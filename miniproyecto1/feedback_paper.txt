@@ -1,0 +1,15 @@
+Introducción (Bueno): Buena introducción. Das un buen contexto e introduces el uso de redes neuronales convolucionales para el problema en cuestión. Sin embargo, utilizas únicamente una fuente y pedimos utilizar al menos dos fuentes. Adicionalmente no mencionas cual es el propósito del artículo, es decir, debes decir explícitamente que se va a realizar en el trabajo a continuación. 
+
+Metodología (Bueno): Bien en general. Sin embargo, hay algunas fallas en la metodología. Por un lado, no se mencionan explícitamente las métricas que se van a utilizar, lo cual es fundamental en este tipo de trabajos. Por otro lado, en el texto se incluyen directamente funciones de PyTorch utilizadas durante la implementación, como por ejemplo transform.ToTensor(). Esto no es adecuado para un artículo académico. En lugar de escribir código o nombres específicos de funciones, se debe describir en palabras el procedimiento realizado, por ejemplo, indicando que las imágenes fueron convertidas a tensores. Adicionalmente, mencionas que dividen los datos en subconjuntos utilizando un método estratificado, sin embargo, no mencionan que subconjuntos (entrenamiento y validación o entrenamiento, validación y prueba). Además, no mencionan que porcentaje de datos tienen en cada subconjunto. Finalmente, cuando incluyes tablas en el artículo no olvides hacer referencia a ellas explícitamente en el texto. 
+
+Resultados:
+
+Cuantitativos (Excelente): Buenos resultados cuantitativos. Sin embargo, no comparas tus resultados con los resultados de otros modelos o diferentes configuraciones de tu modelo. Además, no presentan los resultados de accuracy en el subconjunto de prueba, solo F1-Score. 
+
+Cualitativos (Insuficientes): No presentan resultados cualitativos.
+
+Discusión (Excelente): Buen análisis. Sin embargo, es importante incluir literatura en la discusión para justificar resultados obtenidos. Lo que incluyeron en resultados de mayores confusiones entre glioma y meningioma y que la clase sano presenta menor tasa de error debería ir acá en discusiones y debería está respaldado por literatura. 
+
+Redacción y ortografía (Excelente): Bien.
+
+Formato (Bueno): El formato en general está bien. Sin embargo, en algunas secciones se incluye información que debería ubicarse en otras, lo que afecta la organización y claridad del documento. Adicionalmente, las referencias no están bien formateadas dentro del texto. Aunque la sección de referencias sigue correctamente el formato IEEE, en el cuerpo del documento se utiliza un estilo tipo APA. Es importante mantener consistencia y usar formato IEEE también en el texto (mediante citas numéricas entre corchetes). Por otro lado, se incluyen seis referencias en la sección final, pero solo una es citada en el texto. Todas las referencias listadas deben ser efectivamente mencionadas y utilizadas dentro del contenido para sustentar los argumentos presentados.

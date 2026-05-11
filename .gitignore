@@ -1,0 +1,32 @@
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+*.bin
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+*.toc
+*.blg
+*.bbl
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

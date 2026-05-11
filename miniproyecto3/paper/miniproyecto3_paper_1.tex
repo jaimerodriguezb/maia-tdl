@@ -1,0 +1,126 @@
+\documentclass[letterpaper, 10 pt, conference]{latex_template/ieeeconf}
+
+\overrideIEEEmargins
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ieeeconf usa \fnum@table (no \tablename) para el label de tablas
+% y ya define \fnum@figure como "Fig.~\thefigure" con numeración arábiga
+\AtBeginDocument{%
+  \def\fnum@table{Tabla~\thetable}%
+  \renewcommand{\thetable}{\arabic{table}}%
+}
+
+\title{\LARGE \bf
+Clasificación de Artículos de Noticias de la BBC usando Transformers
+}
+
+\author{Yezid Garcia$^{1}$, Juan Martin Santos$^{1}$ y Jaime Rodriguez$^{1}$ \\
+{\small $^{1}$Universidad de los Andes, Bogotá, Colombia} \\
+{\small Códigos: 200810710, 202013610, 200717791}
+}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introducción}
+
+El procesamiento de lenguaje natural ha avanzado con la introducción de la arquitectura transformer \cite{c1}, que reemplaza las redes recurrentes por mecanismos de atención capaces de relacionar cualquier par de posiciones de una secuencia en tiempo constante. Este diseño supera la degradación de gradiente que afecta a las LSTM en secuencias largas y ha dado lugar a modelos de lenguaje preentrenados como BERT \cite{c2} y GPT \cite{c5}, cuyo ajuste fino sobre tareas específicas alcanza resultados comparables o superiores a los de modelos entrenados desde cero con órdenes de magnitud más datos etiquetados.
+
+La clasificación automática de noticias presenta el reto de asignar categorías temáticas a textos de longitud variable con posible solapamiento semántico entre temas. Un artículo sobre regulación tecnológica puede compartir términos con noticias de economía o política; una crónica deportiva que menciona cifras financieras puede confundirse con contenido de negocios. Las soluciones basadas en representaciones de bolsa de palabras pierden el orden y el contexto necesarios para resolver estas ambigüedades.
+
+En este trabajo se implementa un clasificador de cinco categorías sobre el corpus BBC News \cite{c4} utilizando DistilBERT \cite{c3}, versión destilada de BERT que conserva el 97\% del rendimiento con la mitad de parámetros. El modelo se ajusta mediante fine-tuning durante cinco épocas. El documento describe el conjunto de datos, la arquitectura, el procedimiento de entrenamiento, los resultados cuantitativos y cualitativos obtenidos, y concluye con una discusión sobre las limitaciones y el trabajo futuro.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Metodología}
+
+\subsection{Datos}
+
+Se utiliza el conjunto BBC News \cite{c4}, compuesto por 2225 artículos periodísticos distribuidos en cinco categorías: \textit{business} (510), \textit{entertainment} (386), \textit{politics} (417), \textit{sport} (511) y \textit{tech} (401). Cada artículo contiene el titular y el cuerpo del texto como cadena plana. El conjunto no presenta valores nulos ni duplicados.
+
+Los datos se dividen de forma estratificada en tres subconjuntos: entrenamiento (70\%, 1557 artículos), validación (15\%, 334 artículos) y prueba (15\%, 334 artículos). La partición estratificada preserva la proporción de categorías en cada subconjunto.
+
+\subsection{Preprocesamiento}
+
+El texto de cada artículo se tokeniza con el vocabulario WordPiece de DistilBERT, que descompone las palabras en subpalabras frecuentes en el corpus de preentrenamiento. A cada secuencia se agregan los tokens especiales \texttt{[CLS]} al inicio y \texttt{[SEP]} al final. Las secuencias se truncan o rellenan hasta una longitud máxima de 256 tokens. Se genera una máscara de atención binaria que indica al modelo cuáles posiciones corresponden a contenido real y cuáles a relleno. Las etiquetas de categoría se codifican como enteros del 0 al 4. La tokenización del conjunto completo se realiza una sola vez antes del entrenamiento para evitar cómputo redundante en cada época.
+
+\subsection{Arquitectura}
+
+El modelo se organiza en dos bloques. El primer bloque es DistilBERT \cite{c3}, que procesa la secuencia de tokens mediante seis capas de atención multi-cabeza y produce una representación contextual para cada posición. La representación del token \texttt{[CLS]}, que agrega el contexto global de la secuencia, se extrae como vector de 768 dimensiones. El segundo bloque es una capa de clasificación lineal que proyecta este vector sobre cinco clases y aplica la función softmax para obtener una distribución de probabilidad. El modelo tiene aproximadamente 67 millones de parámetros entrenables. Este diseño sigue el patrón de clasificación de secuencias de BERT \cite{c2}, adaptado a la versión destilada.
+
+\subsection{Entrenamiento y métricas}
+
+El modelo se entrena durante cinco épocas con el optimizador AdamW con tasa de aprendizaje inicial de $2 \times 10^{-5}$. Se aplica un scheduler lineal con fase de calentamiento en el 10\% de los pasos totales de entrenamiento, lo que reduce la magnitud de las actualizaciones durante las primeras iteraciones y estabiliza el ajuste fino de los pesos preentrenados. El gradiente se recorta a una norma máxima de 1.0 antes de cada actualización. El tamaño de lote es 16. Se guarda el checkpoint con la menor pérdida sobre el conjunto de validación y este se usa para la evaluación final.
+
+Las métricas de evaluación son precisión, recall y F1-score por categoría, y exactitud global sobre el conjunto de prueba.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Resultados}
+
+\subsection{Resultados cuantitativos}
+
+La Tabla 1 presenta los resultados del modelo sobre el conjunto de prueba (334 artículos). El modelo alcanza una exactitud global de \textbf{97.90\%} (327 de 334 artículos correctamente clasificados) y un F1-score macro de 0.979.
+
+\begin{table}[h]
+\centering
+\caption{Precisión, recall y F1-score por categoría en el conjunto de prueba (334 artículos).}
+\resizebox{8.5cm}{!}{
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Categoría} & \textbf{Precisión} & \textbf{Recall} & \textbf{F1} & \textbf{Soporte} \\ \hline
+business           & 0.9610             & 0.9610          & 0.9610      & 77               \\ \hline
+entertainment      & 0.9828             & 0.9828          & 0.9828      & 58               \\ \hline
+politics           & 0.9672             & 0.9516          & 0.9593      & 62               \\ \hline
+sport              & 1.0000             & 1.0000          & 1.0000      & 77               \\ \hline
+tech               & 0.9836             & 1.0000          & 0.9917      & 60               \\ \hline
+\textbf{macro avg} & \textbf{0.9789}    & \textbf{0.9791} & \textbf{0.9790} & \textbf{334}  \\ \hline
+\end{tabular}}
+\end{table}
+
+Como se observa en la Tabla 1, la categoría \textit{sport} obtuvo clasificación perfecta (F1 = 1.0). La categoría \textit{tech} obtuvo recall perfecto con precisión de 0.9836, indicando que todos los artículos de tecnología fueron recuperados aunque algunos artículos de otras categorías se asignaron incorrectamente a esta clase. La categoría \textit{politics} presentó el F1 más bajo (0.9593) con un recall de 0.9516, lo que indica que algunos artículos de política fueron clasificados en otras categorías.
+
+En la versión base del pipeline, sin scheduler lineal ni recorte de gradiente, la pérdida de validación presentó mayor varianza entre épocas. La incorporación del scheduler con calentamiento y el recorte de gradiente estabilizó la convergencia, lo que respalda el uso de estas técnicas en el ajuste fino de transformers sobre conjuntos de datos de tamaño moderado.
+
+\subsection{Resultados cualitativos}
+
+El modelo distingue con mayor facilidad las categorías con vocabulario específico y bajo solapamiento semántico con otras. La categoría \textit{sport} concentra términos propios del dominio deportivo —nombres de competencias, marcadores y equipos— que no aparecen con frecuencia en noticias de economía o tecnología, lo que facilita su separación.
+
+La categoría \textit{politics} es la de mayor dificultad. Artículos que cubren política económica o regulación tecnológica comparten términos con \textit{business} y \textit{tech}, y la distinción depende del contexto global del artículo. El mecanismo de atención de DistilBERT permite capturar relaciones de largo alcance entre palabras del texto, lo que en la mayoría de los casos permite resolver esta ambigüedad a partir de la representación del token \texttt{[CLS]}. Los siete artículos mal clasificados corresponden en su mayoría a este tipo de solapamiento temático.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discusión}
+
+El resultado de 97.90\% de exactitud con cinco épocas de ajuste fino sobre 2225 documentos ilustra la efectividad del aprendizaje por transferencia en clasificación de texto. DistilBERT \cite{c3} fue preentrenado sobre grandes corpus de texto en inglés mediante predicción de tokens enmascarados, lo que le permite capturar estructura sintáctica y semántica sin requerir etiquetas de tarea específica. Este principio, introducido por BERT \cite{c2} y extendido en GPT \cite{c5}, T5 \cite{c6} y GPT-3 \cite{c7}, reduce el costo de entrenamiento en dominios concretos al partir de pesos ya ajustados al lenguaje general.
+
+La arquitectura transformer subyacente \cite{c1} presenta ventajas frente a redes recurrentes para el procesamiento de texto periodístico: su atención global permite relacionar el titular con párrafos posteriores del artículo, integrar señales de distintas partes del documento y resolver ambigüedades léxicas mediante contexto. En el caso de \textit{politics}, aunque los artículos comparten vocabulario con otras categorías, la distribución global del texto contiene señales suficientes para la clasificación correcta en el 95.16\% de los casos.
+
+Entre las limitaciones del trabajo se encuentran el tamaño del conjunto de datos (2225 artículos), la ausencia de una comparación directa con modelos de referencia como clasificadores sobre representaciones TF-IDF o regresión logística sobre características del token \texttt{[CLS]} sin ajuste fino, y la falta de un estudio de ablación que aísle el efecto individual del scheduler y el recorte de gradiente sobre la calidad del modelo. Como trabajo futuro se propone evaluar el modelo en conjuntos de noticias de otras fuentes o idiomas para medir la capacidad de generalización entre dominios, incorporar un análisis de errores por categoría que identifique los patrones léxicos asociados a las confusiones, y comparar el fine-tuning completo frente a la extracción de características con el backbone congelado.
+
+\begin{thebibliography}{99}
+
+\bibitem{c1} A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser e I. Polosukhin, ``Attention Is All You Need,'' en \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 30, 2017.
+
+\bibitem{c2} J. Devlin, M.-W. Chang, K. Lee y K. Toutanova, ``BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding,'' en \textit{Proc. NAACL-HLT}, págs. 4171--4186, 2019.
+
+\bibitem{c3} V. Sanh, L. Debut, J. Chaumond y T. Wolf, ``DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter,'' \textit{arXiv preprint arXiv:1910.01108}, 2019.
+
+\bibitem{c4} D. Greene y P. Cunningham, ``Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering,'' en \textit{Proc. 23rd Int. Conf. Machine Learning (ICML)}, págs. 377--384, 2006.
+
+\bibitem{c5} A. Radford, K. Narasimhan, T. Salimans e I. Sutskever, ``Improving Language Understanding by Generative Pre-Training,'' \textit{Technical Report}, OpenAI, 2018.
+
+\bibitem{c6} C. Raffel, N. Shazeer, A. Roberts, K. Lee, S. Narang, M. Matena, Y. Zhou, W. Li y P. J. Liu, ``Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer,'' \textit{Journal of Machine Learning Research}, vol. 21, núm. 140, págs. 1--67, 2020.
+
+\bibitem{c7} T. B. Brown et al., ``Language Models are Few-Shot Learners,'' en \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 33, 2020.
+
+\end{thebibliography}
+
+\end{document}
