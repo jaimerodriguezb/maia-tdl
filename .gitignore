@@ -4,6 +4,8 @@
 *.ckpt
 *.bin
 *.safetensors
+*.h5
+*.weights.h5
 
 # LaTeX build artifacts
 *.aux
