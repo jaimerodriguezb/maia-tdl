@@ -3,6 +3,7 @@
 *.pth
 *.ckpt
 *.bin
+*.safetensors
 
 # LaTeX build artifacts
 *.aux

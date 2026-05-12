@@ -36,9 +36,9 @@ Clasificación de Artículos de Noticias de la BBC usando Transformers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introducción}
 
-La arquitectura transformer, propuesta por Vaswani et al.~\cite{c1}, reemplaza las redes recurrentes por mecanismos de atención que relacionan cualquier par de posiciones de una secuencia en tiempo constante. Este diseño elimina la dependencia secuencial de las LSTM y permite paralelizar el entrenamiento sobre secuencias largas. Sobre esta base, Devlin et al.~\cite{c2} desarrollaron BERT, un modelo preentrenado mediante predicción de tokens enmascarados en grandes corpus no etiquetados, cuyo ajuste fino sobre tareas específicas establece resultados de referencia en clasificación de texto, extracción de información y preguntas y respuestas. En paralelo, Radford et al.~\cite{c3} demostraron con GPT que el preentrenamiento autorregresivo seguido de fine-tuning también generaliza bien a múltiples tareas de comprensión del lenguaje.
+La arquitectura transformer, propuesta por Vaswani et al.~\cite{c1}, reemplaza las redes recurrentes por mecanismos de atención que relacionan cualquier par de posiciones de una secuencia en tiempo constante. Este diseño elimina la dependencia secuencial de las LSTM y permite paralelizar el entrenamiento sobre secuencias largas. Sobre esta base, Devlin et al.~\cite{c2} desarrollaron BERT, un modelo preentrenado mediante predicción de tokens enmascarados en grandes corpus no etiquetados, cuyo ajuste fino sobre tareas específicas establece resultados de referencia en clasificación de texto, extracción de información, preguntas y respuestas. En paralelo, Radford et al.~\cite{c3} demostraron con GPT que el preentrenamiento autorregresivo seguido de fine-tuning también generaliza bien.
 
-La clasificación automática de noticias presenta el reto de asignar categorías temáticas a textos de longitud variable con solapamiento semántico entre dominios. El corpus BBC News~\cite{c4}, con 2225 artículos en cinco categorías, es un banco de prueba estándar para este problema: un artículo de política económica comparte términos con noticias de negocios; una crónica deportiva con cifras puede confundirse con contenido financiero. Las soluciones basadas en bolsa de palabras pierden el orden y el contexto necesarios para resolver estas ambigüedades.
+La clasificación automática de noticias presenta el reto de asignar categorías temáticas a textos de longitud variable con traslape semántico. El corpus BBC News~\cite{c4}, con 2225 artículos en cinco categorías, es un banco de prueba estándar para este problema: un artículo de económica comparte términos con noticias de negocios; una crónica deportiva con cifras puede confundirse con contenido financiero. Las soluciones basadas en bolsa de palabras pierden el orden y el contexto necesarios para resolver estas ambigüedades.
 
 En este trabajo se implementa un clasificador sobre el corpus BBC News usando DistilBERT~\cite{c5}, versión destilada de BERT que conserva el 97\% de su rendimiento con la mitad de parámetros. El modelo se ajusta mediante fine-tuning durante cinco épocas. El documento describe los datos, la arquitectura, el procedimiento de entrenamiento, los resultados cuantitativos con curvas de entrenamiento, los resultados cualitativos y una discusión sobre limitaciones y trabajo futuro.
 
@@ -76,6 +76,8 @@ Las métricas de evaluación son precisión, recall y F1-score por categoría, y
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Resultados}
 
+Los resultados del modelo entrenado se interpretan desde dos perspectivas, cuantitativa y cualitativa, siendo este análisis el insumo para plantear la dicusión acerca del proyecto.
+
 \subsection{Resultados cuantitativos}
 
 La Tabla~1 presenta los resultados sobre el conjunto de prueba (334 artículos). El modelo alcanza una exactitud global de \textbf{98.20\%} (328 de 334 artículos correctamente clasificados) y un F1-score macro de 0.982.
@@ -98,7 +100,7 @@ tech               & 0.9836 & 1.0000 & 0.9917 & 60 \\ \hline
 
 Como se observa en la Tabla~1, \textit{sport} obtuvo clasificación perfecta (F1 = 1.0) y \textit{tech} obtuvo recall perfecto (1.0) con precisión de 0.9836. La categoría \textit{politics} presentó el F1 más bajo (0.9593) con recall de 0.9516, indicando que algunos artículos de política se asignaron a otras categorías.
 
-La Fig.~2 muestra las curvas de pérdida y exactitud durante el entrenamiento. La pérdida de validación desciende de forma consistente durante las primeras épocas y se estabiliza, lo que indica convergencia sin sobreajuste dentro del rango de cinco épocas. La incorporación del scheduler con calentamiento y el recorte de gradiente —ausentes en una versión previa del pipeline— redujo la varianza de la pérdida entre épocas, produciendo curvas más regulares y un resultado final superior.
+La Fig.~2 muestra las curvas de pérdida y exactitud durante el entrenamiento. La pérdida de validación desciende de forma consistente durante las primeras épocas y se estabiliza, lo que indica convergencia sin sobreajuste dentro del rango de cinco épocas. La incorporación del scheduler con calentamiento y el recorte de gradiente redujo la varianza de la pérdida entre épocas, produciendo curvas más regulares y un resultado final superior.
 
 \begin{figure}[h]
     \centering
@@ -110,7 +112,7 @@ La Fig.~2 muestra las curvas de pérdida y exactitud durante el entrenamiento. L
 
 El modelo diferencia con mayor facilidad las categorías con vocabulario específico. \textit{Sport} concentra términos de dominio deportivo —nombres de competencias, marcadores, equipos— que no aparecen en otras categorías. \textit{Tech} incluye términos de tecnología; su precisión de 0.9836 menor que 1.0 sugiere que algunos artículos de otras categorías con contenido tecnológico se clasificaron en esta clase.
 
-\textit{Politics} es la categoría de mayor dificultad. Artículos sobre política económica o regulación tecnológica comparten vocabulario con \textit{business} y \textit{tech}. El mecanismo de atención de DistilBERT captura relaciones de largo alcance entre palabras del texto, lo que permite resolver la mayoría de estas ambigüedades a partir de la representación del token \texttt{[CLS]}. Los seis artículos clasificados incorrectamente corresponden en su mayoría a este tipo de solapamiento temático.
+\textit{Politics} es la categoría de mayor dificultad. Artículos sobre política económica o regulación tecnológica comparten vocabulario con \textit{business} y \textit{tech}. El mecanismo de atención de DistilBERT captura relaciones de largo alcance entre palabras del texto, lo que permite resolver la mayoría de estas ambigüedades a partir de la representación del token \texttt{[CLS]}. Los seis artículos clasificados incorrectamente corresponden en su mayoría a este tipo de traslape temático.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discusión}
