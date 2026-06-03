@@ -1,0 +1,727 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.000
+[MUSIC]
+
+2
+00:00:14.813 --> 00:00:17.080
+Hola, soy Luis Felipe Giraldo.
+
+3
+00:00:17.080 --> 00:00:21.139
+Y el día de hoy hablaremos sobre cómo se
+analizan los aspectos principales de un
+
+4
+00:00:21.139 --> 00:00:23.240
+problema de inteligencia artificial.
+
+5
+00:00:23.240 --> 00:00:26.234
+Esto involucra analizar
+los datos que disponemos.
+
+6
+00:00:26.234 --> 00:00:30.413
+Que son la fuente principal que alimenta
+los modelos de inteligencia artificial.
+
+7
+00:00:30.413 --> 00:00:34.754
+Procederemos a hablar sobre los pasos
+a tener en cuenta en el diseño del modelo.
+
+8
+00:00:34.754 --> 00:00:38.225
+La función de pérdida, que es la que
+direcciona el proceso de aprendizaje.
+
+9
+00:00:38.225 --> 00:00:42.890
+Y la evaluación de desempeño,
+que nos indica qué tan bueno es el
+
+10
+00:00:42.890 --> 00:00:47.829
+modelo que obtuvimos como resultado
+del proceso de aprendizaje.
+
+11
+00:00:47.829 --> 00:00:52.266
+El primer paso para entrenar un
+modelo con inteligencia artificial es
+
+12
+00:00:52.266 --> 00:00:56.364
+identificar de forma clara el
+problema que debemos abordar.
+
+13
+00:00:56.364 --> 00:00:59.578
+Para esto, podemos responder
+a las siguientes preguntas,
+
+14
+00:00:59.578 --> 00:01:02.107
+¿cuál es la necesidad
+que quiero solucionar?
+
+15
+00:01:02.107 --> 00:01:05.931
+¿Qué soluciones han realizado
+otros autores para este problema?
+
+16
+00:01:05.931 --> 00:01:08.404
+¿Cuáles son los datos
+de entrada del modelo?
+
+17
+00:01:08.404 --> 00:01:10.852
+¿Cuál quiero que sea la salida del modelo?
+
+18
+00:01:10.852 --> 00:01:13.052
+¿Con qué datos dispongo?
+
+19
+00:01:13.052 --> 00:01:18.400
+¿Y cuáles son las dificultades y
+consideraciones éticas de mi propuesta?
+
+20
+00:01:21.680 --> 00:01:26.655
+Una vez tenemos claridad sobre la forma
+en la que queremos abordar este problema,
+
+21
+00:01:26.655 --> 00:01:31.430
+debemos iniciar con la etapa de la
+organización y procesamiento de los datos.
+
+22
+00:01:31.430 --> 00:01:32.022
+Para esto,
+
+23
+00:01:32.022 --> 00:01:36.200
+es importante estar familiarizado con
+la información que se va a utilizar.
+
+24
+00:01:36.200 --> 00:01:37.149
+Por ejemplo,
+
+25
+00:01:37.149 --> 00:01:42.453
+¿contamos con los datos de entrada y
+anotaciones adecuados para el problema?
+
+26
+00:01:42.453 --> 00:01:44.776
+¿Cuál es la calidad de estos datos?
+
+27
+00:01:44.776 --> 00:01:48.875
+Por ejemplo, si queremos clasificar
+productos en una plaza de mercado.
+
+28
+00:01:48.875 --> 00:01:52.027
+Debemos garantizar que la
+resolución de la cámara sea
+
+29
+00:01:52.027 --> 00:01:56.950
+lo suficientemente buena para diferenciar
+una manzana roja de un tomate.
+
+30
+00:01:56.950 --> 00:01:58.012
+Por otro lado,
+
+31
+00:01:58.012 --> 00:02:03.176
+es importante comprender si los datos
+son representativos del problema.
+
+32
+00:02:03.176 --> 00:02:06.971
+Si queremos identificar los rostros
+de individuos a través de cámaras de
+
+33
+00:02:06.971 --> 00:02:07.663
+seguridad.
+
+34
+00:02:07.663 --> 00:02:12.432
+Nuestros datos de entrenamiento no pueden
+ser solo las imágenes del documento de
+
+35
+00:02:12.432 --> 00:02:14.476
+identificación de las personas.
+
+36
+00:02:14.476 --> 00:02:19.014
+También es importante tener claridad
+sobre los sesgos de los datos.
+
+37
+00:02:19.014 --> 00:02:21.786
+Si queremos clasificar
+imágenes de gatos y perros,
+
+38
+00:02:21.786 --> 00:02:25.007
+pero todas nuestras imágenes de
+gatos son en blanco y negro.
+
+39
+00:02:25.007 --> 00:02:30.951
+Mientras que todas nuestras imágenes de
+perro son a color, es probable que el
+
+40
+00:02:30.951 --> 00:02:36.819
+modelo clasifique una imagen de perro
+a blanco y negro como si fuese un gato.
+
+41
+00:02:36.819 --> 00:02:43.236
+Típicamente, la información que tenemos
+disponible se divide en tres segmentos.
+
+42
+00:02:43.236 --> 00:02:47.413
+Primero tenemos el segmento
+llamado segmento de entrenamiento,
+
+43
+00:02:47.413 --> 00:02:51.596
+el cual contiene la mayor cantidad
+de la información disponible.
+
+44
+00:02:51.596 --> 00:02:56.176
+Y es el que el modelo utiliza para
+comprender las características relevantes
+
+45
+00:02:56.176 --> 00:02:56.956
+de la tarea.
+
+46
+00:02:56.956 --> 00:03:00.520
+Es decir,
+aprender los patrones basados en datos.
+
+47
+00:03:00.520 --> 00:03:04.952
+Luego tenemos el segmento de validación,
+en donde calificamos el desempeño de
+
+48
+00:03:04.952 --> 00:03:08.270
+aquello que el modelo aprendió
+durante el entrenamiento.
+
+49
+00:03:08.270 --> 00:03:13.460
+Para esto utilizamos información que
+el modelo no ha visto previamente.
+
+50
+00:03:13.460 --> 00:03:17.888
+El segmento de validación es el que
+nos permite comparar los diferentes
+
+51
+00:03:17.888 --> 00:03:20.931
+experimentos que le
+hagamos a la arquitectura.
+
+52
+00:03:20.931 --> 00:03:25.060
+Y sintonizar los
+hiperparámetros del modelo.
+
+53
+00:03:25.060 --> 00:03:29.951
+Finalmente, una vez hemos realizado
+múltiples pruebas y estamos satisfechos
+
+54
+00:03:29.951 --> 00:03:33.747
+con el rendimiento de nuestro
+modelo durante la validación,
+
+55
+00:03:33.747 --> 00:03:37.000
+el modelo pasa al segmento de evaluación.
+
+56
+00:03:37.000 --> 00:03:41.316
+El rendimiento del modelo en este
+segmento es el que se utiliza para
+
+57
+00:03:41.316 --> 00:03:44.408
+compararse con los
+intentos de otros autores.
+
+58
+00:03:44.408 --> 00:03:49.355
+Por esta razón, algunas bases de datos
+que son públicas tienen segmentos
+
+59
+00:03:49.355 --> 00:03:53.839
+de evaluación privados en donde
+cada autor debe enviar su modelo.
+
+60
+00:03:53.839 --> 00:03:57.780
+Y ellos se encargarán de realizar
+la evaluación de desempeño.
+
+61
+00:04:01.300 --> 00:04:05.138
+Ahora, una vez tenemos la
+base de datos organizada,
+
+62
+00:04:05.138 --> 00:04:10.500
+procedemos a la parte del diseño
+y del entrenamiento del modelo.
+
+63
+00:04:10.500 --> 00:04:14.639
+Habíamos hablado de la importancia de
+revisar lo que otros autores han hecho
+
+64
+00:04:14.639 --> 00:04:16.330
+para resolver este problema.
+
+65
+00:04:16.330 --> 00:04:20.030
+Esto se conoce como una
+revisión del estado del arte.
+
+66
+00:04:20.030 --> 00:04:23.346
+En caso de que el estado del arte
+cuente con un modelo de libre acceso.
+
+67
+00:04:23.346 --> 00:04:27.749
+Es una buena práctica replicar ese
+modelo en nuestros datos con el
+
+68
+00:04:27.749 --> 00:04:30.650
+objetivo de evaluar su desempeño.
+
+69
+00:04:30.650 --> 00:04:35.212
+Así podemos iniciar el proceso de
+diseño y experimentación con lo que se
+
+70
+00:04:35.212 --> 00:04:37.198
+conoce como una línea de base.
+
+71
+00:04:37.198 --> 00:04:41.350
+La cual es una arquitectura que
+utilizamos como punto de inicio.
+
+72
+00:04:44.410 --> 00:04:49.261
+Adicionalmente, nosotros podemos
+verificar el desempeño de diferentes
+
+73
+00:04:49.261 --> 00:04:54.196
+arquitecturas de redes convolucionales
+para resolver el mismo problema.
+
+74
+00:04:54.196 --> 00:04:58.694
+La selección de la arquitectura a utilizar
+depende de diferentes factores.
+
+75
+00:04:58.694 --> 00:05:03.454
+Por ejemplo, la complejidad de la tarea
+de clasificación o regresión a resolver,
+
+76
+00:05:03.454 --> 00:05:08.085
+la cantidad de datos que tenemos
+disponibles, los recursos computacionales.
+
+77
+00:05:08.085 --> 00:05:12.807
+Y el nivel de desempeño que queremos que
+el modelo tenga para clasificación o
+
+78
+00:05:12.807 --> 00:05:15.405
+regresión son algunos de esos factores.
+
+79
+00:05:15.405 --> 00:05:20.462
+Una tarea de clasificación o regresión
+sencilla con imágenes a baja resolución
+
+80
+00:05:20.462 --> 00:05:25.683
+probablemente se pueda resolver con una
+arquitectura con muy poca profundidad.
+
+81
+00:05:25.683 --> 00:05:26.665
+Por otro lado,
+
+82
+00:05:26.665 --> 00:05:31.209
+si debemos resolver una tarea compleja
+de regresión o clasificación.
+
+83
+00:05:31.209 --> 00:05:36.278
+Y tenemos disponibles una cantidad
+considerable de datos, es probable que
+
+84
+00:05:36.278 --> 00:05:41.780
+una red lo suficientemente profunda
+se requiera para resolver la tarea.
+
+85
+00:05:41.780 --> 00:05:46.038
+Si los recursos computacionales
+que tenemos a nuestra disposición
+
+86
+00:05:46.038 --> 00:05:47.089
+son limitados.
+
+87
+00:05:47.089 --> 00:05:51.851
+Entonces arquitecturas pequeñas con
+pocos parámetros y capas se deben
+
+88
+00:05:51.851 --> 00:05:55.348
+utilizar para reducir el
+tiempo de entrenamiento.
+
+89
+00:05:55.348 --> 00:05:59.410
+Y la memoria de almacenamiento
+requerida para resolver esta tarea.
+
+90
+00:06:02.830 --> 00:06:07.096
+Existen arquitecturas cuyo
+desempeño you ha sido reportado.
+
+91
+00:06:07.096 --> 00:06:11.700
+Y varias de esas arquitecturas pre
+entrenadas en conjuntos de entrenamiento
+
+92
+00:06:11.700 --> 00:06:15.550
+grandes se encuentran
+disponibles de forma abierta.
+
+93
+00:06:15.550 --> 00:06:18.773
+Algunas de estas arquitecturas
+tienen poca profundidad.
+
+94
+00:06:18.773 --> 00:06:23.209
+Mientras que otras tienen mayor
+profundidad y modificaciones que hacen que
+
+95
+00:06:23.209 --> 00:06:26.406
+su desempeño mejore en
+diferentes tareas complejas.
+
+96
+00:06:26.406 --> 00:06:31.150
+Por ejemplo, LeNet y AlexNet son
+redes neuronales clásicas con poca
+
+97
+00:06:31.150 --> 00:06:36.143
+profundidad que sirven para resolver
+tareas relativamente fáciles con
+
+98
+00:06:36.143 --> 00:06:38.620
+pocos recursos computacionales.
+
+99
+00:06:38.620 --> 00:06:44.684
+Arquitecturas más profundas incluyen VGG,
+GoogLenet, MobileNet y EfficientNet.
+
+100
+00:06:44.684 --> 00:06:45.575
+En particular,
+
+101
+00:06:45.575 --> 00:06:49.531
+GoogleNet está diseñada para optimizar
+los recursos computacionales.
+
+102
+00:06:49.531 --> 00:06:53.760
+Y MobileNet está diseñada para
+ser desplegada en sistemas
+
+103
+00:06:53.760 --> 00:06:56.701
+embebidos como dispositivos móviles.
+
+104
+00:06:56.701 --> 00:07:01.837
+Entre las arquitecturas mucho más
+profundas encontramos a ResNet y DenseNet.
+
+105
+00:07:01.837 --> 00:07:06.005
+Las cuales pueden tener fácilmente
+un número de capas superior a 100.
+
+106
+00:07:09.769 --> 00:07:14.668
+Durante el entrenamiento del modelo es
+importante tener alguna métrica que
+
+107
+00:07:14.668 --> 00:07:18.047
+nos permita conocer si el
+modelo está aprendiendo.
+
+108
+00:07:18.047 --> 00:07:23.095
+En nuestras lecciones pasadas hemos
+aprendido sobre la función de pérdida.
+
+109
+00:07:23.095 --> 00:07:28.068
+La cual nos permite cuantificar la
+diferencia entre el valor predicho y el
+
+110
+00:07:28.068 --> 00:07:29.900
+valor objetivo.
+
+111
+00:07:29.900 --> 00:07:34.325
+Así podemos utilizar esta función
+para determinar el estado del modelo.
+
+112
+00:07:34.325 --> 00:07:39.268
+Para esto podemos graficar el valor de la
+función objetivo con respecto al número
+
+113
+00:07:39.268 --> 00:07:42.910
+de épocas que han transcurrido
+durante el entrenamiento.
+
+114
+00:07:42.910 --> 00:07:47.524
+El modelo completa una época cada vez que
+ha visto la totalidad de los datos de
+
+115
+00:07:47.524 --> 00:07:48.615
+entrenamiento.
+
+116
+00:07:48.615 --> 00:07:53.870
+Y el número de épocas suele ser un valor
+que se define al inicio del entrenamiento.
+
+117
+00:07:54.970 --> 00:07:59.981
+Ahora, si el modelo está aprendiendo
+correctamente, esperamos que la función
+
+118
+00:07:59.981 --> 00:08:04.785
+de pérdida disminuya con el paso de las
+épocas, como se muestra en la figura.
+
+119
+00:08:04.785 --> 00:08:09.057
+Adicionalmente, la figura muestra
+que después de la época 35
+
+120
+00:08:09.057 --> 00:08:12.943
+no disminuye la función de
+pérdida significativamente.
+
+121
+00:08:12.943 --> 00:08:17.775
+Lo cual nos sugiere que sin importar
+cuánto tiempo más se deje entrenando el
+
+122
+00:08:17.775 --> 00:08:20.239
+modelo, este ha llegado a un límite.
+
+123
+00:08:24.269 --> 00:08:27.451
+Una vez nosotros hemos
+organizado los datos.
+
+124
+00:08:27.451 --> 00:08:31.715
+Definido la metodología de diseño del
+modelo de inteligencia artificial que va
+
+125
+00:08:31.715 --> 00:08:33.630
+a resolver el problema planteado.
+
+126
+00:08:33.630 --> 00:08:39.412
+Y definida la función de pérdida que va
+a direccionar el proceso de aprendizaje.
+
+127
+00:08:39.412 --> 00:08:44.055
+Ahora procedemos a definir alguna
+métrica que mida el desempeño del
+
+128
+00:08:44.055 --> 00:08:45.611
+modelo you entrenado.
+
+129
+00:08:45.611 --> 00:08:49.959
+Y realizar diferentes experimentos
+en los que podemos evaluar
+
+130
+00:08:49.959 --> 00:08:52.015
+diferentes arquitecturas.
+
+131
+00:08:52.015 --> 00:08:55.418
+Existen diferentes tipos de
+indicadores de desempeño.
+
+132
+00:08:55.418 --> 00:09:00.014
+Un ejemplo es el F1-score, el cual
+cuantifica el desempeño de un modelo
+
+133
+00:09:00.014 --> 00:09:05.090
+de clasificación ante la presencia de
+posibles desbalances en las clases.
+
+134
+00:09:05.090 --> 00:09:08.081
+En el ejemplo en la
+diapositiva vemos que para
+
+135
+00:09:08.081 --> 00:09:11.627
+experimentos con diferentes
+arquitecturas podemos
+
+136
+00:09:11.627 --> 00:09:16.523
+usar esta métrica para determinar cuál
+es el modelo con mejor desempeño.
+
+137
+00:09:16.523 --> 00:09:20.913
+Las métricas que se usan depende
+del tipo de problema que estemos
+
+138
+00:09:20.913 --> 00:09:22.548
+intentando resolver.
+
+139
+00:09:26.337 --> 00:09:30.780
+Como conclusión tenemos que el
+entrenamiento de un modelo de inteligencia
+
+140
+00:09:30.780 --> 00:09:31.631
+artificial.
+
+141
+00:09:31.631 --> 00:09:35.531
+Y en particular las redes neuronales
+convolucionales requieren de una
+
+142
+00:09:35.531 --> 00:09:37.190
+definición del problema.
+
+143
+00:09:37.190 --> 00:09:43.521
+Organización de los datos, diseño del
+modelo y una evaluación del desempeño.
+
+144
+00:09:43.521 --> 00:09:48.080
+Es de mucha importancia asegurarse que los
+datos son lo suficientemente apropiados
+
+145
+00:09:48.080 --> 00:09:49.631
+para resolver el problema.
+
+146
+00:09:49.631 --> 00:09:53.752
+Entendiendo las limitaciones,
+los sesgos que se pueden generar.
+
+147
+00:09:53.752 --> 00:09:58.134
+La revisión del estado del arte es
+fundamental para tener una línea base.
+
+148
+00:09:58.134 --> 00:10:03.018
+Y poder comparar con posibles futuros
+resultados que podamos tener.
+
+149
+00:10:03.018 --> 00:10:07.178
+La selección de la arquitectura depende
+de las características del problema,
+
+150
+00:10:07.178 --> 00:10:09.482
+base de datos y recursos computacionales.
+
+151
+00:10:09.482 --> 00:10:13.357
+Y la gráfica de función de pérdidas sobre
+el número de épocas es muy útil para
+
+152
+00:10:13.357 --> 00:10:15.459
+evaluar si el modelo está aprendiendo.

@@ -1,0 +1,44 @@
+[MUSIC] Hola, soy Luis Felipe Giraldo. En este video, hablaremos de las
+redes generativas adversariales, también conocidas como GANs
+por sus siglas en inglés. La organización de este
+video es la siguiente. Como introducción, definiremos las
+redes generativas adversariales. Después, estudiaremos cada
+componente de estas arquitecturas. Iniciaremos con el generador. Luego, estudiaremos el
+discriminador de una GAN. Ambos son componentes
+fundamentales de las GANs. Para después, estudiar cómo estas
+dos componentes interactúan juntas. Por último, concluiremos con
+un resumen de lo aprendido. Iniciemos hablando de las GANs. Una red generativa adversarial,
+GAN por sus siglas en inglés. Es un tipo de modelo de inteligencia
+artificial que consiste en dos redes neuronales que se enfrentan
+y compiten entre cinco. El generador y el discriminador. La GAN se utiliza principalmente para la
+generación de datos sintéticos que son realistas. Puede utilizarse en diversas aplicaciones
+como la generación de imágenes, música, texto e incluso video. En el caso particular de
+la generación de imágenes, la entrada es una muestra de ruido
+y a partir de esa entrada aleatoria queremos generar una imagen sintética
+que parezca lo más real posible. Ahora hablemos del generador de una GAN. El generador toma una entrada aleatoria,
+comúnmente conocida como ruido, vector latente o semilla, y la transforma en una
+salida que se asemeja a los datos reales. Por ejemplo, si queremos entrenar una GAN para generar
+imágenes de alta resolución de rosas. El generador tomará un vector latente y lo
+convertirá en una imagen realista y una rosa que siga la distribución de las
+imágenes de los datos de entrenamiento. El objetivo del generador es engañar al
+discriminador generando datos sintéticos que son tan realistas que el discriminador
+no puede distinguerlos de los datos reales. Por otro lado,
+tenemos red neuronal que evalúa y clasifica la autenticidad de los datos. Toma como entrada tanto datos reales como
+datos generados por el generador y produce una salida que indica la probabilidad
+de que la entrada sea real o falsa. A medida que el entrenamiento
+de la GAN progresa, el discriminador se vuelve más hábil en
+la tarea de discernir entre los datos reales y los datos que son generados. Ahora veamos cómo se integran
+estos dos componentes. El proceso de entrenamiento de una
+GAN implica una competencia entre el generador y el discriminador. El generador busca mejorar su capacidad
+para generar datos realistas y engañar al discriminador. Mientras que el discriminador busca
+mejorar su capacidad para distinguir entre datos reales y datos generados. Ambos componentes se
+entrenan de forma alternada. Primero se entrena el discriminador con
+un conjunto de datos reales y generados, y luego se entrena el generador utilizando
+la retroalimentación del discriminador para mejorar su rendimiento. Este proceso iterativo continúa hasta
+que el generador pueda generar datos sintéticos que sean indistinguibles de
+los datos reales para el discriminador. En conclusión, el generador y discriminador son los
+componentes fundamentales de una GAN. El generador crea datos sintéticos
+que se asemejan a los datos reales. Mientras que el discriminador evalúa
+y distingue entre los datos reales y generados. Finalmente, estos dos componentes
+trabajan en una competencia adversaria, de ahí el nombre. Para mejorar continuamente la calidad
+de los datos generados por la GAN.

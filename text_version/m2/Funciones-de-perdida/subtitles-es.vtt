@@ -1,0 +1,373 @@
+WEBVTT
+
+1
+00:00:14.320 --> 00:00:17.855
+Hola a todos. Soy Pablo Arbeláez.
+
+2
+00:00:17.855 --> 00:00:22.685
+En este video, hablaremos acerca de las funciones de pérdida.
+
+3
+00:00:22.685 --> 00:00:27.470
+Comenzaremos, por supuesto, definiendo formalmente esta noción.
+
+4
+00:00:27.470 --> 00:00:29.060
+Posteriormente,
+
+5
+00:00:29.060 --> 00:00:35.420
+hablaremos de dos funciones de pérdida para el problema de regresión y luego,
+
+6
+00:00:35.420 --> 00:00:38.450
+hablaremos de las funciones desde pérdida para los
+
+7
+00:00:38.450 --> 00:00:45.060
+problemas de clasificación para terminar con unas conclusiones.
+
+8
+00:00:50.840 --> 00:00:53.760
+Imaginemos, por ejemplo,
+
+9
+00:00:53.760 --> 00:00:57.270
+que queremos preparar una taza de café y debemos
+
+10
+00:00:57.270 --> 00:01:01.200
+añadir 15 gramos de café molido al filtro.
+
+11
+00:01:01.200 --> 00:01:05.040
+Al inicio, añadimos grandes cantidades.
+
+12
+00:01:05.040 --> 00:01:12.085
+Luego, empezamos a hacer más cuidadosos a medida que nos acercamos al valor deseado.
+
+13
+00:01:12.085 --> 00:01:18.975
+La diferencia entre lo que hemos añadido y nuestro objetivo de 15 gramos es,
+
+14
+00:01:18.975 --> 00:01:22.290
+precisamente, la función de pérdida.
+
+15
+00:01:22.290 --> 00:01:27.660
+Así, podemos definir la función de pérdida como la diferencia entre
+
+16
+00:01:27.660 --> 00:01:32.625
+la predicción de un modelo y su resultado esperado.
+
+17
+00:01:32.625 --> 00:01:38.050
+A continuación, veremos algunos ejemplos de funciones de pérdida.
+
+18
+00:01:39.680 --> 00:01:45.780
+El tipo de error más comúnmente utilizado es el error L1,
+
+19
+00:01:45.780 --> 00:01:51.330
+que consiste en tomar el valor absoluto de la diferencia entre
+
+20
+00:01:51.330 --> 00:01:56.055
+la predicción del modelo y el valor esperado.
+
+21
+00:01:56.055 --> 00:02:02.820
+Por otro lado, el error medio absoluto o Mean Absolute Error,
+
+22
+00:02:02.820 --> 00:02:11.170
+en inglés, consiste en el promedio del error L1 en todas las predicciones.
+
+23
+00:02:14.240 --> 00:02:21.350
+Ahora, el error L2 consiste en tomar la predicción del modelo
+
+24
+00:02:21.350 --> 00:02:28.130
+y la anotación real y realizar ahora una diferencia elevada al cuadrado.
+
+25
+00:02:28.130 --> 00:02:34.235
+Así, el error cuadrático medio o Mean Square Error en inglés,
+
+26
+00:02:34.235 --> 00:02:40.615
+consiste en promediar el error L2 para todas las predicciones.
+
+27
+00:02:40.615 --> 00:02:45.330
+Este tipo de error es uno de los más comunes y tiene una alta
+
+28
+00:02:45.330 --> 00:02:50.280
+sensibilidad por los datos atípicos o outliers.
+
+29
+00:02:50.280 --> 00:02:54.675
+Cuando hay un dato que está muy lejos del valor esperado,
+
+30
+00:02:54.675 --> 00:02:58.080
+su valor al cuadrado es mucho más grande.
+
+31
+00:02:58.080 --> 00:03:04.000
+Por lo tanto, la pérdida es muy alta con este tipo de error.
+
+32
+00:03:06.200 --> 00:03:12.250
+Ahora bien, la primera función de clasificación que veremos es
+
+33
+00:03:12.250 --> 00:03:18.620
+la cruz entropía binaria o Binary Cross-Entropy Loss en inglés,
+
+34
+00:03:18.620 --> 00:03:23.725
+también se le conoce como la función de pérdida logarítmica.
+
+35
+00:03:23.725 --> 00:03:25.630
+Para entender cómo funciona,
+
+36
+00:03:25.630 --> 00:03:32.545
+debemos recordar que en un problema de clasificación binario solo tenemos dos clases,
+
+37
+00:03:32.545 --> 00:03:35.170
+la positiva y la negativa, que,
+
+38
+00:03:35.170 --> 00:03:39.130
+en este caso, denominaremos 0 y 1.
+
+39
+00:03:40.450 --> 00:03:44.645
+Para entender cómo funciona esta función de pérdida,
+
+40
+00:03:44.645 --> 00:03:49.040
+observemos el siguiente ejemplo: en esta tabla se encuentra en
+
+41
+00:03:49.040 --> 00:03:52.055
+la primera columna la probabilidad de pertenecer
+
+42
+00:03:52.055 --> 00:03:55.580
+a la clase número 1 que produce nuestro modelo,
+
+43
+00:03:55.580 --> 00:03:59.705
+mientras que en la segunda columna tenemos el valor real.
+
+44
+00:03:59.705 --> 00:04:05.570
+Empecemos con aquellas predicciones que deberían pertenecer a la clase 1.
+
+45
+00:04:05.570 --> 00:04:10.055
+En este caso, se cancela el segundo término de la ecuación,
+
+46
+00:04:10.055 --> 00:04:16.965
+ya que Yi es igual a 1 y tenemos 1 menos 1 multiplicado por el logaritmo.
+
+47
+00:04:16.965 --> 00:04:21.310
+Debemos entonces calcular el primer término, es decir,
+
+48
+00:04:21.310 --> 00:04:27.220
+el logaritmo de la probabilidad de que pertenezca a la clase 1.
+
+49
+00:04:27.220 --> 00:04:33.490
+Ahora, para las predicciones pertenecientes a la clase 0,
+
+50
+00:04:33.490 --> 00:04:35.875
+el primer término se vuelve ahora 0,
+
+51
+00:04:35.875 --> 00:04:38.500
+puesto que Yi es igual a 0.
+
+52
+00:04:38.500 --> 00:04:43.165
+Y si la probabilidad de que el dato pertenezca a la clase 1 es,
+
+53
+00:04:43.165 --> 00:04:45.445
+por ejemplo, de 21 por ciento,
+
+54
+00:04:45.445 --> 00:04:48.475
+esto implica que la probabilidad de que pertenezca
+
+55
+00:04:48.475 --> 00:04:51.760
+a la clase 0 es de 1 menos 21 por ciento,
+
+56
+00:04:51.760 --> 00:04:54.235
+es decir, de 79 por ciento.
+
+57
+00:04:54.235 --> 00:04:57.430
+Por eso se realiza esta corrección y se le
+
+58
+00:04:57.430 --> 00:05:01.300
+aplica el logaritmo a las probabilidades corregidas.
+
+59
+00:05:01.300 --> 00:05:05.110
+Finalmente, se multiplican los valores por menos 1,
+
+60
+00:05:05.110 --> 00:05:06.685
+ya que son negativos,
+
+61
+00:05:06.685 --> 00:05:11.870
+y se calcula el promedio para hallar la pérdida de cross entropía.
+
+62
+00:05:11.870 --> 00:05:15.950
+En este caso, el resultado fue de 0,081.
+
+63
+00:05:15.950 --> 00:05:24.800
+En esta gráfica podemos
+
+64
+00:05:24.800 --> 00:05:31.070
+observar el comportamiento de la pérdida logarítmica para los distintos
+
+65
+00:05:31.070 --> 00:05:34.405
+valores de probabilidad en el eje X.
+
+66
+00:05:34.405 --> 00:05:37.850
+Se utiliza esta función debido a que penalizan menos
+
+67
+00:05:37.850 --> 00:05:41.990
+a aquellos valores que se encuentran cercanos al valor real,
+
+68
+00:05:41.990 --> 00:05:45.785
+mientras que crece exponencialmente
+
+69
+00:05:45.785 --> 00:05:51.510
+a medida que el valor predicho se aleja del valor esperado.
+
+70
+00:05:52.090 --> 00:05:58.160
+Cuando tenemos un problema de clasificación en múltiples categorías,
+
+71
+00:05:58.160 --> 00:06:03.155
+la pérdida de cross entropía se puede generalizar,
+
+72
+00:06:03.155 --> 00:06:07.205
+naturalmente, a partir de la cross entropía binaria,
+
+73
+00:06:07.205 --> 00:06:09.790
+que venimos de definir.
+
+74
+00:06:09.790 --> 00:06:14.000
+La diferencia es que, en este caso,
+
+75
+00:06:14.000 --> 00:06:20.360
+la clase correcta se representa con 1 y las otras clases se representan con 0.
+
+76
+00:06:20.360 --> 00:06:22.790
+Como podemos ver en la ecuación,
+
+77
+00:06:22.790 --> 00:06:25.970
+debido a que las otras clases son 0,
+
+78
+00:06:25.970 --> 00:06:32.120
+únicamente calculamos el negativo del logaritmo de la probabilidad de la clase correcta.
+
+79
+00:06:32.120 --> 00:06:37.700
+Es decir, lo que estamos esperando es una función de distribución sobre
+
+80
+00:06:37.700 --> 00:06:40.160
+todas las categorías en las cuales la
+
+81
+00:06:40.160 --> 00:06:46.680
+categoría correcta tiene una probabilidad de 1 y las demás tienen una probabilidad de 0.
+
+82
+00:06:47.660 --> 00:06:53.900
+En conclusión, las funciones de pérdida miden la diferencia o
+
+83
+00:06:53.900 --> 00:06:59.660
+la pérdida entre la predicción de un modelo y el valor esperado.
+
+84
+00:06:59.660 --> 00:07:04.640
+Por otro lado, las funciones de pérdida L1 y L2
+
+85
+00:07:04.640 --> 00:07:09.020
+son generalmente utilizadas para problemas de regresión,
+
+86
+00:07:09.020 --> 00:07:12.730
+donde queremos predecir una variable continua.
+
+87
+00:07:12.730 --> 00:07:17.345
+La norma L2 es la más sensible a datos atípicos,
+
+88
+00:07:17.345 --> 00:07:21.325
+a datos que están por fuera del rango esperado.
+
+89
+00:07:21.325 --> 00:07:25.215
+Por otra parte, la función de pérdida de cross
+
+90
+00:07:25.215 --> 00:07:29.940
+entropía puede ser utilizada para problemas de clasificación,
+
+91
+00:07:29.940 --> 00:07:35.355
+bien sea binarios, bien sea multicategorías.
+
+92
+00:07:35.355 --> 00:07:38.220
+Y eso es todo por este video.
+
+93
+00:07:38.220 --> 00:07:40.840
+Muchas gracias por su atención.

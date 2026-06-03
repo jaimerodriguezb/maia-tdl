@@ -1,0 +1,63 @@
+[MUSIC] Hola, soy Luis Felipe Giraldo, en esta sesión hablaremos
+sobre el proceso de difusión. En primera instancia, recordemos brevemente los principios
+de un modelo de difusión. Posteriormente, vamos a introducir el
+concepto del proceso forward de difusión, para después introducir el
+kernel de difusión forward. Terminaremos esta presentación con
+un resumen de lo visto en la sesión. En un proceso de difusión, el objetivo
+es destruir de forma progresiva cualquier información relevante que
+exista en una señal definida X0. En el ejemplo en la diapositiva,
+vemos cómo una imagen de entrada, denotada por X0. Se va destruyendo en cada
+paso del proceso de difusión, la imagen en el paso final,
+denotada con XT. Corresponde a una imagen donde
+cualquier información relevante ha sido completamente destruida. De ahí su nombre de proceso de difusión. Ahora, por otro lado, la reversión
+del proceso de difusión consiste en reconstruir la información considerada
+relevante a partir de ruido aleatorio. En la diapositiva, vemos que a partir de
+la imagen denotada por XT, a la derecha. Queremos obtener la imagen X0,
+a la izquierda, la cual contiene información
+considerada como relevante. Este es el objetivo de los modelos
+probabilísticos de difusión, usados como modelos generativos. El proceso de difusión es muy fácil
+de modelar, you que puede definirse como la contaminación por ruido
+de la información original. Realizado de forma progresiva,
+sin embargo, la reversión del proceso de difusión
+es bastante difícil de modelar. Aquí, es donde el aprendizaje profundo, o
+deep learning, cumple un rol fundamental. Para modelar este proceso reverso y
+permitir la generación de información original. El proceso de difusión,
+conocido como proceso forward, en los modelos
+probabilísticos de difusión. Consiste en contaminar, en cada paso,
+la muestra anterior con ruido gaussiano. En la diapositiva, vemos cómo la
+imagen X0 es contaminada con una imagen de ruido gaussiano,
+para obtener la imagen X1. El ruido gaussiano se denota por épsilon1,
+a la derecha de la ecuación. La imagen se multiplica por un
+factor de raíz de, 1-beta1, y el ruido gaussiano se multiplica
+por un factor de, beta1. Donde, beta1,
+es un coeficiente constante entre 0 y 1, tenga en cuenta que, épsilon1,
+es una imagen aleatoria. De esta forma podemos obtener una
+imagen similar a la anterior, pero ahora contaminada con ruido,
+como se observa en la figura. En un proceso de difusión esto
+se realiza de forma iterativa. Aquí tenemos una ecuación general
+del proceso de difusión para un instante de tiempo, t. Primero, asumimos que you
+tenemos la muestra en el paso, t-1, que sería, Xt-1. Esta muestra la combinamos,
+linealmente, con ruido gaussiano para obtener la muestra del paso, t,
+que en este caso la denotamos con, Xt. El ruido gaussiano se denota por,
+épsilont, a la derecha de la ecuación. Tenga en cuenta que, épsilon1,
+es una imagen aleatoria, es decir, una imagen en la cual cada píxel
+se le asigna un color aleatorio. De acuerdo con la descripción anterior, la distribución de
+probabilidad de la imagen, Xt. Dada la imagen del paso anterior,
+Xt-1, es una distribución gaussiana, con media, Xt-1,
+multiplicada por raíz de, 1-betat. Y con matriz de covarianza que
+corresponde a la matriz identidad, multiplicada por, betat. Esta distribución se denota por, q, y usualmente se denomina el
+kernel de difusión forward. La distribución, q, precisamente, es el
+modelo del proceso forward de difusión. Al ser esta una distribución
+de probabilidad, nos permite modelar toda una
+familia de posibles muestras. Que podemos obtener en el paso,
+t, del proceso de difusión, es decir,
+you conociendo la muestra en el paso, t-1. Nosotros conocemos las probabilidades de
+obtener alguna muestra en el paso, t. De ahí, a que a este tipo de modelos se
+les conozcan como modelos probabilísticos de difusión. En resumen,
+el proceso forward de difusión destruye, de forma progresiva,
+información relevante de entrada. A través de la adición de
+ruido gaussiano en cada paso, este proceso se modela
+a través de una distribución. Que nos indica la probabilidad de obtener
+una muestra contaminada con ruido, en el paso, t,
+dada la muestra obtenida en el paso, t-1. La función que modela esta distribución
+se le conoce como el kernel de difusión forward.

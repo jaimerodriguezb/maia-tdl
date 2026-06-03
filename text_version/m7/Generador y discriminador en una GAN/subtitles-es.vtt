@@ -1,0 +1,292 @@
+WEBVTT
+
+1
+00:00:12.289 --> 00:00:14.515
+[MUSIC]
+
+2
+00:00:14.515 --> 00:00:17.281
+Hola, soy Luis Felipe Giraldo.
+
+3
+00:00:17.281 --> 00:00:20.715
+En este video, hablaremos de las
+redes generativas adversariales,
+
+4
+00:00:20.715 --> 00:00:24.263
+también conocidas como GANs
+por sus siglas en inglés.
+
+5
+00:00:24.263 --> 00:00:26.504
+La organización de este
+video es la siguiente.
+
+6
+00:00:26.504 --> 00:00:30.385
+Como introducción, definiremos las
+redes generativas adversariales.
+
+7
+00:00:30.385 --> 00:00:34.206
+Después, estudiaremos cada
+componente de estas arquitecturas.
+
+8
+00:00:34.206 --> 00:00:36.467
+Iniciaremos con el generador.
+
+9
+00:00:36.467 --> 00:00:39.668
+Luego, estudiaremos el
+discriminador de una GAN.
+
+10
+00:00:39.668 --> 00:00:43.809
+Ambos son componentes
+fundamentales de las GANs.
+
+11
+00:00:43.809 --> 00:00:48.833
+Para después, estudiar cómo estas
+dos componentes interactúan juntas.
+
+12
+00:00:48.833 --> 00:00:52.356
+Por último, concluiremos con
+un resumen de lo aprendido.
+
+13
+00:00:55.059 --> 00:00:56.760
+Iniciemos hablando de las GANs.
+
+14
+00:00:57.821 --> 00:01:01.849
+Una red generativa adversarial,
+GAN por sus siglas en inglés.
+
+15
+00:01:01.849 --> 00:01:05.538
+Es un tipo de modelo de inteligencia
+artificial que consiste en dos redes
+
+16
+00:01:05.538 --> 00:01:09.171
+neuronales que se enfrentan
+y compiten entre cinco.
+
+17
+00:01:09.171 --> 00:01:11.678
+El generador y el discriminador.
+
+18
+00:01:11.678 --> 00:01:15.833
+La GAN se utiliza principalmente para la
+generación de datos sintéticos que son
+
+19
+00:01:15.833 --> 00:01:16.521
+realistas.
+
+20
+00:01:17.702 --> 00:01:22.200
+Puede utilizarse en diversas aplicaciones
+como la generación de imágenes,
+
+21
+00:01:22.200 --> 00:01:24.145
+música, texto e incluso video.
+
+22
+00:01:26.066 --> 00:01:30.038
+En el caso particular de
+la generación de imágenes,
+
+23
+00:01:30.038 --> 00:01:35.187
+la entrada es una muestra de ruido
+y a partir de esa entrada aleatoria
+
+24
+00:01:35.187 --> 00:01:40.726
+queremos generar una imagen sintética
+que parezca lo más real posible.
+
+25
+00:01:40.726 --> 00:01:41.793
+Ahora hablemos del generador de una GAN.
+
+26
+00:01:42.793 --> 00:01:48.237
+El generador toma una entrada aleatoria,
+comúnmente conocida como ruido, vector
+
+27
+00:01:48.237 --> 00:01:53.617
+latente o semilla, y la transforma en una
+salida que se asemeja a los datos reales.
+
+28
+00:01:54.698 --> 00:01:55.646
+Por ejemplo,
+
+29
+00:01:55.646 --> 00:02:01.022
+si queremos entrenar una GAN para generar
+imágenes de alta resolución de rosas.
+
+30
+00:02:01.022 --> 00:02:05.529
+El generador tomará un vector latente y lo
+convertirá en una imagen realista y una
+
+31
+00:02:05.529 --> 00:02:09.852
+rosa que siga la distribución de las
+imágenes de los datos de entrenamiento.
+
+32
+00:02:11.073 --> 00:02:15.873
+El objetivo del generador es engañar al
+discriminador generando datos sintéticos
+
+33
+00:02:15.873 --> 00:02:20.396
+que son tan realistas que el discriminador
+no puede distinguerlos de los datos
+
+34
+00:02:20.396 --> 00:02:20.955
+reales.
+
+35
+00:02:23.016 --> 00:02:27.844
+Por otro lado,
+tenemos red neuronal que evalúa y
+
+36
+00:02:27.844 --> 00:02:31.976
+clasifica la autenticidad de los datos.
+
+37
+00:02:33.056 --> 00:02:37.728
+Toma como entrada tanto datos reales como
+datos generados por el generador y produce
+
+38
+00:02:37.728 --> 00:02:41.758
+una salida que indica la probabilidad
+de que la entrada sea real o falsa.
+
+39
+00:02:42.998 --> 00:02:46.074
+A medida que el entrenamiento
+de la GAN progresa,
+
+40
+00:02:46.074 --> 00:02:50.761
+el discriminador se vuelve más hábil en
+la tarea de discernir entre los datos
+
+41
+00:02:50.761 --> 00:02:53.121
+reales y los datos que son generados.
+
+42
+00:02:55.941 --> 00:02:58.382
+Ahora veamos cómo se integran
+estos dos componentes.
+
+43
+00:02:59.623 --> 00:03:04.021
+El proceso de entrenamiento de una
+GAN implica una competencia entre el
+
+44
+00:03:04.021 --> 00:03:06.009
+generador y el discriminador.
+
+45
+00:03:07.049 --> 00:03:11.825
+El generador busca mejorar su capacidad
+para generar datos realistas y engañar al
+
+46
+00:03:11.825 --> 00:03:12.870
+discriminador.
+
+47
+00:03:12.870 --> 00:03:17.588
+Mientras que el discriminador busca
+mejorar su capacidad para distinguir entre
+
+48
+00:03:17.588 --> 00:03:19.540
+datos reales y datos generados.
+
+49
+00:03:20.801 --> 00:03:24.044
+Ambos componentes se
+entrenan de forma alternada.
+
+50
+00:03:24.044 --> 00:03:28.298
+Primero se entrena el discriminador con
+un conjunto de datos reales y generados,
+
+51
+00:03:28.298 --> 00:03:32.677
+y luego se entrena el generador utilizando
+la retroalimentación del discriminador
+
+52
+00:03:32.677 --> 00:03:35.178
+para mejorar su rendimiento.
+
+53
+00:03:35.178 --> 00:03:39.602
+Este proceso iterativo continúa hasta
+que el generador pueda generar datos
+
+54
+00:03:39.602 --> 00:03:44.382
+sintéticos que sean indistinguibles de
+los datos reales para el discriminador.
+
+55
+00:03:46.983 --> 00:03:47.988
+En conclusión,
+
+56
+00:03:47.988 --> 00:03:52.665
+el generador y discriminador son los
+componentes fundamentales de una GAN.
+
+57
+00:03:54.005 --> 00:03:58.319
+El generador crea datos sintéticos
+que se asemejan a los datos reales.
+
+58
+00:03:58.319 --> 00:04:03.161
+Mientras que el discriminador evalúa
+y distingue entre los datos reales y
+
+59
+00:04:03.161 --> 00:04:04.827
+generados.
+
+60
+00:04:04.827 --> 00:04:10.089
+Finalmente, estos dos componentes
+trabajan en una competencia adversaria,
+
+61
+00:04:10.089 --> 00:04:11.273
+de ahí el nombre.
+
+62
+00:04:11.273 --> 00:04:15.595
+Para mejorar continuamente la calidad
+de los datos generados por la GAN.

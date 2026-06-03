@@ -1,0 +1,205 @@
+WEBVTT
+
+1
+00:00:13.490 --> 00:00:17.265
+Hola. Soy Luis Felipe Giraldo.
+
+2
+00:00:17.265 --> 00:00:20.490
+Aquí les daré una introducción conceptual a lo que
+
+3
+00:00:20.490 --> 00:00:23.865
+es el aprendizaje profundo o Deep Learning.
+
+4
+00:00:23.865 --> 00:00:25.830
+Les mostraré también algunas
+
+5
+00:00:25.830 --> 00:00:31.000
+de las principales arquitecturas en esta fascinante área del Machine Learning.
+
+6
+00:00:32.870 --> 00:00:38.430
+Machine Learning equipa los sistemas de inteligencia artificial con
+
+7
+00:00:38.430 --> 00:00:40.815
+herramientas para modelar de forma
+
+8
+00:00:40.815 --> 00:00:44.160
+automatizada patrones en los datos que vienen del mundo
+
+9
+00:00:44.160 --> 00:00:46.805
+real para la toma de decisiones.
+
+10
+00:00:46.805 --> 00:00:48.790
+El desempeño de los diferentes
+
+11
+00:00:48.790 --> 00:00:51.730
+algoritmos de Machine Learning para encontrar dichos patrones,
+
+12
+00:00:51.730 --> 00:00:52.990
+depende, en gran manera,
+
+13
+00:00:52.990 --> 00:00:54.880
+de la representación de los datos.
+
+14
+00:00:54.880 --> 00:00:58.750
+Por ejemplo, si nuestro objetivo consiste en separar dos
+
+15
+00:00:58.750 --> 00:01:02.110
+categorías de los datos usando una línea recta,
+
+16
+00:01:02.110 --> 00:01:03.910
+esta tarea sería imposible en
+
+17
+00:01:03.910 --> 00:01:07.615
+la representación de los datos de la figura de la izquierda.
+
+18
+00:01:07.615 --> 00:01:11.710
+Sin embargo, si representamos exactamente los mismos datos,
+
+19
+00:01:11.710 --> 00:01:13.720
+pero usando sus coordenadas polares,
+
+20
+00:01:13.720 --> 00:01:16.060
+como se muestra en la figura de la derecha,
+
+21
+00:01:16.060 --> 00:01:20.420
+la tarea de separar las categorías se vuelve trivial.
+
+22
+00:01:21.970 --> 00:01:26.250
+El diagrama nos muestra una forma de categorizar las
+
+23
+00:01:26.250 --> 00:01:28.950
+diferentes técnicas de Machine Learning.
+
+24
+00:01:28.950 --> 00:01:31.860
+Por un lado, podemos encontrar los algoritmos de
+
+25
+00:01:31.860 --> 00:01:34.950
+Machine Learning considerados como tradicionales,
+
+26
+00:01:34.950 --> 00:01:40.425
+en los cuales se requiere determinar manualmente cómo extraer características
+
+27
+00:01:40.425 --> 00:01:43.335
+que definen la representación de los datos.
+
+28
+00:01:43.335 --> 00:01:47.880
+A esto se le conoce como ingeniería de características.
+
+29
+00:01:47.880 --> 00:01:51.240
+Por otro lado, tenemos los modelos de Deep Learning,
+
+30
+00:01:51.240 --> 00:01:57.970
+que nos permiten aprender la representación de los datos de forma automática.
+
+31
+00:01:59.540 --> 00:02:03.770
+El Deep Learning permite resolver el problema de encontrar
+
+32
+00:02:03.770 --> 00:02:08.705
+la representación adecuada de los datos para abordar los problemas de aprendizaje.
+
+33
+00:02:08.705 --> 00:02:13.040
+Aquí, los algoritmos de Deep Learning encuentran representaciones
+
+34
+00:02:13.040 --> 00:02:17.000
+de los datos que faciliten la extracción de conceptos,
+
+35
+00:02:17.000 --> 00:02:23.010
+o abstracciones que le ayudan a la máquina a entender el mundo físico.
+
+36
+00:02:24.110 --> 00:02:30.465
+En la figura, vemos una de las arquitecturas más importantes del Deep Learning.
+
+37
+00:02:30.465 --> 00:02:33.960
+Este modelo recibe una imagen de entrada,
+
+38
+00:02:33.960 --> 00:02:39.960
+y la expresa en términos de una serie de representaciones simples que, en su conjunto,
+
+39
+00:02:39.960 --> 00:02:44.550
+permite construir una representación compleja y poderosa,
+
+40
+00:02:44.550 --> 00:02:50.410
+que eventualmente facilita la toma automatizada de decisiones.
+
+41
+00:02:52.880 --> 00:02:54.920
+En este curso,
+
+42
+00:02:54.920 --> 00:02:59.620
+iniciaremos con un análisis detallado de las redes neuronales artificiales,
+
+43
+00:02:59.620 --> 00:03:02.890
+que son la base de las arquitecturas de Deep Learning.
+
+44
+00:03:02.890 --> 00:03:06.010
+Después, introduciremos las redes neuronales
+
+45
+00:03:06.010 --> 00:03:09.700
+convolucionales y las redes neuronales recurrentes.
+
+46
+00:03:09.700 --> 00:03:12.880
+Posteriormente, estudiaremos los "transformers" del
+
+47
+00:03:12.880 --> 00:03:16.480
+lenguaje y su variante usada para visión computarizada,
+
+48
+00:03:16.480 --> 00:03:19.160
+conocido como el "transformer" visual.
+
+49
+00:03:19.160 --> 00:03:22.870
+Finalmente, cerraremos nuestro estudio con las redes
+
+50
+00:03:22.870 --> 00:03:27.550
+generativas adversariales y los modelos probabilísticos de difusión,
+
+51
+00:03:27.550 --> 00:03:33.440
+las cuales son una de las arquitecturas de modelos generativos más importantes.

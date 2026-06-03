@@ -1,0 +1,95 @@
+[MUSIC] Hola, soy Pablo Arbeláez. En este video hablaremos acerca
+de unas redes neuronales de inmensa relevancia llamadas transformers. La organización de este
+video es la siguiente. Primero, describiremos brevemente
+el origen de esta técnica. Más adelante hablaremos acerca de la
+arquitectura básica de un transformer. A continuación,
+nos enfocaremos en la primera parte de esa arquitectura, llamada el
+encoder o codificador. Para luego enfocarnos en la segunda parte
+y llamada el decoder o decodificador. Finalmente, cerraremos
+con algunas conclusiones. Retomemos algunos de los principales
+hitos del aprendizaje profundo. Primero, se produjo un auge en
+el uso de las redes neuronales convolucionales para modelar
+relaciones complejas. Especialmente en el caso de
+los estímulos visuales y en el campo de la visión por computador. También las redes neuronales
+recurrentes o RNNs mostraron resultados prometedores para el
+procesamiento del lenguaje natural. Estas redes se utilizaron ampliamente
+para procesar datos secuenciales como las oraciones o también los
+datos de las series temporales. Debido a su capacidad para
+poder memorizar características relevantes de los datos
+de entrada anteriores. Una red recurrente está caracterizada por
+una noción de memoria en el procesamiento. Sin embargo, la naturaleza
+secuencial de las redes recurrentes genera desafíos en términos
+de su costo computacional. Y de la posibilidad de realizar
+un entrenamiento en paralelo en muchas máquinas al mismo tiempo. Motivados por lo anterior,
+en 2017 un equipo de Google Brain dirigido por
+Vaswani y sus colaboradores. Publicó un artículo muy famoso
+llamado Attention is all yout need, atención es todo lo que necesitas. En el cual se mencionó por primera vez
+la arquitectura de los Transformers. Ahora daremos un vistazo a la
+arquitectura que propuso este equipo. Los transformers constan de
+dos componentes principales. Primero el codificador o encoder y después el decodificador o decoder. En primera instancia,
+el modelo recibe una secuencia de entrada, por ejemplo,
+la frase yo soy un estudiante. Esta oración se codifica en
+un espacio de representación. Gracias a nuestro modelo, se encuentra una representación única por
+para la oración en conjunto. Y además de eso, el codificador
+encontrará una representación para cada una de las palabras
+que componen esta oración. Por otro lado,
+el decodificador retomará estas características que acabamos de describir. Y establecerá la relevancia de
+cada una de ellas para poder llegar a una nueva predicción. Por ejemplo, en este caso se podría tratar de un
+transformer para la tarea de traducción. Y la salida sería esta misma frase yo
+soy estudiante, pero en otro idioma. Tendríamos entonces un decoder
+para traducir la frase a francés, por ejemplo,
+y otra para traducirla al inglés. El codificador entonces extrae
+las características más relevantes y el decodificador. A partir de estas características,
+realiza la predicción final esperada. Antes de pasar por el codificador, los datos deben ser pre-procesados
+de la siguiente manera. Por ejemplo, si la frase de
+entrada es yo soy estudiante, lo primero que hacemos es tokenizarla. Es decir,
+dividirla en unidades más pequeñas. Por ejemplo, la podemos convertir en un
+vector, donde cada palabra es una unidad. Luego cada uno de estos
+elementos a cada uno de ellos se le asigna un único valor entero n1,
+n2, n3. Cada uno de los elementos de
+este vector se llama un token. Podemos pensar en la
+tokenización como un diccionario que relaciona palabras y números. En el bloque Input embedding, el modelo representa cada token en
+un espacio vectorial alternativo. Potencialmente de mayor dimensión, donde se captura la información
+semántica de las palabras. Por ejemplo, palabras con
+significados similares deberían situarse cercanas entre sí en
+este espacio de representación. Mientras que palabras con significados
+distintos deberían estar más lejanas, como se ilustra en esta figura. Donde podemos ver una representación
+en dos dimensiones de las palabras. El bloque Positional encoding
+o la codificación posesional agrega información a cada
+token para dotarlo de contexto sobre su posición con
+respecto a los demás tokens. Esto habilita al modelo para
+comprender el orden en el que los tokens aparecen en el texto. Ahora que hemos representado las
+palabras en un espacio donde codificamos sus relaciones semánticas
+y posicionales en el texto, pasamos esta información
+al bloque del encoder. Hablemos ahora más sobre el codificador. El codificador está compuesto
+por múltiples capas con mecanismos de autoatención,
+redes feed forward, capas de normalización y
+conexiones residuales. Lo que hace realmente únicos
+a los transformers es el mecanismo de autoatención. Pues permite que el codificador
+pondere la importancia relativa de cada elemento en la secuencia de entrada
+con respecto a los otros elementos. De esta forma,
+el codificador puede centrarse en la información que es más relevante. Y capturar dependencias a largo plazo
+entre los datos de manera muy efectiva. Por otro lado, la capa de feed
+forward añade una no linealidad a cada capa del encoder con respecto
+al mecanismo de autoatención. La función del codificador es, entonces, crear una representación única
+para toda la secuencia de entrada. Y también una representación para cada
+uno de los elementos de esa secuencia. Hablemos ahora sobre el decodificador. Este está también compuesto
+por múltiples capas que contienen mecanismos de
+autoatención y redes feed forward. Perceptrones multicapa o incluso
+compuestos de una única capa. Sin embargo, la capa del decodificador, además de esto incluye lo que llamamos
+un mecanismo de atención cruzada. El cual relaciona las características
+del codificador respecto a las predicciones que el decodificador
+ha realizado anteriormente. Finalmente, la última
+capa del decodificador pasa por una red lineal que
+se encarga de proyectar las características y
+generar una predicción final. En conclusión,
+los transformers son una arquitectura muy reciente de las redes neuronales. Y están compuestos por un
+codificador y un decodificador. Codificador extrae las
+características más relevantes de los datos de entrada gracias a un mecanismo
+de autoatención en todas sus capas. Y el decodificador toma las
+predicciones anteriores junto a las características del codificador
+para realizar una nueva predicción. Por otro lado, los transformers pueden
+ser entrenados de manera paralela. Y además de esto tienen la habilidad
+de pre entrenarse en un gran conjunto de datos, lo cual tiene
+un gran impacto en la práctica. Y eso es todo,
+muchas gracias por su atención.

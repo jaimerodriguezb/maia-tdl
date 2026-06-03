@@ -1,0 +1,124 @@
+[MUSIC] Hola a todos, soy Pablo Arbeláez. En este video, hablaremos acerca de la
+estructura de una red neuronal artificial. La organización de este
+video es la siguiente. Como introducción,
+repasaremos el concepto fundamental de neurona e indicaremos
+cómo se calcula su salida. Después describiremos la
+estructura de una red neuronal en sus principales la capa de entrada,
+las capas ocultas y la capa de salida. A continuación, hablaremos de la
+importancia de la capa de salida. Y cómo su configuración de depende
+de la definición del problema. Posteriormente hablaremos
+acerca de la importancia de la profundidad en las redes neuronales. Por último, concluiremos con
+un resumen de lo aprendido. Recordemos primero que la unidad funcional de las redes neuronales es la neurona. Esta no es otra cosa que una
+función matemática que recibe una entrada compuesta
+de diferentes valores. Y calcula una combinación
+lineal para generar una salida. De manera más precisa, la salida de una neurona es una
+suma ponderada de sus entradas, las cuales son en este caso
+los valores x1, x2 y x3. Esas entradas se están ponderando
+con unos pesos W y con un sesgo b. Finalmente, obtenemos la salida
+de la neurona utilizando una función de activación f
+para añadir una no linealidad. Y calcular la salida final
+de nuestra unidad básica. Ahora, ¿cómo vamos a combinar
+estas distintas neuronas? Dada una misma entrada,
+por ejemplo x1, x2, x3, si cambiamos los pesos
+podemos tener dos neuronas distintas como las que se
+indican en este diagrama. Podemos así organizar todas
+las neuronas que toman la misma entrada en una capa
+vertical en la misma columna. Es esta columna la que
+llamaremos una capa de procesamiento de la red
+neuronal en este caso. En este ejemplo tenemos
+a la izquierda una entrada. Luego una capa de procesamiento
+compuesta por dos neuronas y a la derecha una salida. Se procesa la información de
+la izquierda hacia la derecha. Para entender cómo funciona el
+procesamiento secuencial de los datos de una red neuronal. Es útil imaginar la red como una
+serie de capas de procesamiento. Cada capa está entonces
+compuesta por un conjunto de neuronas y la representamos
+como una columna vertical. Cada neurona recibe una
+entrada de la capa anterior. Y produce una salida que será utilizada
+como entrada para la capa siguiente, y así sucesivamente,
+como se observa en la figura. De esta manera podemos
+crear arquitecturas de redes neuronales que
+tienen múltiples capas ocultas o capas internas
+para procesar los datos. El proceso comienza entonces
+con los datos crudos, los datos originales
+que queremos procesar. Estos datos pueden ser imágenes, texto, audio o cualquier otro tipo de
+información que se quiera analizar. En este caso utilizaremos nuestro ejemplo, en el cual los datos son
+un vector numérico de tres componentes que contiene valores x1,
+x2 y x3. La capa de entrada toma
+entonces estos datos y los envía a la siguiente capa de la red. Empiezan entonces las distintas
+capas de procesamiento que se conocen con el nombre de capas ocultas. Hasta este punto tenemos unos
+pesos W y unos sesgos b que que se pueden representar
+por medio de matrices. El superíndice corresponde a la capa
+de la red que estamos procesando. Y los subíndices indican el peso de
+cada una de las neuronas de la capa. En este caso particular, el superíndice 1 hace referencia
+a la primera capa oculta de la red. Y el subíndice 2, 1,
+representa el valor del segundo peso para la primera neurona
+de esta capa oculta. Como mencionamos anteriormente,
+los valores de la capa oculta se calculan como una suma ponderada utilizando la
+matriz de pesos W y el vector de sesgos b. En particular,
+el caso del valor z de la segunda capa lo podemos calcular de la forma en
+la que se muestra a continuación. Los pesos correspondientes se multiplican por las entradas x y se
+les suma el sesgo b, b súper 1 i en este caso. Finalmente, después de pasar
+por todas estas capas ocultas, los datos llegan a la capa de salida. Que produce una respuesta basada en los patrones que se han
+detectado en los datos. En este punto tenemos una matriz de
+pesos W2 y una matriz de sesgos, un vector de sesgos b2 para poder
+calcular la salida de la red. you que la información es procesada
+de manera secuencial, para calcular el valor de la capa de salida debemos
+utilizar los valores de la capa oculta. Aquella que está inmediatamente
+antes en la red, es decir,
+los valores z1 y z2 de la segunda capa. En este caso, la salida de la red
+se puede calcular utilizando los valores de la capa anterior
+y los pesos de esa capa. Como se muestra en la
+fórmula la salida es entonces una combinación lineal de estos valores. Todo lo anterior se puede expresar
+de manera comprimida utilizando una serie de multiplicaciones matriciales
+como se muestra a continuación. Es posible calcular todos los valores de
+la capa oculta con solo multiplicar la matriz de pesos W por el vector de entrada
+y sumarle luego el vector de sesgos b. Este mismo procedimiento se aplica para
+calcular los valores de la capa de salida utilizando la respuesta
+de la capa anterior. Es decir, z2, la matriz de
+pesos W2 y sumando el sesgo b2. La capa de salida de una red
+neuronal es muy importante. Porque, como su nombre lo indica,
+es es la última capa de procesamiento. Y aquella que produce la salida final,
+la salida esperada de la red. Es decir, es aquella que produce
+la predicción o el resultado deseado de nuestra red neuronal. Dependiendo del tipo de problema
+que estemos resolviendo, la capa de salida puede tener
+distintas configuraciones y funciones. Supongamos que queremos entrenar
+una red neuronal para clasificar, por ejemplo,
+imágenes en cuatro categorías. Para hacer esto, la red tendría varias capas ocultas
+que procesan los datos de entrada. Y que extraen características útiles, para
+finalmente llegar a una capa de salida. Que produce una probabilidad
+de que los datos pertenezcan a cada una de las cuatro categorías. Esta capa de salida en este caso
+tendría entonces cuatro neuronas para cada una de las clases. Una de ellas y la función de activación
+sería lo que llamamos el softmax. Que produce una distribución
+de probabilidad sobre las cuatro casillas del vector. Podemos así interpretar cada
+uno de estos números como la probabilidad de pertenecer
+a cada categoría. Donde 1 significa una confianza
+perfecta de pertenencia. Y 0 significa una confianza perfecta de no
+pertenencia a cada una de las categorías. Acá hay un ejemplo en este gráfico en el
+cual la clase más probable es la clase 3. Y la red neuronal le otorga
+una probabilidad de 0.4 de pertenecer a esa clase para estos datos. A medida que los datos son
+procesados por la red, cada capa realiza un
+análisis más complejo. Las capas intermedias pueden
+detectar características en las imágenes como bordes,
+formas y distintos patrones. Por esta razón es importante la
+profundidad de una red neuronal. Es uno de los hiperparámetros clave. Estas redes pueden aprender un
+conocimiento que es jerárquico. Lo que significa que pueden adquirir
+representaciones de los datos que inicialmente son muy sencillas. Pero que se convierten en
+cada vez más complejas y generales a medida que se
+agregan capas ocultas. Cuanto mayor sea el
+número de capas ocultas, mayor será la complejidad de la
+representación de los datos. Y, por lo tanto, de los problemas
+que se pueden resolver con esta red. Es este número de capas cada
+vez más grande que hace redes cada vez más profundas. Lo que le da el nombre a la
+rama de machine learning llamada aprendizaje profundo. El aprendizaje profundo es la
+capacidad para entrenar redes neuronales con muchas
+capas de procesamiento. En conclusión, una red neuronal está
+compuesta por una capa de entrada, una o varias capas ocultas y
+finalmente una capa de salida. Es una secuencia de capas que procesa
+la información desde la capa de entrada hasta la capa de salida, produciendo
+un análisis cada vez más complejo. La forma exacta de la capa de
+salida depende del problema que se esté estudiando. En el caso de la clasificación,
+la dimensión de la capa de salida depende del número de clases en las
+que se quiere categorizar el dato. Por último, a medida que una red
+neuronal se vuelve más y más profunda. Es decir, a medida que se
+agregan más y más capas ocultas, aumenta la complejidad de la
+información que puede procesar. Y eso es todo por hoy. Muchas gracias por su atención.

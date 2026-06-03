@@ -1,0 +1,492 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.000
+[MUSIC]
+
+2
+00:00:14.837 --> 00:00:17.352
+Hola a todos, soy Pablo Arbeláez.
+
+3
+00:00:17.352 --> 00:00:22.899
+En este video hablaremos acerca del
+algoritmo de descenso de gradiente,
+
+4
+00:00:22.899 --> 00:00:27.006
+una metodología clave en
+el aprendizaje profundo.
+
+5
+00:00:27.006 --> 00:00:31.450
+Comenzaremos por dar una
+definición de este método.
+
+6
+00:00:31.450 --> 00:00:38.157
+Después nos adentraremos en los detalles
+del cálculo del descenso de gradiente.
+
+7
+00:00:38.157 --> 00:00:45.667
+Más adelante describiremos algunos tipos
+convencionales de descenso de gradiente.
+
+8
+00:00:45.667 --> 00:00:51.246
+Y terminaremos con unas conclusiones.
+
+9
+00:00:51.246 --> 00:00:57.932
+En aprendizaje profundo, el algoritmo
+de retropropagación nos permite
+
+10
+00:00:57.932 --> 00:01:03.881
+calcular el error o la pérdida del
+modelo respecto a una entrada.
+
+11
+00:01:03.881 --> 00:01:08.803
+Y un valor esperado para poder
+corregir el valor de sus pesos
+
+12
+00:01:08.803 --> 00:01:11.430
+de sus parámetros internos.
+
+13
+00:01:11.430 --> 00:01:15.116
+Ahora veremos cómo
+funciona el método que nos
+
+14
+00:01:15.116 --> 00:01:19.002
+permite optimizar estos
+pesos en la práctica.
+
+15
+00:01:19.002 --> 00:01:24.505
+Imaginemos que tenemos una función
+de pérdida como la siguiente,
+
+16
+00:01:24.505 --> 00:01:27.510
+que depende del parámetro x.
+
+17
+00:01:27.510 --> 00:01:32.100
+Si calculamos el gradiente de
+la función y lo igualamos a 0,
+
+18
+00:01:32.100 --> 00:01:35.435
+encontramos los extremos de esta función.
+
+19
+00:01:35.435 --> 00:01:41.959
+Por ejemplo, podemos encontrar el
+mínimo global como indica la figura.
+
+20
+00:01:41.959 --> 00:01:47.783
+Sin embargo, si ahora tenemos un modelo
+que depende you no de un parámetro,
+
+21
+00:01:47.783 --> 00:01:51.121
+sino de millones de variables distintas.
+
+22
+00:01:51.121 --> 00:01:56.302
+Este proceso se convierte en
+computacionalmente inviable.
+
+23
+00:01:56.302 --> 00:02:01.098
+Por lo tanto, tendremos que utilizar un
+
+24
+00:02:01.098 --> 00:02:05.895
+algoritmo que nos permita realizar esta
+
+25
+00:02:05.895 --> 00:02:10.137
+optimización por pequeños pasos.
+
+26
+00:02:10.137 --> 00:02:16.274
+Al calcular el gradiente de esta
+función para un punto aleatorio,
+
+27
+00:02:16.274 --> 00:02:22.720
+obtendremos como resultado la
+dirección que maximiza el cambio.
+
+28
+00:02:22.720 --> 00:02:27.828
+De esta manera, el descenso de
+gradiente utiliza el negativo
+
+29
+00:02:27.828 --> 00:02:34.040
+del gradiente para precisamente
+minimizar la función objetivo.
+
+30
+00:02:34.040 --> 00:02:37.868
+Ahora, estos cambios en la
+dirección pueden llegar
+
+31
+00:02:37.868 --> 00:02:42.590
+a ser muy abruptos dependiendo
+de cada función de pérdida.
+
+32
+00:02:42.590 --> 00:02:47.744
+Por lo tanto,
+se utiliza lo que llamamos un factor,
+
+33
+00:02:47.744 --> 00:02:52.774
+una tasa de aprendizaje
+que nos permite escalar.
+
+34
+00:02:52.774 --> 00:02:58.673
+Este cambio nos permite ajustarlo
+a las especificidades del relieve,
+
+35
+00:02:58.673 --> 00:03:04.470
+que es esta función de pérdida y
+que estamos buscando minimizar.
+
+36
+00:03:04.470 --> 00:03:10.208
+Esta tasa de aprendizaje es el
+hiperparámetro fundamental en
+
+37
+00:03:10.208 --> 00:03:17.065
+el algoritmo de descenso de gradiente
+y en inglés se llama learning rate.
+
+38
+00:03:17.065 --> 00:03:21.740
+Hablemos ahora de la importancia
+de la tasa de aprendizaje.
+
+39
+00:03:21.740 --> 00:03:27.480
+Si tenemos una tasa de aprendizaje
+demasiado alta, podemos quizás llegar
+
+40
+00:03:27.480 --> 00:03:33.556
+más rápidamente a un punto de convergencia
+mediante este método iterativo.
+
+41
+00:03:33.556 --> 00:03:37.731
+Imaginen ustedes que nuestra
+función de pérdida es un relieve.
+
+42
+00:03:37.731 --> 00:03:41.490
+Y que queremos llegar al valle
+más profundo de ese relieve
+
+43
+00:03:41.490 --> 00:03:45.394
+desplazándonos siguiendo
+la dirección del gradiente.
+
+44
+00:03:45.394 --> 00:03:47.902
+Entonces, si nuestros pasos son grandes,
+
+45
+00:03:47.902 --> 00:03:50.892
+podemos llegar rápidamente
+al valle más profundo.
+
+46
+00:03:50.892 --> 00:03:55.291
+Pero si son muy grandes,
+corremos el riesgo de seguir
+
+47
+00:03:55.291 --> 00:03:59.508
+derecho y nunca encontrar
+nuestro mínimo global.
+
+48
+00:03:59.508 --> 00:04:05.770
+Podemos llegar a un caso de
+divergencia de nuestra algoritmo.
+
+49
+00:04:05.770 --> 00:04:10.252
+Por otro lado, si la tasa de
+aprendizaje es demasiado pequeña,
+
+50
+00:04:10.252 --> 00:04:15.066
+entonces nos tomará mucho tiempo
+poder llegar a ese valle profundo.
+
+51
+00:04:15.066 --> 00:04:19.640
+Estaremos dando pasos muy pequeños cada
+
+52
+00:04:19.640 --> 00:04:24.624
+vez para acercarnos a ese mínimo esperado.
+
+53
+00:04:24.624 --> 00:04:30.196
+Es más, si son realmente pequeños,
+corremos el riesgo adicional
+
+54
+00:04:30.196 --> 00:04:36.079
+de quedarnos estancados en un mínimo
+regional que no es tan profundo.
+
+55
+00:04:36.079 --> 00:04:40.900
+Unos valores para los parámetros
+que no son un óptimo global para
+
+56
+00:04:40.900 --> 00:04:42.425
+nuestro problema.
+
+57
+00:04:42.425 --> 00:04:50.593
+O que sencillamente son subóptimos y
+proveen resultados que no son deseados.
+
+58
+00:04:50.593 --> 00:04:54.827
+La tasa de aprendizaje ideal,
+por otro lado,
+
+59
+00:04:54.827 --> 00:04:59.942
+nos permite pasar por encima
+de estos mínimos locales.
+
+60
+00:04:59.942 --> 00:05:03.973
+Y llegar finalmente a un
+punto de convergencia,
+
+61
+00:05:03.973 --> 00:05:10.702
+a un mínimo de la función de pérdida que
+sea adecuado para nuestros propósitos.
+
+62
+00:05:10.702 --> 00:05:16.030
+No necesariamente será este el
+mínimo global, observen ustedes.
+
+63
+00:05:16.030 --> 00:05:20.385
+Sin embargo, en la práctica se obtienen
+
+64
+00:05:20.385 --> 00:05:24.868
+resultados bastante aceptables con esta
+
+65
+00:05:24.868 --> 00:05:30.255
+metodología que opera
+por iteraciones locales.
+
+66
+00:05:30.255 --> 00:05:33.929
+En el ejemplo de descenso de
+gradiente que acabo de explicar,
+
+67
+00:05:33.929 --> 00:05:38.038
+estamos asumiendo que el modelo ha
+calculado su función de pérdida.
+
+68
+00:05:38.038 --> 00:05:42.612
+Y se ha realizado la retropropagación
+después de haber pasado por
+
+69
+00:05:42.612 --> 00:05:46.116
+la totalidad de los elementos
+de la base de datos.
+
+70
+00:05:46.116 --> 00:05:50.514
+Una iteración en este
+algoritmo se hace respecto
+
+71
+00:05:50.514 --> 00:05:53.632
+a la totalidad de la base de datos.
+
+72
+00:05:53.632 --> 00:05:58.823
+De manera ideal para poder tener
+en cuenta toda la diversidad
+
+73
+00:05:58.823 --> 00:06:05.280
+de los datos originales al encontrar
+el óptimo de los parámetros.
+
+74
+00:06:05.280 --> 00:06:10.704
+Sin embargo, esta estrategia no
+siempre es computacionalmente viable.
+
+75
+00:06:10.704 --> 00:06:11.801
+Por lo tanto,
+
+76
+00:06:11.801 --> 00:06:17.756
+existen alternativas cuando las bases
+de datos son realmente voluminosas.
+
+77
+00:06:17.756 --> 00:06:21.635
+La primera es el descenso
+de gradiente estocástico,
+
+78
+00:06:21.635 --> 00:06:27.249
+en el cual realizamos la optimización
+sobre un punto aleatorio de los datos.
+
+79
+00:06:27.249 --> 00:06:31.792
+E inclusive podemos también,
+en algunas variantes,
+
+80
+00:06:31.792 --> 00:06:38.323
+elegir aleatoriamente algunas dimensiones
+para realizar la optimización.
+
+81
+00:06:38.323 --> 00:06:43.356
+Por otro lado, es muy frecuente en
+el caso de las redes neuronales
+
+82
+00:06:43.356 --> 00:06:47.759
+que no sea posible tener toda
+la base de datos en memoria.
+
+83
+00:06:47.759 --> 00:06:53.054
+Pero que sea posible tener pequeños
+pedazos de la base de datos.
+
+84
+00:06:53.054 --> 00:06:57.965
+Este submuestreo de los datos es lo
+que llamamos un descenso de gradiente
+
+85
+00:06:57.965 --> 00:06:59.406
+con minibatches.
+
+86
+00:06:59.406 --> 00:07:03.182
+Cada pequeña fracción de
+datos se llama un minibatch.
+
+87
+00:07:03.182 --> 00:07:05.156
+Y observen ustedes que,
+
+88
+00:07:05.156 --> 00:07:09.574
+si bien no es igual de bueno
+a tener toda la base de datos,
+
+89
+00:07:09.574 --> 00:07:15.785
+sí es más robusto que tomar decisiones
+basadas en cada dato individualmente.
+
+90
+00:07:15.785 --> 00:07:20.689
+Puesto que el gradiente de
+los datos individuales puede
+
+91
+00:07:20.689 --> 00:07:25.392
+tener más ruido que el
+gradiente de un grupo de datos.
+
+92
+00:07:25.392 --> 00:07:30.615
+En conclusión, la retropropagación
+utiliza una función de pérdida
+
+93
+00:07:30.615 --> 00:07:36.209
+para poder calcular el gradiente de
+un modelo respecto a sus parámetros.
+
+94
+00:07:36.209 --> 00:07:40.854
+El algoritmo de descenso de
+gradiente es el más comúnmente
+
+95
+00:07:40.854 --> 00:07:45.418
+utilizado para optimizar de
+forma iterativa los pesos.
+
+96
+00:07:45.418 --> 00:07:51.217
+Los parámetros internos de los
+modelos de machine learning.
+
+97
+00:07:51.217 --> 00:07:54.659
+La tasa de aprendizaje, por otro lado,
+
+98
+00:07:54.659 --> 00:08:00.752
+es un hiperparámetro esencial para
+la optimización de estos modelos.
+
+99
+00:08:00.752 --> 00:08:06.006
+Finalmente, existen diversos
+tipos de descenso de gradiente.
+
+100
+00:08:06.006 --> 00:08:10.884
+Diversas variantes que difieren
+en el número de datos que
+
+101
+00:08:10.884 --> 00:08:13.432
+utilizan en cada iteración.
+
+102
+00:08:13.432 --> 00:08:15.096
+Y eso es todo por hoy.
+
+103
+00:08:15.096 --> 00:08:17.098
+Muchas gracias por su atención.

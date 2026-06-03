@@ -1,0 +1,21 @@
+1. Efficient Estimation of Word Representations in Vector Space — Mikolov et al. (2013)
+https://arxiv.org/abs/1301.3781
+
+Este paper introduce word2vec, el precursor directo de GloVe que tu proyecto utiliza. Establece el paradigma de aprender representaciones densas de palabras de forma no supervisada y transferirlas a tareas downstream. Demuestra que vectores preentrenados capturan relaciones semánticas y sintácticas complejas, lo que justifica directamente la decisión de inicializar el nn.Embedding con vectores GloVe en lugar de entrenar desde cero, especialmente relevante dado que la cobertura del vocabulario alcanzó el 77.2 %.
+
+
+2. LSTM: A Search Space Odyssey — Greff et al. (2015)
+https://arxiv.org/abs/1503.04069
+
+Estudio empírico exhaustivo con 5 400 experimentos que analiza qué componentes del LSTM son realmente necesarios. Concluye que la arquitectura estándar es la variante más robusta y que el forget gate es el componente crítico. Valida directamente la elección de una BiLSTM estándar con hidden_dim=128 sobre alternativas como GRU o LSTM con peepholes, y explica por qué agregar capas adicionales no siempre mejora el rendimiento en tareas de clasificación de longitud moderada.
+
+
+4. Universal Language Model Fine-Tuning for Text Classification (ULMFiT) — Howard & Ruder (2018)
+https://arxiv.org/abs/1801.06146
+
+Formaliza exactamente la estrategia freeze/unfreeze que implementa este proyecto: propone "gradual unfreezing" (descongelar capas progresivamente) y "discriminative fine-tuning" (tasas de aprendizaje diferenciadas por capa al descongelar). Uno de sus seis benchmarks es precisamente IMDb, donde alcanza estado del arte. La implementación del proyecto sigue este mismo esquema: extracción de características con embeddings congelados seguida de ajuste fino con lr 10× menor.
+
+5. Supervised Learning of Universal Sentence Representations from Natural Language Inference Data (InferSent) — Conneau et al. (2017)
+https://arxiv.org/abs/1705.02364
+
+Establece que una BiLSTM con mean pooling sobre todos los estados ocultos produce representaciones de oraciones superiores a usar solo el último estado oculto o max pooling, y que estas representaciones se transfieren efectivamente a tareas de análisis de sentimiento. Es el referente directo de la decisión arquitectónica output.mean(dim=1) en el forward del modelo, validando que el promedio de estados captura información semántica global de la secuencia de forma más estable que otras estrategias de agregación.
