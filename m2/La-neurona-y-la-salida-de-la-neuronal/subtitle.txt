@@ -1,0 +1,71 @@
+[MUSIC] Hola, soy Pablo Arbeláez. En este video hablaremos acerca de cómo se
+calcula la salida para una única neurona. Es decir, describiremos en detalle
+cómo tomamos las entradas y utilizamos los pesos de la neurona
+para poder calcular una salida. Posteriormente, daremos un
+ejemplo en donde combinaremos varias neuronas en capas sucesivas. Y repetiremos el ejemplo utilizando
+una función de activación no lineal. Finalmente, presentaremos
+algunas conclusiones del video. La neurona es entonces nuestra
+unidad funcional de base. Y se encuentra inspirada
+por supuesto en el concepto biológico de las
+neuronas de nuestro cerebro. En donde cada una de estas células
+está conectada a muchas otras. Y por un lado recibe
+impulsos eléctricos de otras células para transmitirlos
+a las células vecinas. En el caso de las redes
+neuronales artificiales, la neurona es una función matemática y
+en nuestro caso va a ser muy sencilla. Por un lado, recibe una entrada
+compuesta de diferentes valores, en este caso notados con las letras x1,
+x2 y x3. Realiza después nuestra
+neurona una combinación lineal una suma ponderada de
+esas entradas con ciertos pesos preestablecidos, notados aquí w1, w2 y w3. Tenemos además un sesgo b. Así, la salida z de nuestra neurona es la combinación lineal de los xy con los wi, a la cual le sumamos un valor constante b. Observen ustedes que cada
+una de estas unidades se comporta como una regresión lineal
+de la estadística tradicional. Ahora, las redes neuronales
+cuentan generalmente con múltiples neuronas que están ordenadas
+en capas de procesamiento. Así que para evitar que la combinación de nuestras neuronas se pueda
+representar como una única de ellas. Debemos utilizar lo que
+llamamos una función de activación al final de
+cada combinación lineal. A continuación,
+veremos la función de activación más sencilla de todas y también
+la más comúnmente utilizada, llamada ReLU,
+o rectified linear unit en inglés. En este caso,
+esta función no lineal convierte todas las salidas negativas a cero. Y aplica la identidad a los valores
+positivos, es decir, no los modifica. Ahora, el verdadero potencial
+de las neuronas se realiza cuando se consideran múltiples
+de ellas ordenadas en capas en las que cada neurona se
+especializa en realizar una tarea. En este ejemplo, la capa de entrada
+en verde tiene los datos x1, x2 y x3. Por otro lado, la capa oculta
+en azul claro tiene dos neuronas que procesarán cada una de ellas
+la información de entrada. Finalmente, tenemos una capa de salida en donde hay otra neurona
+que calculará el valor final a partir del resultado
+de la capa oculta. Ahora, observen ustedes que
+si tenemos muchas neuronas lineales conectadas entre sí. Entonces el efecto conjunto
+sería equivalente al de tener una única neurona lineal. Porque la composición de funciones
+lineales es una única función y lineal. Por este motivo, para aumentar el poder de representación de las redes
+neuronales necesitamos introducir una función de
+activación en cada neurona. Veamos este comportamiento de las neuronas
+lineales con nuestro ejemplo anterior. Tenemos aquí valores
+específicos para los datos x1, x2 y x3 y tenemos también
+pesos específicos. Podemos observar que el resultado final
+de la red, en este caso el número 13. Podría haberse obtenido con una única combinación lineal de
+los valores de entrada, dándoles los pesos -29,
+9 y 18, y un sesgo de 8. De esta manera obtendríamos
+exactamente el mismo valor que haber realizado todas estas combinaciones
+lineales una detrás de la otra. Ahora, si aplicamos la
+función de activación llamada rectified linear unit o ReLU. Entonces lo que haremos será convertir
+todos los valores negativos en cero. De esta manera,
+la salida de la primera neurona, que era menos nueve,
+se convertirá ahora en cero. Y así el resultado final de
+nuestra red neuronal you no será una sencilla combinación lineal
+de los valores de entrada. Así, es muy importante recordar
+que para aumentar el poder de representación de las redes neuronales
+es fundamental incluir no linealidades. Por sencillas que sean estas,
+como es el caso del ReLU. En conclusión,
+cada neurona es una función matemática que realiza una combinación lineal de sus
+entradas para producir una salida. Múltiples neuronas se pueden combinar para
+para crear una red neuronal más compleja. La salida de cada neurona
+requiere de una función de activación para que se
+convierta en un modelo no lineal. Y tenga así un mayor
+poder de representación. Finalmente, la no linealidad de
+las neuronas permite que durante el entrenamiento de una red
+neuronal para una tarea específica. Cada una de las neuronas pueda
+especializarse en una tarea particular. Y eso es todo por este video,
+muchas gracias por su atención.

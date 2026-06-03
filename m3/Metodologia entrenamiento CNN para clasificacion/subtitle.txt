@@ -1,0 +1,119 @@
+[MUSIC] Hola, soy Luis Felipe Giraldo. Y el día de hoy hablaremos sobre cómo se
+analizan los aspectos principales de un problema de inteligencia artificial. Esto involucra analizar
+los datos que disponemos. Que son la fuente principal que alimenta
+los modelos de inteligencia artificial. Procederemos a hablar sobre los pasos
+a tener en cuenta en el diseño del modelo. La función de pérdida, que es la que
+direcciona el proceso de aprendizaje. Y la evaluación de desempeño,
+que nos indica qué tan bueno es el modelo que obtuvimos como resultado
+del proceso de aprendizaje. El primer paso para entrenar un
+modelo con inteligencia artificial es identificar de forma clara el
+problema que debemos abordar. Para esto, podemos responder
+a las siguientes preguntas, ¿cuál es la necesidad
+que quiero solucionar? ¿Qué soluciones han realizado
+otros autores para este problema? ¿Cuáles son los datos
+de entrada del modelo? ¿Cuál quiero que sea la salida del modelo? ¿Con qué datos dispongo? ¿Y cuáles son las dificultades y
+consideraciones éticas de mi propuesta? Una vez tenemos claridad sobre la forma
+en la que queremos abordar este problema, debemos iniciar con la etapa de la
+organización y procesamiento de los datos. Para esto, es importante estar familiarizado con
+la información que se va a utilizar. Por ejemplo, ¿contamos con los datos de entrada y
+anotaciones adecuados para el problema? ¿Cuál es la calidad de estos datos? Por ejemplo, si queremos clasificar
+productos en una plaza de mercado. Debemos garantizar que la
+resolución de la cámara sea lo suficientemente buena para diferenciar
+una manzana roja de un tomate. Por otro lado, es importante comprender si los datos
+son representativos del problema. Si queremos identificar los rostros
+de individuos a través de cámaras de seguridad. Nuestros datos de entrenamiento no pueden
+ser solo las imágenes del documento de identificación de las personas. También es importante tener claridad
+sobre los sesgos de los datos. Si queremos clasificar
+imágenes de gatos y perros, pero todas nuestras imágenes de
+gatos son en blanco y negro. Mientras que todas nuestras imágenes de
+perro son a color, es probable que el modelo clasifique una imagen de perro
+a blanco y negro como si fuese un gato. Típicamente, la información que tenemos
+disponible se divide en tres segmentos. Primero tenemos el segmento
+llamado segmento de entrenamiento, el cual contiene la mayor cantidad
+de la información disponible. Y es el que el modelo utiliza para
+comprender las características relevantes de la tarea. Es decir,
+aprender los patrones basados en datos. Luego tenemos el segmento de validación,
+en donde calificamos el desempeño de aquello que el modelo aprendió
+durante el entrenamiento. Para esto utilizamos información que
+el modelo no ha visto previamente. El segmento de validación es el que
+nos permite comparar los diferentes experimentos que le
+hagamos a la arquitectura. Y sintonizar los
+hiperparámetros del modelo. Finalmente, una vez hemos realizado
+múltiples pruebas y estamos satisfechos con el rendimiento de nuestro
+modelo durante la validación, el modelo pasa al segmento de evaluación. El rendimiento del modelo en este
+segmento es el que se utiliza para compararse con los
+intentos de otros autores. Por esta razón, algunas bases de datos
+que son públicas tienen segmentos de evaluación privados en donde
+cada autor debe enviar su modelo. Y ellos se encargarán de realizar
+la evaluación de desempeño. Ahora, una vez tenemos la
+base de datos organizada, procedemos a la parte del diseño
+y del entrenamiento del modelo. Habíamos hablado de la importancia de
+revisar lo que otros autores han hecho para resolver este problema. Esto se conoce como una
+revisión del estado del arte. En caso de que el estado del arte
+cuente con un modelo de libre acceso. Es una buena práctica replicar ese
+modelo en nuestros datos con el objetivo de evaluar su desempeño. Así podemos iniciar el proceso de
+diseño y experimentación con lo que se conoce como una línea de base. La cual es una arquitectura que
+utilizamos como punto de inicio. Adicionalmente, nosotros podemos
+verificar el desempeño de diferentes arquitecturas de redes convolucionales
+para resolver el mismo problema. La selección de la arquitectura a utilizar
+depende de diferentes factores. Por ejemplo, la complejidad de la tarea
+de clasificación o regresión a resolver, la cantidad de datos que tenemos
+disponibles, los recursos computacionales. Y el nivel de desempeño que queremos que
+el modelo tenga para clasificación o regresión son algunos de esos factores. Una tarea de clasificación o regresión
+sencilla con imágenes a baja resolución probablemente se pueda resolver con una
+arquitectura con muy poca profundidad. Por otro lado, si debemos resolver una tarea compleja
+de regresión o clasificación. Y tenemos disponibles una cantidad
+considerable de datos, es probable que una red lo suficientemente profunda
+se requiera para resolver la tarea. Si los recursos computacionales
+que tenemos a nuestra disposición son limitados. Entonces arquitecturas pequeñas con
+pocos parámetros y capas se deben utilizar para reducir el
+tiempo de entrenamiento. Y la memoria de almacenamiento
+requerida para resolver esta tarea. Existen arquitecturas cuyo
+desempeño you ha sido reportado. Y varias de esas arquitecturas pre
+entrenadas en conjuntos de entrenamiento grandes se encuentran
+disponibles de forma abierta. Algunas de estas arquitecturas
+tienen poca profundidad. Mientras que otras tienen mayor
+profundidad y modificaciones que hacen que su desempeño mejore en
+diferentes tareas complejas. Por ejemplo, LeNet y AlexNet son
+redes neuronales clásicas con poca profundidad que sirven para resolver
+tareas relativamente fáciles con pocos recursos computacionales. Arquitecturas más profundas incluyen VGG,
+GoogLenet, MobileNet y EfficientNet. En particular, GoogleNet está diseñada para optimizar
+los recursos computacionales. Y MobileNet está diseñada para
+ser desplegada en sistemas embebidos como dispositivos móviles. Entre las arquitecturas mucho más
+profundas encontramos a ResNet y DenseNet. Las cuales pueden tener fácilmente
+un número de capas superior a 100. Durante el entrenamiento del modelo es
+importante tener alguna métrica que nos permita conocer si el
+modelo está aprendiendo. En nuestras lecciones pasadas hemos
+aprendido sobre la función de pérdida. La cual nos permite cuantificar la
+diferencia entre el valor predicho y el valor objetivo. Así podemos utilizar esta función
+para determinar el estado del modelo. Para esto podemos graficar el valor de la
+función objetivo con respecto al número de épocas que han transcurrido
+durante el entrenamiento. El modelo completa una época cada vez que
+ha visto la totalidad de los datos de entrenamiento. Y el número de épocas suele ser un valor
+que se define al inicio del entrenamiento. Ahora, si el modelo está aprendiendo
+correctamente, esperamos que la función de pérdida disminuya con el paso de las
+épocas, como se muestra en la figura. Adicionalmente, la figura muestra
+que después de la época 35 no disminuye la función de
+pérdida significativamente. Lo cual nos sugiere que sin importar
+cuánto tiempo más se deje entrenando el modelo, este ha llegado a un límite. Una vez nosotros hemos
+organizado los datos. Definido la metodología de diseño del
+modelo de inteligencia artificial que va a resolver el problema planteado. Y definida la función de pérdida que va
+a direccionar el proceso de aprendizaje. Ahora procedemos a definir alguna
+métrica que mida el desempeño del modelo you entrenado. Y realizar diferentes experimentos
+en los que podemos evaluar diferentes arquitecturas. Existen diferentes tipos de
+indicadores de desempeño. Un ejemplo es el F1-score, el cual
+cuantifica el desempeño de un modelo de clasificación ante la presencia de
+posibles desbalances en las clases. En el ejemplo en la
+diapositiva vemos que para experimentos con diferentes
+arquitecturas podemos usar esta métrica para determinar cuál
+es el modelo con mejor desempeño. Las métricas que se usan depende
+del tipo de problema que estemos intentando resolver. Como conclusión tenemos que el
+entrenamiento de un modelo de inteligencia artificial. Y en particular las redes neuronales
+convolucionales requieren de una definición del problema. Organización de los datos, diseño del
+modelo y una evaluación del desempeño. Es de mucha importancia asegurarse que los
+datos son lo suficientemente apropiados para resolver el problema. Entendiendo las limitaciones,
+los sesgos que se pueden generar. La revisión del estado del arte es
+fundamental para tener una línea base. Y poder comparar con posibles futuros
+resultados que podamos tener. La selección de la arquitectura depende
+de las características del problema, base de datos y recursos computacionales. Y la gráfica de función de pérdidas sobre
+el número de épocas es muy útil para evaluar si el modelo está aprendiendo.

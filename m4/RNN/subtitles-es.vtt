@@ -1,0 +1,385 @@
+WEBVTT
+
+1
+00:00:14.210 --> 00:00:17.265
+Hola. Soy Luis Felipe Giraldo.
+
+2
+00:00:17.265 --> 00:00:20.100
+En este video vamos a hablar de las redes neuronales
+
+3
+00:00:20.100 --> 00:00:24.090
+recurrentes o RNN por sus siglas en inglés.
+
+4
+00:00:24.090 --> 00:00:27.300
+Empezaremos definiendo las redes neuronales recurrentes,
+
+5
+00:00:27.300 --> 00:00:31.110
+para después estudiar su arquitectura y funcionamiento.
+
+6
+00:00:31.110 --> 00:00:35.520
+Presentaremos algunas ventajas y desventajas de este tipo de redes,
+
+7
+00:00:35.520 --> 00:00:39.570
+para finalizar con un resumen de lo aquí estudiado.
+
+8
+00:00:59.870 --> 00:01:05.000
+Ahora, veamos una arquitectura tradicional de las redes neuronales recurrentes
+
+9
+00:01:05.000 --> 00:01:10.035
+: t define la unidad de tiempo u orden de una secuencia;
+
+10
+00:01:10.035 --> 00:01:14.735
+x_t es la entrada en el instante de tiempo t;
+
+11
+00:01:14.735 --> 00:01:19.500
+o_t es la salida de la red en el instante de tiempo t;
+
+12
+00:01:20.060 --> 00:01:25.415
+s_t es la activación de la red neuronal en el instante de tiempo t,
+
+13
+00:01:25.415 --> 00:01:30.850
+y es el que nos permite almacenar la historia del proceso que estamos modelando.
+
+14
+00:01:30.850 --> 00:01:33.080
+En el diagrama en la diapositiva,
+
+15
+00:01:33.080 --> 00:01:40.520
+la primera neurona debe generar una activación s_t menos 1 y la salida o_t menos 1,
+
+16
+00:01:40.520 --> 00:01:44.530
+habiendo recibido la entrada x_t menos 1.
+
+17
+00:01:44.530 --> 00:01:48.260
+La siguiente neurona recibe ahora,
+
+18
+00:01:48.260 --> 00:01:50.300
+no solo la entrada x_t,
+
+19
+00:01:50.300 --> 00:01:53.570
+sino también la activación de la neurona anterior,
+
+20
+00:01:53.570 --> 00:01:56.155
+que es s_t menos 1.
+
+21
+00:01:56.155 --> 00:02:02.300
+Esta neurona utiliza la información de la entrada x_t y la activación s_t menos
+
+22
+00:02:02.300 --> 00:02:09.730
+1 para calcular una activación s_t y la salida o_t.
+
+23
+00:02:09.730 --> 00:02:16.175
+Eventualmente, s_t va a ser utilizado por la neurona siguiente.
+
+24
+00:02:16.175 --> 00:02:21.710
+Este proceso se repite para todas las neuronas que vienen más adelante.
+
+25
+00:02:23.170 --> 00:02:29.960
+La activación s_t se calcula como una combinación lineal entre
+
+26
+00:02:29.960 --> 00:02:33.950
+la entrada de x_t y la activación de la neurona anterior,
+
+27
+00:02:33.950 --> 00:02:38.600
+pasando por una función de activación que denotamos como Sigma.
+
+28
+00:02:38.600 --> 00:02:40.955
+La salida en el tiempo t,
+
+29
+00:02:40.955 --> 00:02:42.970
+denotada como o_t,
+
+30
+00:02:42.970 --> 00:02:48.305
+se calcula como una transformación de la activación s_t.
+
+31
+00:02:48.305 --> 00:02:51.415
+De esta forma generamos s_t,
+
+32
+00:02:51.415 --> 00:02:54.610
+que podemos verla como información que se propaga
+
+33
+00:02:54.610 --> 00:02:58.765
+a lo largo de la red conteniendo la historia del proceso que estamos modelando,
+
+34
+00:02:58.765 --> 00:03:03.410
+y o_t, que es la variable en el tiempo que queremos predecir.
+
+35
+00:03:03.410 --> 00:03:05.610
+Los pesos U,
+
+36
+00:03:05.610 --> 00:03:09.655
+W y b_t que ustedes ven en las ecuaciones,
+
+37
+00:03:09.655 --> 00:03:14.170
+son pesos que resultan de un proceso de entrenamiento.
+
+38
+00:03:14.170 --> 00:03:20.960
+U y W no dependen del tiempo y son las mismas para todas las neuronas.
+
+39
+00:03:21.950 --> 00:03:28.100
+Es usual simplificar el modelo de una red neuronal recurrente utilizando el diagrama
+
+40
+00:03:28.100 --> 00:03:30.695
+que se muestra en la figura en la parte izquierda,
+
+41
+00:03:30.695 --> 00:03:33.375
+indicando las entradas x,
+
+42
+00:03:33.375 --> 00:03:35.235
+las salidas o,
+
+43
+00:03:35.235 --> 00:03:36.900
+las activaciones s,
+
+44
+00:03:36.900 --> 00:03:43.330
+y los pesos entrenables que son V, W y U.
+
+45
+00:03:44.180 --> 00:03:48.970
+A continuación, veremos el ejemplo de una red neuronal recurrente,
+
+46
+00:03:48.970 --> 00:03:50.630
+que busca predecir el cambio en
+
+47
+00:03:50.630 --> 00:03:53.990
+la humedad del suelo basado en el cambio de la temperatura del aire.
+
+48
+00:03:53.990 --> 00:03:57.425
+La temperatura del aire la representamos en grados Celsius,
+
+49
+00:03:57.425 --> 00:04:01.365
+mientras que la humedad se medirá en fracción de agua por volumen.
+
+50
+00:04:01.365 --> 00:04:04.850
+Contamos con la información de la temperatura del
+
+51
+00:04:04.850 --> 00:04:08.285
+aire y la humedad del suelo por un periodo de un año.
+
+52
+00:04:08.285 --> 00:04:12.590
+Nuestra hipótesis es que la humedad del suelo se puede predecir
+
+53
+00:04:12.590 --> 00:04:17.765
+a través de la temperatura del aire usando una red neuronal recurrente.
+
+54
+00:04:17.765 --> 00:04:20.930
+En este ejemplo, la entrada del modelo,
+
+55
+00:04:20.930 --> 00:04:22.370
+denotada por x,
+
+56
+00:04:22.370 --> 00:04:25.985
+es la información temporal de la temperatura del viento,
+
+57
+00:04:25.985 --> 00:04:28.820
+mientras que la salida "o" debería ser
+
+58
+00:04:28.820 --> 00:04:31.975
+la humedad del suelo para un tiempo definido por la letra t.
+
+59
+00:04:31.975 --> 00:04:35.195
+Asumamos que tenemos una red neuronal recurrente
+
+60
+00:04:35.195 --> 00:04:40.280
+básica con la función de activación tangente hiperbólica.
+
+61
+00:04:40.280 --> 00:04:44.355
+Asumamos que conocemos los pesos U,
+
+62
+00:04:44.355 --> 00:04:46.745
+W y b_t;
+
+63
+00:04:46.745 --> 00:04:49.360
+s_0 asumimos que es 0.
+
+64
+00:04:49.360 --> 00:04:52.955
+La red neuronal toma la entrada en el instante de tiempo 1,
+
+65
+00:04:52.955 --> 00:04:56.825
+que sería 28,36 grados centígrados,
+
+66
+00:04:56.825 --> 00:04:59.480
+y la multiplica por el peso U;
+
+67
+00:04:59.480 --> 00:05:05.810
+suma el peso o sesgo b_t y produce la activación s_1,
+
+68
+00:05:05.810 --> 00:05:08.755
+como se muestra en la ecuación de la derecha.
+
+69
+00:05:08.755 --> 00:05:15.155
+Usando esta activación, se multiplica por V y se le suma el sesgo b_t.
+
+70
+00:05:15.155 --> 00:05:17.630
+Esto produce la salida o_1,
+
+71
+00:05:17.630 --> 00:05:21.620
+que toma un valor de 0,341.
+
+72
+00:05:21.620 --> 00:05:26.010
+Este es un valor de humedad en el instante de tiempo 1.
+
+73
+00:05:26.010 --> 00:05:31.280
+Este proceso se repite iterativamente para cada instante de tiempo,
+
+74
+00:05:31.280 --> 00:05:34.670
+generando la activación para cada neurona y la
+
+75
+00:05:34.670 --> 00:05:39.270
+serie de tiempo que corresponde a la predicción de la humedad.
+
+76
+00:05:41.720 --> 00:05:47.855
+Tenemos algunas ventajas y desventajas de las redes neuronales recurrentes.
+
+77
+00:05:47.855 --> 00:05:49.825
+Veamos las ventajas.
+
+78
+00:05:49.825 --> 00:05:55.485
+Estas redes recurrentes son clave para procesar datos secuenciales.
+
+79
+00:05:55.485 --> 00:06:02.525
+En general, teóricamente, puede procesar datos de cualquier tamaño de entrada.
+
+80
+00:06:02.525 --> 00:06:07.700
+El tamaño del modelo no incrementa con el tamaño de los datos de entrada,
+
+81
+00:06:07.700 --> 00:06:11.740
+y los pesos se comparten a través del tiempo.
+
+82
+00:06:11.740 --> 00:06:14.120
+Algunas desventajas, es
+
+83
+00:06:14.120 --> 00:06:17.420
+que presenta problemas de desvanecimiento y explosión del
+
+84
+00:06:17.420 --> 00:06:21.595
+gradiente durante el proceso de entrenamiento.
+
+85
+00:06:21.595 --> 00:06:25.625
+Usualmente, es computacionalmente lento de entrenar,
+
+86
+00:06:25.625 --> 00:06:30.120
+y no puede recordar información que es muy antigua.
+
+87
+00:06:30.370 --> 00:06:33.915
+Veamos algunas conclusiones de este estudio.
+
+88
+00:06:33.915 --> 00:06:35.900
+Las redes neuronales recurrentes
+
+89
+00:06:35.900 --> 00:06:41.890
+son una clase de red neuronal que procesan datos secuenciales o dependientes del tiempo.
+
+90
+00:06:41.890 --> 00:06:44.690
+La unidad de memoria de las redes neuronales,
+
+91
+00:06:44.690 --> 00:06:47.690
+representadas a través de la variable s_t,
+
+92
+00:06:47.690 --> 00:06:52.765
+permiten recordar características claves de pasos anteriores para el procesamiento.
+
+93
+00:06:52.765 --> 00:06:54.950
+Las redes neuronales recurrentes
+
+94
+00:06:54.950 --> 00:06:57.140
+presentan problemas de desvanecimiento
+
+95
+00:06:57.140 --> 00:07:00.305
+y exclusión del gradiente durante su entrenamiento,
+
+96
+00:07:00.305 --> 00:07:04.200
+y tienden a ser computacionalmente lentas.

@@ -1,0 +1,740 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.000
+[MUSIC]
+
+2
+00:00:14.753 --> 00:00:17.253
+Hola a todos, soy Pablo Arbeláez.
+
+3
+00:00:17.253 --> 00:00:23.990
+En este video, hablaremos acerca de la
+estructura de una red neuronal artificial.
+
+4
+00:00:23.990 --> 00:00:27.930
+La organización de este
+video es la siguiente.
+
+5
+00:00:27.930 --> 00:00:32.761
+Como introducción,
+repasaremos el concepto fundamental
+
+6
+00:00:32.761 --> 00:00:37.019
+de neurona e indicaremos
+cómo se calcula su salida.
+
+7
+00:00:37.019 --> 00:00:42.177
+Después describiremos la
+estructura de una red neuronal en
+
+8
+00:00:42.177 --> 00:00:49.110
+sus principales la capa de entrada,
+las capas ocultas y la capa de salida.
+
+9
+00:00:49.110 --> 00:00:53.979
+A continuación, hablaremos de la
+importancia de la capa de salida.
+
+10
+00:00:53.979 --> 00:00:59.580
+Y cómo su configuración de depende
+de la definición del problema.
+
+11
+00:00:59.580 --> 00:01:04.564
+Posteriormente hablaremos
+acerca de la importancia de
+
+12
+00:01:04.564 --> 00:01:08.700
+la profundidad en las redes neuronales.
+
+13
+00:01:08.700 --> 00:01:12.840
+Por último, concluiremos con
+un resumen de lo aprendido.
+
+14
+00:01:15.500 --> 00:01:20.662
+Recordemos primero que la unidad funcional
+
+15
+00:01:20.662 --> 00:01:25.271
+de las redes neuronales es la neurona.
+
+16
+00:01:25.271 --> 00:01:30.012
+Esta no es otra cosa que una
+función matemática que recibe
+
+17
+00:01:30.012 --> 00:01:33.982
+una entrada compuesta
+de diferentes valores.
+
+18
+00:01:33.982 --> 00:01:39.409
+Y calcula una combinación
+lineal para generar una salida.
+
+19
+00:01:39.409 --> 00:01:41.624
+De manera más precisa,
+
+20
+00:01:41.624 --> 00:01:47.494
+la salida de una neurona es una
+suma ponderada de sus entradas,
+
+21
+00:01:47.494 --> 00:01:52.617
+las cuales son en este caso
+los valores x1, x2 y x3.
+
+22
+00:01:52.617 --> 00:02:00.210
+Esas entradas se están ponderando
+con unos pesos W y con un sesgo b.
+
+23
+00:02:00.210 --> 00:02:05.668
+Finalmente, obtenemos la salida
+de la neurona utilizando
+
+24
+00:02:05.668 --> 00:02:11.137
+una función de activación f
+para añadir una no linealidad.
+
+25
+00:02:11.137 --> 00:02:16.310
+Y calcular la salida final
+de nuestra unidad básica.
+
+26
+00:02:18.070 --> 00:02:23.270
+Ahora, ¿cómo vamos a combinar
+estas distintas neuronas?
+
+27
+00:02:23.270 --> 00:02:28.306
+Dada una misma entrada,
+por ejemplo x1, x2, x3,
+
+28
+00:02:28.306 --> 00:02:32.906
+si cambiamos los pesos
+podemos tener dos neuronas
+
+29
+00:02:32.906 --> 00:02:37.740
+distintas como las que se
+indican en este diagrama.
+
+30
+00:02:37.740 --> 00:02:42.612
+Podemos así organizar todas
+las neuronas que toman la
+
+31
+00:02:42.612 --> 00:02:47.710
+misma entrada en una capa
+vertical en la misma columna.
+
+32
+00:02:49.050 --> 00:02:52.797
+Es esta columna la que
+llamaremos una capa de
+
+33
+00:02:52.797 --> 00:02:56.994
+procesamiento de la red
+neuronal en este caso.
+
+34
+00:02:56.994 --> 00:03:00.651
+En este ejemplo tenemos
+a la izquierda una entrada.
+
+35
+00:03:00.651 --> 00:03:05.075
+Luego una capa de procesamiento
+compuesta por dos
+
+36
+00:03:05.075 --> 00:03:08.426
+neuronas y a la derecha una salida.
+
+37
+00:03:08.426 --> 00:03:12.482
+Se procesa la información de
+la izquierda hacia la derecha.
+
+38
+00:03:16.403 --> 00:03:21.359
+Para entender cómo funciona el
+procesamiento secuencial de los datos
+
+39
+00:03:21.359 --> 00:03:22.872
+de una red neuronal.
+
+40
+00:03:22.872 --> 00:03:29.770
+Es útil imaginar la red como una
+serie de capas de procesamiento.
+
+41
+00:03:29.770 --> 00:03:34.337
+Cada capa está entonces
+compuesta por un conjunto de
+
+42
+00:03:34.337 --> 00:03:39.334
+neuronas y la representamos
+como una columna vertical.
+
+43
+00:03:39.334 --> 00:03:43.743
+Cada neurona recibe una
+entrada de la capa anterior.
+
+44
+00:03:43.743 --> 00:03:49.463
+Y produce una salida que será utilizada
+como entrada para la capa siguiente,
+
+45
+00:03:49.463 --> 00:03:53.336
+y así sucesivamente,
+como se observa en la figura.
+
+46
+00:03:53.336 --> 00:03:58.380
+De esta manera podemos
+crear arquitecturas de
+
+47
+00:03:58.380 --> 00:04:03.296
+redes neuronales que
+tienen múltiples capas
+
+48
+00:04:03.296 --> 00:04:08.869
+ocultas o capas internas
+para procesar los datos.
+
+49
+00:04:08.869 --> 00:04:12.688
+El proceso comienza entonces
+con los datos crudos,
+
+50
+00:04:12.688 --> 00:04:16.186
+los datos originales
+que queremos procesar.
+
+51
+00:04:16.186 --> 00:04:19.323
+Estos datos pueden ser imágenes, texto,
+
+52
+00:04:19.323 --> 00:04:24.300
+audio o cualquier otro tipo de
+información que se quiera analizar.
+
+53
+00:04:24.300 --> 00:04:28.557
+En este caso utilizaremos nuestro ejemplo,
+
+54
+00:04:28.557 --> 00:04:33.149
+en el cual los datos son
+un vector numérico de tres
+
+55
+00:04:33.149 --> 00:04:37.975
+componentes que contiene valores x1,
+x2 y x3.
+
+56
+00:04:37.975 --> 00:04:42.783
+La capa de entrada toma
+entonces estos datos y
+
+57
+00:04:42.783 --> 00:04:46.965
+los envía a la siguiente capa de la red.
+
+58
+00:04:46.965 --> 00:04:51.821
+Empiezan entonces las distintas
+capas de procesamiento que se
+
+59
+00:04:51.821 --> 00:04:54.940
+conocen con el nombre de capas ocultas.
+
+60
+00:04:56.120 --> 00:05:00.984
+Hasta este punto tenemos unos
+pesos W y unos sesgos b que
+
+61
+00:05:00.984 --> 00:05:05.586
+que se pueden representar
+por medio de matrices.
+
+62
+00:05:05.586 --> 00:05:11.151
+El superíndice corresponde a la capa
+de la red que estamos procesando.
+
+63
+00:05:11.151 --> 00:05:18.314
+Y los subíndices indican el peso de
+cada una de las neuronas de la capa.
+
+64
+00:05:18.314 --> 00:05:20.305
+En este caso particular,
+
+65
+00:05:20.305 --> 00:05:25.558
+el superíndice 1 hace referencia
+a la primera capa oculta de la red.
+
+66
+00:05:25.558 --> 00:05:30.616
+Y el subíndice 2, 1,
+representa el valor del segundo
+
+67
+00:05:30.616 --> 00:05:35.690
+peso para la primera neurona
+de esta capa oculta.
+
+68
+00:05:35.690 --> 00:05:42.057
+Como mencionamos anteriormente,
+los valores de la capa oculta se calculan
+
+69
+00:05:42.057 --> 00:05:48.930
+como una suma ponderada utilizando la
+matriz de pesos W y el vector de sesgos b.
+
+70
+00:05:48.930 --> 00:05:54.106
+En particular,
+el caso del valor z de la segunda capa
+
+71
+00:05:54.106 --> 00:06:00.825
+lo podemos calcular de la forma en
+la que se muestra a continuación.
+
+72
+00:06:00.825 --> 00:06:06.179
+Los pesos correspondientes se multiplican
+
+73
+00:06:06.179 --> 00:06:11.240
+por las entradas x y se
+les suma el sesgo b,
+
+74
+00:06:11.240 --> 00:06:14.290
+b súper 1 i en este caso.
+
+75
+00:06:15.510 --> 00:06:20.297
+Finalmente, después de pasar
+por todas estas capas ocultas,
+
+76
+00:06:20.297 --> 00:06:23.104
+los datos llegan a la capa de salida.
+
+77
+00:06:23.104 --> 00:06:26.163
+Que produce una respuesta basada en los
+
+78
+00:06:26.163 --> 00:06:29.746
+patrones que se han
+detectado en los datos.
+
+79
+00:06:29.746 --> 00:06:35.313
+En este punto tenemos una matriz de
+pesos W2 y una matriz de sesgos,
+
+80
+00:06:35.313 --> 00:06:40.504
+un vector de sesgos b2 para poder
+calcular la salida de la red.
+
+81
+00:06:40.504 --> 00:06:45.762
+you que la información es procesada
+de manera secuencial, para calcular
+
+82
+00:06:45.762 --> 00:06:51.292
+el valor de la capa de salida debemos
+utilizar los valores de la capa oculta.
+
+83
+00:06:51.292 --> 00:06:56.947
+Aquella que está inmediatamente
+antes en la red,
+
+84
+00:06:56.947 --> 00:07:02.744
+es decir,
+los valores z1 y z2 de la segunda capa.
+
+85
+00:07:02.744 --> 00:07:07.500
+En este caso, la salida de la red
+se puede calcular utilizando los
+
+86
+00:07:07.500 --> 00:07:11.227
+valores de la capa anterior
+y los pesos de esa capa.
+
+87
+00:07:11.227 --> 00:07:16.247
+Como se muestra en la
+fórmula la salida es entonces
+
+88
+00:07:16.247 --> 00:07:20.555
+una combinación lineal de estos valores.
+
+89
+00:07:20.555 --> 00:07:25.833
+Todo lo anterior se puede expresar
+de manera comprimida utilizando
+
+90
+00:07:25.833 --> 00:07:31.863
+una serie de multiplicaciones matriciales
+como se muestra a continuación.
+
+91
+00:07:31.863 --> 00:07:38.221
+Es posible calcular todos los valores de
+la capa oculta con solo multiplicar la
+
+92
+00:07:38.221 --> 00:07:44.600
+matriz de pesos W por el vector de entrada
+y sumarle luego el vector de sesgos b.
+
+93
+00:07:46.250 --> 00:07:50.993
+Este mismo procedimiento se aplica para
+calcular los valores de la capa de
+
+94
+00:07:50.993 --> 00:07:54.445
+salida utilizando la respuesta
+de la capa anterior.
+
+95
+00:07:54.445 --> 00:08:00.626
+Es decir, z2, la matriz de
+pesos W2 y sumando el sesgo b2.
+
+96
+00:08:05.630 --> 00:08:09.801
+La capa de salida de una red
+neuronal es muy importante.
+
+97
+00:08:09.801 --> 00:08:14.289
+Porque, como su nombre lo indica,
+es es la última capa de procesamiento.
+
+98
+00:08:14.289 --> 00:08:19.826
+Y aquella que produce la salida final,
+la salida esperada de la red.
+
+99
+00:08:19.826 --> 00:08:24.718
+Es decir, es aquella que produce
+la predicción o el resultado
+
+100
+00:08:24.718 --> 00:08:27.452
+deseado de nuestra red neuronal.
+
+101
+00:08:27.452 --> 00:08:31.904
+Dependiendo del tipo de problema
+que estemos resolviendo,
+
+102
+00:08:31.904 --> 00:08:37.789
+la capa de salida puede tener
+distintas configuraciones y funciones.
+
+103
+00:08:37.789 --> 00:08:43.528
+Supongamos que queremos entrenar
+una red neuronal para clasificar,
+
+104
+00:08:43.528 --> 00:08:47.589
+por ejemplo,
+imágenes en cuatro categorías.
+
+105
+00:08:47.589 --> 00:08:48.845
+Para hacer esto,
+
+106
+00:08:48.845 --> 00:08:53.884
+la red tendría varias capas ocultas
+que procesan los datos de entrada.
+
+107
+00:08:53.884 --> 00:09:00.464
+Y que extraen características útiles, para
+finalmente llegar a una capa de salida.
+
+108
+00:09:00.464 --> 00:09:05.044
+Que produce una probabilidad
+de que los datos pertenezcan
+
+109
+00:09:05.044 --> 00:09:08.530
+a cada una de las cuatro categorías.
+
+110
+00:09:08.530 --> 00:09:13.437
+Esta capa de salida en este caso
+tendría entonces cuatro neuronas
+
+111
+00:09:13.437 --> 00:09:15.586
+para cada una de las clases.
+
+112
+00:09:15.586 --> 00:09:22.630
+Una de ellas y la función de activación
+sería lo que llamamos el softmax.
+
+113
+00:09:22.630 --> 00:09:27.583
+Que produce una distribución
+de probabilidad
+
+114
+00:09:27.583 --> 00:09:31.779
+sobre las cuatro casillas del vector.
+
+115
+00:09:31.779 --> 00:09:36.248
+Podemos así interpretar cada
+uno de estos números como la
+
+116
+00:09:36.248 --> 00:09:39.984
+probabilidad de pertenecer
+a cada categoría.
+
+117
+00:09:39.984 --> 00:09:45.738
+Donde 1 significa una confianza
+perfecta de pertenencia.
+
+118
+00:09:45.738 --> 00:09:51.610
+Y 0 significa una confianza perfecta de no
+pertenencia a cada una de las categorías.
+
+119
+00:09:53.150 --> 00:09:59.330
+Acá hay un ejemplo en este gráfico en el
+cual la clase más probable es la clase 3.
+
+120
+00:09:59.330 --> 00:10:04.195
+Y la red neuronal le otorga
+una probabilidad de 0.4 de
+
+121
+00:10:04.195 --> 00:10:07.830
+pertenecer a esa clase para estos datos.
+
+122
+00:10:11.570 --> 00:10:15.987
+A medida que los datos son
+procesados por la red,
+
+123
+00:10:15.987 --> 00:10:20.274
+cada capa realiza un
+análisis más complejo.
+
+124
+00:10:20.274 --> 00:10:25.249
+Las capas intermedias pueden
+detectar características en
+
+125
+00:10:25.249 --> 00:10:30.132
+las imágenes como bordes,
+formas y distintos patrones.
+
+126
+00:10:30.132 --> 00:10:35.404
+Por esta razón es importante la
+profundidad de una red neuronal.
+
+127
+00:10:35.404 --> 00:10:39.181
+Es uno de los hiperparámetros clave.
+
+128
+00:10:39.181 --> 00:10:43.886
+Estas redes pueden aprender un
+conocimiento que es jerárquico.
+
+129
+00:10:43.886 --> 00:10:48.467
+Lo que significa que pueden adquirir
+representaciones de los datos que
+
+130
+00:10:48.467 --> 00:10:50.689
+inicialmente son muy sencillas.
+
+131
+00:10:50.689 --> 00:10:54.584
+Pero que se convierten en
+cada vez más complejas y
+
+132
+00:10:54.584 --> 00:10:59.120
+generales a medida que se
+agregan capas ocultas.
+
+133
+00:10:59.120 --> 00:11:03.034
+Cuanto mayor sea el
+número de capas ocultas,
+
+134
+00:11:03.034 --> 00:11:08.395
+mayor será la complejidad de la
+representación de los datos.
+
+135
+00:11:08.395 --> 00:11:14.732
+Y, por lo tanto, de los problemas
+que se pueden resolver con esta red.
+
+136
+00:11:14.732 --> 00:11:19.448
+Es este número de capas cada
+vez más grande que hace
+
+137
+00:11:19.448 --> 00:11:22.380
+redes cada vez más profundas.
+
+138
+00:11:22.380 --> 00:11:26.790
+Lo que le da el nombre a la
+rama de machine learning
+
+139
+00:11:26.790 --> 00:11:29.810
+llamada aprendizaje profundo.
+
+140
+00:11:29.810 --> 00:11:34.004
+El aprendizaje profundo es la
+capacidad para entrenar redes
+
+141
+00:11:34.004 --> 00:11:37.386
+neuronales con muchas
+capas de procesamiento.
+
+142
+00:11:41.582 --> 00:11:47.819
+En conclusión, una red neuronal está
+compuesta por una capa de entrada,
+
+143
+00:11:47.819 --> 00:11:53.160
+una o varias capas ocultas y
+finalmente una capa de salida.
+
+144
+00:11:53.160 --> 00:11:59.096
+Es una secuencia de capas que procesa
+la información desde la capa de entrada
+
+145
+00:11:59.096 --> 00:12:05.740
+hasta la capa de salida, produciendo
+un análisis cada vez más complejo.
+
+146
+00:12:05.740 --> 00:12:10.576
+La forma exacta de la capa de
+salida depende del problema que se
+
+147
+00:12:10.576 --> 00:12:12.069
+esté estudiando.
+
+148
+00:12:12.069 --> 00:12:17.255
+En el caso de la clasificación,
+la dimensión de la capa de salida
+
+149
+00:12:17.255 --> 00:12:23.076
+depende del número de clases en las
+que se quiere categorizar el dato.
+
+150
+00:12:23.076 --> 00:12:28.309
+Por último, a medida que una red
+neuronal se vuelve más y más profunda.
+
+151
+00:12:28.309 --> 00:12:32.719
+Es decir, a medida que se
+agregan más y más capas ocultas,
+
+152
+00:12:32.719 --> 00:12:37.494
+aumenta la complejidad de la
+información que puede procesar.
+
+153
+00:12:37.494 --> 00:12:39.084
+Y eso es todo por hoy.
+
+154
+00:12:39.084 --> 00:12:40.888
+Muchas gracias por su atención.

@@ -1,0 +1,365 @@
+WEBVTT
+
+1
+00:00:14.090 --> 00:00:19.680
+En la sesión de hoy estudiaremos el proceso reverso de los modelos de difusión.
+
+2
+00:00:19.680 --> 00:00:25.965
+En primera instancia, recordaremos brevemente los principios de un modelo de difusión.
+
+3
+00:00:25.965 --> 00:00:30.870
+Posteriormente, introduciremos el proceso de difusión reversa
+
+4
+00:00:30.870 --> 00:00:33.285
+y el "kernel" asociado a este proceso.
+
+5
+00:00:33.285 --> 00:00:37.470
+Finalizaremos con un resumen de lo visto en esta sesión.
+
+6
+00:00:39.490 --> 00:00:43.550
+Recordemos que en un proceso de difusión,
+
+7
+00:00:43.550 --> 00:00:49.910
+el objetivo es destruir de forma progresiva cualquier información relevante
+
+8
+00:00:49.910 --> 00:00:55.290
+que exista en una señal definida denotada por X_0.
+
+9
+00:01:00.860 --> 00:01:03.020
+Y, por otro lado,
+
+10
+00:01:03.020 --> 00:01:07.910
+el objetivo de la reversión del proceso de difusión es reconstruir
+
+11
+00:01:07.910 --> 00:01:13.230
+la información considerada relevante a partir del ruido aleatorio.
+
+12
+00:01:15.500 --> 00:01:19.270
+El proceso de difusión es muy fácil de modelar,
+
+13
+00:01:19.270 --> 00:01:24.310
+ya que puede involucrar la contaminación progresiva por ruido de la información.
+
+14
+00:01:24.310 --> 00:01:31.015
+Sin embargo, la reversión del proceso de difusión es bastante difícil de modelar.
+
+15
+00:01:31.015 --> 00:01:34.670
+Aquí es donde el aprendizaje profundo o "Deep Learning"
+
+16
+00:01:34.670 --> 00:01:38.950
+cumple un rol fundamental para modelar este proceso reverso y
+
+17
+00:01:38.950 --> 00:01:44.900
+permitir la generación de información que es considerada como original.
+
+18
+00:01:48.830 --> 00:01:54.550
+Aquí, la distribución de probabilidad de la imagen x_t,
+
+19
+00:01:54.550 --> 00:01:57.940
+dada la imagen del paso anterior x_t menos
+
+20
+00:01:57.940 --> 00:02:02.570
+1 es una distribución gaussiana con media x_t menos
+
+21
+00:02:02.570 --> 00:02:05.600
+1 multiplicada por raíz de 1 menos
+
+22
+00:02:05.600 --> 00:02:11.125
+Beta_t y con matriz de covarianza en la matriz identidad multiplicada por Beta_t.
+
+23
+00:02:11.125 --> 00:02:15.940
+Esta se denomina el "Kernel de difusión 'forward'".
+
+24
+00:02:17.390 --> 00:02:21.170
+Con el kernel de difusión forward podemos
+
+25
+00:02:21.170 --> 00:02:25.310
+modelar la transición de la información en el paso t menos
+
+26
+00:02:25.310 --> 00:02:27.680
+1 al paso t. Este
+
+27
+00:02:27.680 --> 00:02:32.840
+kernel ya está completamente caracterizado a través de una distribución gaussiana.
+
+28
+00:02:32.840 --> 00:02:35.030
+Nuestro objetivo es encontrar
+
+29
+00:02:35.030 --> 00:02:40.730
+la distribución de probabilidad o kernel que modele la transición reversa, es decir,
+
+30
+00:02:40.730 --> 00:02:43.580
+la transición que va de la información en el paso
+
+31
+00:02:43.580 --> 00:02:46.765
+t a la información en el paso t menos 1,
+
+32
+00:02:46.765 --> 00:02:51.105
+denotada por q, x_t menos 1 dado x_t.
+
+33
+00:02:51.105 --> 00:02:54.740
+Esta distribución no la conocemos; sin embargo,
+
+34
+00:02:54.740 --> 00:02:59.690
+la vamos a aproximar con una distribución gaussiana que depende de un parámetro Theta.
+
+35
+00:02:59.690 --> 00:03:02.760
+Esta distribución, la denotamos como p de Theta,
+
+36
+00:03:02.760 --> 00:03:07.950
+y es la que necesitamos aprender a través de técnicas de "Deep Learning".
+
+37
+00:03:08.690 --> 00:03:15.080
+La distribución de probabilidad de x_t menos 1 condicionada en x_t,
+
+38
+00:03:15.080 --> 00:03:19.040
+nos permite remover el ruido y recuperar información
+
+39
+00:03:19.040 --> 00:03:22.235
+en cada paso del proceso reverso de difusión.
+
+40
+00:03:22.235 --> 00:03:24.830
+Esta distribución denotada
+
+41
+00:03:24.830 --> 00:03:29.840
+por p de Theta es una distribución gaussiana que contiene parámetros
+
+42
+00:03:29.840 --> 00:03:32.975
+que son estimados a través de una red neuronal.
+
+43
+00:03:32.975 --> 00:03:38.630
+Estos parámetros corresponden a la media y a la matriz de covarianza.
+
+44
+00:03:38.630 --> 00:03:41.660
+La red neuronal es entrenada para seguir de forma
+
+45
+00:03:41.660 --> 00:03:45.620
+reversa el camino trazado por la distribución q,
+
+46
+00:03:45.620 --> 00:03:50.725
+que es el kernel de difusión forward y está completamente caracterizada.
+
+47
+00:03:50.725 --> 00:03:56.550
+La función de pérdida que direcciona el aprendizaje se define de la siguiente manera.
+
+48
+00:03:57.530 --> 00:04:03.530
+Sabemos que el camino seguido por el proceso forward es completamente
+
+49
+00:04:03.530 --> 00:04:09.730
+conocido y está caracterizado por la distribución q de x_t condicionada en x_t menos 1.
+
+50
+00:04:09.730 --> 00:04:12.530
+Por otro lado, el proceso reverso,
+
+51
+00:04:12.530 --> 00:04:18.605
+el cual está definido por la distribución p_Theta de x_t menos 1 condicionado en x_t,
+
+52
+00:04:18.605 --> 00:04:20.420
+es el que queremos caracterizar
+
+53
+00:04:20.420 --> 00:04:25.505
+a través de una red neuronal que define los parámetros de esta distribución.
+
+54
+00:04:25.505 --> 00:04:29.015
+Por las propiedades de estas dos distribuciones,
+
+55
+00:04:29.015 --> 00:04:32.285
+con cualquiera de estas dos distribuciones podríamos
+
+56
+00:04:32.285 --> 00:04:36.785
+encontrar la distribución de los datos originales X_0.
+
+57
+00:04:36.785 --> 00:04:40.840
+Por lo tanto, esperaríamos que tanto q de x_0,
+
+58
+00:04:40.840 --> 00:04:42.380
+que ya lo conocemos,
+
+59
+00:04:42.380 --> 00:04:47.250
+debería ser exactamente igual a p_Theta de x_0.
+
+60
+00:04:48.260 --> 00:04:51.215
+Aprovechando lo anterior,
+
+61
+00:04:51.215 --> 00:04:56.935
+la función de pérdida que direcciona la búsqueda de los parámetros de la red neuronal,
+
+62
+00:04:56.935 --> 00:05:02.460
+cuantifica las diferencias entre p_Theta de x_0 y q de x_0.
+
+63
+00:05:02.460 --> 00:05:05.090
+Estas diferencias se miden a través
+
+64
+00:05:05.090 --> 00:05:11.030
+de la divergencia Kullback-Liebler o divergencia K-L. Esta divergencia es muy
+
+65
+00:05:11.030 --> 00:05:13.880
+utilizada en diferentes contextos de "Machine Learning"
+
+66
+00:05:13.880 --> 00:05:19.985
+y permite medir qué tan diferente es una distribución de probabilidad de la otra.
+
+67
+00:05:19.985 --> 00:05:23.625
+Esa divergencia siempre es no negativa
+
+68
+00:05:23.625 --> 00:05:27.950
+y entre más diferencias existen entre las dos distribuciones,
+
+69
+00:05:27.950 --> 00:05:30.265
+más grande es la divergencia.
+
+70
+00:05:30.265 --> 00:05:32.415
+La función de pérdida, entonces,
+
+71
+00:05:32.415 --> 00:05:36.250
+depende de esta divergencia K-L.
+
+72
+00:05:37.190 --> 00:05:39.830
+Esta ilustración representa el
+
+73
+00:05:39.830 --> 00:05:44.450
+proceso de recuperación de información a partir de ruido inicial,
+
+74
+00:05:44.450 --> 00:05:46.580
+asumiendo que ya se cuenta con una
+
+75
+00:05:46.580 --> 00:05:50.785
+aproximación de la distribución de probabilidad p de Theta.
+
+76
+00:05:50.785 --> 00:05:54.860
+En cada paso, el ruido se elimina de forma progresiva hasta
+
+77
+00:05:54.860 --> 00:05:58.205
+recuperar una imagen que sigue la distribución aprendida.
+
+78
+00:05:58.205 --> 00:06:01.850
+De esta manera, al tener un modelo de difusión reversa,
+
+79
+00:06:01.850 --> 00:06:04.970
+nosotros somos capaces de generar información original
+
+80
+00:06:04.970 --> 00:06:08.360
+a partir de cualquier tipo de ruido inicial.
+
+81
+00:06:08.360 --> 00:06:11.120
+Es importante tener en cuenta que los ejemplos
+
+82
+00:06:11.120 --> 00:06:14.525
+vistos en este estudio están basados en imágenes.
+
+83
+00:06:14.525 --> 00:06:17.930
+Sin embargo, los modelos de difusión, en teoría,
+
+84
+00:06:17.930 --> 00:06:23.580
+serían capaces de modelar cualquier tipo de información estructurada.
+
+85
+00:06:24.580 --> 00:06:30.860
+En esta sesión, vimos que el proceso de reversión de un proceso de difusión permite
+
+86
+00:06:30.860 --> 00:06:34.325
+remover de forma progresiva el ruido de una muestra.
+
+87
+00:06:34.325 --> 00:06:37.865
+Esto se modela a través de una distribución de probabilidad
+
+88
+00:06:37.865 --> 00:06:40.130
+en donde tenemos redes neuronales profundas
+
+89
+00:06:40.130 --> 00:06:43.135
+para estimar los parámetros de esta distribución.
+
+90
+00:06:43.135 --> 00:06:48.815
+El entrenamiento de la red neuronal requiere el uso del kernel de difusión forward,
+
+91
+00:06:48.815 --> 00:06:53.070
+el cual nosotros conocemos ya completamente.

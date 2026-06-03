@@ -1,0 +1,65 @@
+[MUSIC] Hola, soy Pablo Arbeláez. En este video hablaremos acerca
+del preentrenamiento y del aprendizaje de transferencia. En el entrenamiento de los
+modelos basados en Transformers. La organización de este
+vídeo es la siguiente. Primero exploraremos qué es el
+preentrenamiento y por qué es importante para este
+tipo de arquitecturas. Después describiremos la idea detrás
+del aprendizaje de transferencia. Por último, concluiremos con
+un resumen de lo aprendido. Definamos primero el preentrenamiento
+y discutamos su importancia. Esta es una etapa crucial en el desarrollo
+de modelos de inteligencia artificial. Que, como los Transformers,
+se entrenan en grandes cantidades de datos sin ninguna tarea
+específica como objetivo. Durante el preentrenamiento,
+el modelo aprende a capturar patrones y estructuras complejas
+presentes en los datos de entrada. Lo que permite adquirir una gran
+comprensión general del dominio y aprender representaciones
+extremadamente ricas de los datos. El preentrenamiento se lleva a cabo
+en grandes conjuntos de datos. Como corpus de texto de la web, libros, artículos o cualquier otro
+recurso textual disponible. Al entrenar el modelo en un
+corpus diverso y extenso, se se espera que adquiera un
+conocimiento profundo del lenguaje. Y que sea capaz de capturar
+las características esenciales de las diferentes palabras y
+construcciones lingüísticas. En el caso de los Transformers para
+procesamiento de lenguaje natural, el dominio nativo en
+el que fueron creados. El preentrenamiento implica
+exponer al modelo a una gran cantidad de texto sin
+ningún tipo de etiqueta. El objetivo es que el modelo adquiera
+una comprensión profunda del lenguaje. Incluyendo características
+claves como la semántica, la sintaxis y las relaciones contextuales
+entre las palabras y las frases. Durante el proceso de preentrenamiento, el modelo basado en Transformers se
+alimenta con secuencias de texto. Como oraciones o fragmentos de texto. El modelo aprende a predecir
+la siguiente palabra en una secuencia basándose en el contexto previo. Esto se logra mediante el uso de
+una arquitectura de autoatención. Que permite al modelo asignar
+diferentes pesos o importancias a las palabras de entrada en función
+de su relevancia contextual. Para poder predecir la última
+palabra del fragmento de texto. Después de la etapa de preentrenamiento, donde el modelo ha aprendido
+representaciones generales del lenguaje. Se procede a hacer un aprendizaje de
+transferencia, o fine-tuning en inglés. Esta etapa implica entrenar el
+modelo que ha sido preentrenado ahora para una tarea específica
+o un dominio particular. Utilizando generalmente un conjunto
+de datos mucho más pequeño y usualmente etiquetado. Esta última etapa suele ser supervisada. El fine-tuning es esencial para poder
+adaptar un modelo preentrenado. A tareas que sean mucho más específicas
+en el procesamiento del lenguaje natural. Ejemplos de estas tareas son la
+clasificación de texto, el análisis de sentimientos, la traducción,
+la generación de texto, entre otros. A través del fine-tuning, el modelo
+se especializa en la tarea deseada. Y ajusta sus pesos para poder obtener un
+mejor rendimiento en esa tarea específica. El fine-tuning le permite al modelo
+aprovechar esos conocimientos generales que adquirió
+durante el preentrenamiento. Y ahora adaptarlos a la tarea
+o al dominio específicos. Esto es especialmente beneficioso
+cuando se dispone de conjuntos de datos de entrenamiento. Que si bien están etiquetados,
+son mucho más pequeños y limitados. you que el modelo pre entrenado
+ha capturado una gran parte de la estructura lingüística y contextual. Y puede ahora aplicarla a este
+dominio más restringido. En conclusión, el preentrenamiento
+de los Transformers implica entrenar el modelo en grandes
+cantidades de datos no etiquetados. Gracias a esta metodología, el Transformer aprende representaciones
+generales del lenguaje. Y captura patrones y
+estructuras muy complejas. Esto proporciona una base
+sólida para después realizar un aprendizaje de transferencia. Y para adaptarlo a tareas específicas
+de procesamiento del lenguaje natural. El fine-tuning o aprendizaje de
+transferencia es este proceso de ajuste y de especialización. De un modelo de Transformer
+preentrenado para una tarea específica. El fine-tuning permite adaptar
+el modelo a tareas de NLP más específicas y así mejorar su
+rendimiento en dominios particulares. Aprovechando ese conocimiento
+que ha adquirido previamente durante el preentrenamiento. Y eso es todo por hoy,
+muchas gracias por su atención.

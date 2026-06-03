@@ -1,0 +1,415 @@
+WEBVTT
+
+1
+00:00:00.026 --> 00:00:10.026
+[MUSIC]
+
+2
+00:00:14.597 --> 00:00:16.795
+Hola, soy Pablo Arbeláez.
+
+3
+00:00:16.795 --> 00:00:24.034
+En este video hablaremos acerca de cómo se
+calcula la salida para una única neurona.
+
+4
+00:00:24.034 --> 00:00:29.039
+Es decir, describiremos en detalle
+cómo tomamos las entradas y
+
+5
+00:00:29.039 --> 00:00:34.502
+utilizamos los pesos de la neurona
+para poder calcular una salida.
+
+6
+00:00:34.502 --> 00:00:39.315
+Posteriormente, daremos un
+ejemplo en donde combinaremos
+
+7
+00:00:39.315 --> 00:00:42.342
+varias neuronas en capas sucesivas.
+
+8
+00:00:42.342 --> 00:00:49.758
+Y repetiremos el ejemplo utilizando
+una función de activación no lineal.
+
+9
+00:00:49.758 --> 00:00:56.746
+Finalmente, presentaremos
+algunas conclusiones del video.
+
+10
+00:00:56.746 --> 00:01:01.458
+La neurona es entonces nuestra
+unidad funcional de base.
+
+11
+00:01:01.458 --> 00:01:04.955
+Y se encuentra inspirada
+por supuesto en el
+
+12
+00:01:04.955 --> 00:01:09.626
+concepto biológico de las
+neuronas de nuestro cerebro.
+
+13
+00:01:09.626 --> 00:01:14.610
+En donde cada una de estas células
+está conectada a muchas otras.
+
+14
+00:01:14.610 --> 00:01:19.769
+Y por un lado recibe
+impulsos eléctricos de
+
+15
+00:01:19.769 --> 00:01:26.801
+otras células para transmitirlos
+a las células vecinas.
+
+16
+00:01:26.801 --> 00:01:31.088
+En el caso de las redes
+neuronales artificiales,
+
+17
+00:01:31.088 --> 00:01:37.633
+la neurona es una función matemática y
+en nuestro caso va a ser muy sencilla.
+
+18
+00:01:37.633 --> 00:01:43.462
+Por un lado, recibe una entrada
+compuesta de diferentes valores,
+
+19
+00:01:43.462 --> 00:01:48.860
+en este caso notados con las letras x1,
+x2 y x3.
+
+20
+00:01:48.860 --> 00:01:54.152
+Realiza después nuestra
+neurona una combinación
+
+21
+00:01:54.152 --> 00:02:00.578
+lineal una suma ponderada de
+esas entradas con ciertos pesos
+
+22
+00:02:00.578 --> 00:02:05.872
+preestablecidos, notados aquí w1, w2 y w3.
+
+23
+00:02:05.872 --> 00:02:09.462
+Tenemos además un sesgo b.
+
+24
+00:02:09.462 --> 00:02:14.586
+Así, la salida z de nuestra neurona es la
+
+25
+00:02:14.586 --> 00:02:19.711
+combinación lineal de los xy con los wi,
+
+26
+00:02:19.711 --> 00:02:25.013
+a la cual le sumamos un valor constante b.
+
+27
+00:02:25.013 --> 00:02:30.198
+Observen ustedes que cada
+una de estas unidades
+
+28
+00:02:30.198 --> 00:02:37.987
+se comporta como una regresión lineal
+de la estadística tradicional.
+
+29
+00:02:37.987 --> 00:02:43.338
+Ahora, las redes neuronales
+cuentan generalmente con múltiples
+
+30
+00:02:43.338 --> 00:02:48.029
+neuronas que están ordenadas
+en capas de procesamiento.
+
+31
+00:02:48.029 --> 00:02:50.828
+Así que para evitar que la combinación
+
+32
+00:02:50.828 --> 00:02:55.826
+de nuestras neuronas se pueda
+representar como una única de ellas.
+
+33
+00:02:55.826 --> 00:03:00.444
+Debemos utilizar lo que
+llamamos una función de
+
+34
+00:03:00.444 --> 00:03:05.298
+activación al final de
+cada combinación lineal.
+
+35
+00:03:05.298 --> 00:03:10.501
+A continuación,
+veremos la función de activación
+
+36
+00:03:10.501 --> 00:03:16.793
+más sencilla de todas y también
+la más comúnmente utilizada,
+
+37
+00:03:16.793 --> 00:03:22.001
+llamada ReLU,
+o rectified linear unit en inglés.
+
+38
+00:03:22.001 --> 00:03:27.973
+En este caso,
+esta función no lineal convierte
+
+39
+00:03:27.973 --> 00:03:32.614
+todas las salidas negativas a cero.
+
+40
+00:03:32.614 --> 00:03:39.950
+Y aplica la identidad a los valores
+positivos, es decir, no los modifica.
+
+41
+00:03:41.530 --> 00:03:46.479
+Ahora, el verdadero potencial
+de las neuronas se realiza
+
+42
+00:03:46.479 --> 00:03:51.529
+cuando se consideran múltiples
+de ellas ordenadas en capas
+
+43
+00:03:51.529 --> 00:03:56.784
+en las que cada neurona se
+especializa en realizar una tarea.
+
+44
+00:03:56.784 --> 00:04:05.316
+En este ejemplo, la capa de entrada
+en verde tiene los datos x1, x2 y x3.
+
+45
+00:04:05.316 --> 00:04:10.917
+Por otro lado, la capa oculta
+en azul claro tiene dos neuronas
+
+46
+00:04:10.917 --> 00:04:16.720
+que procesarán cada una de ellas
+la información de entrada.
+
+47
+00:04:16.720 --> 00:04:21.229
+Finalmente, tenemos una capa de salida en
+
+48
+00:04:21.229 --> 00:04:25.989
+donde hay otra neurona
+que calculará el valor
+
+49
+00:04:25.989 --> 00:04:31.011
+final a partir del resultado
+de la capa oculta.
+
+50
+00:04:31.011 --> 00:04:35.560
+Ahora, observen ustedes que
+si tenemos muchas neuronas
+
+51
+00:04:35.560 --> 00:04:38.126
+lineales conectadas entre sí.
+
+52
+00:04:38.126 --> 00:04:42.990
+Entonces el efecto conjunto
+sería equivalente al
+
+53
+00:04:42.990 --> 00:04:46.469
+de tener una única neurona lineal.
+
+54
+00:04:46.469 --> 00:04:54.500
+Porque la composición de funciones
+lineales es una única función y lineal.
+
+55
+00:04:54.500 --> 00:04:58.610
+Por este motivo, para aumentar el poder de
+
+56
+00:04:58.610 --> 00:05:03.748
+representación de las redes
+neuronales necesitamos
+
+57
+00:05:03.748 --> 00:05:09.125
+introducir una función de
+activación en cada neurona.
+
+58
+00:05:09.125 --> 00:05:15.388
+Veamos este comportamiento de las neuronas
+lineales con nuestro ejemplo anterior.
+
+59
+00:05:15.388 --> 00:05:20.540
+Tenemos aquí valores
+específicos para los datos x1,
+
+60
+00:05:20.540 --> 00:05:25.025
+x2 y x3 y tenemos también
+pesos específicos.
+
+61
+00:05:25.025 --> 00:05:32.589
+Podemos observar que el resultado final
+de la red, en este caso el número 13.
+
+62
+00:05:32.589 --> 00:05:36.625
+Podría haberse obtenido con una única
+
+63
+00:05:36.625 --> 00:05:41.670
+combinación lineal de
+los valores de entrada,
+
+64
+00:05:41.670 --> 00:05:47.776
+dándoles los pesos -29,
+9 y 18, y un sesgo de 8.
+
+65
+00:05:47.776 --> 00:05:53.389
+De esta manera obtendríamos
+exactamente el mismo valor que
+
+66
+00:05:53.389 --> 00:06:00.585
+haber realizado todas estas combinaciones
+lineales una detrás de la otra.
+
+67
+00:06:00.585 --> 00:06:05.465
+Ahora, si aplicamos la
+función de activación
+
+68
+00:06:05.465 --> 00:06:09.600
+llamada rectified linear unit o ReLU.
+
+69
+00:06:09.600 --> 00:06:15.364
+Entonces lo que haremos será convertir
+todos los valores negativos en cero.
+
+70
+00:06:15.364 --> 00:06:19.228
+De esta manera,
+la salida de la primera neurona,
+
+71
+00:06:19.228 --> 00:06:23.195
+que era menos nueve,
+se convertirá ahora en cero.
+
+72
+00:06:23.195 --> 00:06:28.336
+Y así el resultado final de
+nuestra red neuronal you no será
+
+73
+00:06:28.336 --> 00:06:33.916
+una sencilla combinación lineal
+de los valores de entrada.
+
+74
+00:06:33.916 --> 00:06:39.041
+Así, es muy importante recordar
+que para aumentar el poder
+
+75
+00:06:39.041 --> 00:06:46.436
+de representación de las redes neuronales
+es fundamental incluir no linealidades.
+
+76
+00:06:46.436 --> 00:06:50.690
+Por sencillas que sean estas,
+como es el caso del ReLU.
+
+77
+00:06:53.030 --> 00:06:58.168
+En conclusión,
+cada neurona es una función matemática que
+
+78
+00:06:58.168 --> 00:07:04.653
+realiza una combinación lineal de sus
+entradas para producir una salida.
+
+79
+00:07:04.653 --> 00:07:13.027
+Múltiples neuronas se pueden combinar para
+para crear una red neuronal más compleja.
+
+80
+00:07:13.027 --> 00:07:17.105
+La salida de cada neurona
+requiere de una función
+
+81
+00:07:17.105 --> 00:07:22.083
+de activación para que se
+convierta en un modelo no lineal.
+
+82
+00:07:22.083 --> 00:07:26.486
+Y tenga así un mayor
+poder de representación.
+
+83
+00:07:26.486 --> 00:07:31.454
+Finalmente, la no linealidad de
+las neuronas permite que durante
+
+84
+00:07:31.454 --> 00:07:36.343
+el entrenamiento de una red
+neuronal para una tarea específica.
+
+85
+00:07:36.343 --> 00:07:42.318
+Cada una de las neuronas pueda
+especializarse en una tarea particular.
+
+86
+00:07:42.318 --> 00:07:46.020
+Y eso es todo por este video,
+muchas gracias por su atención.

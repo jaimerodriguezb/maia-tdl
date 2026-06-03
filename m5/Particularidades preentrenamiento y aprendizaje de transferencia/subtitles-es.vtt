@@ -1,0 +1,385 @@
+WEBVTT
+
+1
+00:00:00.216 --> 00:00:10.216
+[MUSIC]
+
+2
+00:00:14.895 --> 00:00:16.942
+Hola, soy Pablo Arbeláez.
+
+3
+00:00:16.942 --> 00:00:21.449
+En este video hablaremos acerca
+del preentrenamiento y del
+
+4
+00:00:21.449 --> 00:00:23.980
+aprendizaje de transferencia.
+
+5
+00:00:23.980 --> 00:00:28.190
+En el entrenamiento de los
+modelos basados en Transformers.
+
+6
+00:00:28.190 --> 00:00:31.922
+La organización de este
+vídeo es la siguiente.
+
+7
+00:00:31.922 --> 00:00:36.895
+Primero exploraremos qué es el
+preentrenamiento y por qué es
+
+8
+00:00:36.895 --> 00:00:40.707
+importante para este
+tipo de arquitecturas.
+
+9
+00:00:40.707 --> 00:00:46.808
+Después describiremos la idea detrás
+del aprendizaje de transferencia.
+
+10
+00:00:46.808 --> 00:00:51.803
+Por último, concluiremos con
+un resumen de lo aprendido.
+
+11
+00:00:51.803 --> 00:00:57.650
+Definamos primero el preentrenamiento
+y discutamos su importancia.
+
+12
+00:00:59.110 --> 00:01:04.580
+Esta es una etapa crucial en el desarrollo
+de modelos de inteligencia artificial.
+
+13
+00:01:04.580 --> 00:01:09.778
+Que, como los Transformers,
+se entrenan en grandes cantidades
+
+14
+00:01:09.778 --> 00:01:14.134
+de datos sin ninguna tarea
+específica como objetivo.
+
+15
+00:01:14.134 --> 00:01:18.436
+Durante el preentrenamiento,
+el modelo aprende a capturar
+
+16
+00:01:18.436 --> 00:01:23.426
+patrones y estructuras complejas
+presentes en los datos de entrada.
+
+17
+00:01:23.426 --> 00:01:28.762
+Lo que permite adquirir una gran
+comprensión general del dominio
+
+18
+00:01:28.762 --> 00:01:34.205
+y aprender representaciones
+extremadamente ricas de los datos.
+
+19
+00:01:34.205 --> 00:01:38.421
+El preentrenamiento se lleva a cabo
+en grandes conjuntos de datos.
+
+20
+00:01:38.421 --> 00:01:41.947
+Como corpus de texto de la web, libros,
+
+21
+00:01:41.947 --> 00:01:47.049
+artículos o cualquier otro
+recurso textual disponible.
+
+22
+00:01:47.049 --> 00:01:51.369
+Al entrenar el modelo en un
+corpus diverso y extenso,
+
+23
+00:01:51.369 --> 00:01:56.749
+se se espera que adquiera un
+conocimiento profundo del lenguaje.
+
+24
+00:01:56.749 --> 00:02:02.433
+Y que sea capaz de capturar
+las características esenciales
+
+25
+00:02:02.433 --> 00:02:08.352
+de las diferentes palabras y
+construcciones lingüísticas.
+
+26
+00:02:08.352 --> 00:02:14.281
+En el caso de los Transformers para
+procesamiento de lenguaje natural,
+
+27
+00:02:14.281 --> 00:02:17.887
+el dominio nativo en
+el que fueron creados.
+
+28
+00:02:17.887 --> 00:02:21.675
+El preentrenamiento implica
+exponer al modelo a una
+
+29
+00:02:21.675 --> 00:02:25.469
+gran cantidad de texto sin
+ningún tipo de etiqueta.
+
+30
+00:02:25.469 --> 00:02:29.976
+El objetivo es que el modelo adquiera
+una comprensión profunda del lenguaje.
+
+31
+00:02:29.976 --> 00:02:35.478
+Incluyendo características
+claves como la semántica,
+
+32
+00:02:35.478 --> 00:02:42.821
+la sintaxis y las relaciones contextuales
+entre las palabras y las frases.
+
+33
+00:02:42.821 --> 00:02:45.731
+Durante el proceso de preentrenamiento,
+
+34
+00:02:45.731 --> 00:02:50.595
+el modelo basado en Transformers se
+alimenta con secuencias de texto.
+
+35
+00:02:50.595 --> 00:02:55.495
+Como oraciones o fragmentos de texto.
+
+36
+00:02:55.495 --> 00:02:59.991
+El modelo aprende a predecir
+la siguiente palabra en una
+
+37
+00:02:59.991 --> 00:03:03.828
+secuencia basándose en el contexto previo.
+
+38
+00:03:03.828 --> 00:03:08.902
+Esto se logra mediante el uso de
+una arquitectura de autoatención.
+
+39
+00:03:08.902 --> 00:03:13.749
+Que permite al modelo asignar
+diferentes pesos o importancias
+
+40
+00:03:13.749 --> 00:03:18.876
+a las palabras de entrada en función
+de su relevancia contextual.
+
+41
+00:03:18.876 --> 00:03:23.113
+Para poder predecir la última
+palabra del fragmento de texto.
+
+42
+00:03:28.107 --> 00:03:30.763
+Después de la etapa de preentrenamiento,
+
+43
+00:03:30.763 --> 00:03:35.351
+donde el modelo ha aprendido
+representaciones generales del lenguaje.
+
+44
+00:03:35.351 --> 00:03:42.034
+Se procede a hacer un aprendizaje de
+transferencia, o fine-tuning en inglés.
+
+45
+00:03:42.034 --> 00:03:47.337
+Esta etapa implica entrenar el
+modelo que ha sido preentrenado
+
+46
+00:03:47.337 --> 00:03:52.249
+ahora para una tarea específica
+o un dominio particular.
+
+47
+00:03:52.249 --> 00:03:56.864
+Utilizando generalmente un conjunto
+de datos mucho más pequeño
+
+48
+00:03:56.864 --> 00:03:58.908
+y usualmente etiquetado.
+
+49
+00:03:58.908 --> 00:04:02.386
+Esta última etapa suele ser supervisada.
+
+50
+00:04:02.386 --> 00:04:07.733
+El fine-tuning es esencial para poder
+adaptar un modelo preentrenado.
+
+51
+00:04:07.733 --> 00:04:13.680
+A tareas que sean mucho más específicas
+en el procesamiento del lenguaje natural.
+
+52
+00:04:13.680 --> 00:04:18.267
+Ejemplos de estas tareas son la
+clasificación de texto, el análisis
+
+53
+00:04:18.267 --> 00:04:23.260
+de sentimientos, la traducción,
+la generación de texto, entre otros.
+
+54
+00:04:23.260 --> 00:04:28.800
+A través del fine-tuning, el modelo
+se especializa en la tarea deseada.
+
+55
+00:04:28.800 --> 00:04:35.841
+Y ajusta sus pesos para poder obtener un
+mejor rendimiento en esa tarea específica.
+
+56
+00:04:35.841 --> 00:04:40.096
+El fine-tuning le permite al modelo
+aprovechar esos conocimientos
+
+57
+00:04:40.096 --> 00:04:43.558
+generales que adquirió
+durante el preentrenamiento.
+
+58
+00:04:43.558 --> 00:04:49.064
+Y ahora adaptarlos a la tarea
+o al dominio específicos.
+
+59
+00:04:49.064 --> 00:04:53.850
+Esto es especialmente beneficioso
+cuando se dispone de conjuntos de
+
+60
+00:04:53.850 --> 00:04:55.669
+datos de entrenamiento.
+
+61
+00:04:55.669 --> 00:05:01.543
+Que si bien están etiquetados,
+son mucho más pequeños y limitados.
+
+62
+00:05:01.543 --> 00:05:06.173
+you que el modelo pre entrenado
+ha capturado una gran parte de la
+
+63
+00:05:06.173 --> 00:05:09.207
+estructura lingüística y contextual.
+
+64
+00:05:09.207 --> 00:05:13.690
+Y puede ahora aplicarla a este
+dominio más restringido.
+
+65
+00:05:15.150 --> 00:05:20.330
+En conclusión, el preentrenamiento
+de los Transformers implica
+
+66
+00:05:20.330 --> 00:05:26.270
+entrenar el modelo en grandes
+cantidades de datos no etiquetados.
+
+67
+00:05:26.270 --> 00:05:28.506
+Gracias a esta metodología,
+
+68
+00:05:28.506 --> 00:05:33.702
+el Transformer aprende representaciones
+generales del lenguaje.
+
+69
+00:05:33.702 --> 00:05:38.102
+Y captura patrones y
+estructuras muy complejas.
+
+70
+00:05:38.102 --> 00:05:42.304
+Esto proporciona una base
+sólida para después realizar un
+
+71
+00:05:42.304 --> 00:05:44.712
+aprendizaje de transferencia.
+
+72
+00:05:44.712 --> 00:05:51.710
+Y para adaptarlo a tareas específicas
+de procesamiento del lenguaje natural.
+
+73
+00:05:51.710 --> 00:05:56.669
+El fine-tuning o aprendizaje de
+transferencia es este proceso
+
+74
+00:05:56.669 --> 00:05:59.249
+de ajuste y de especialización.
+
+75
+00:05:59.249 --> 00:06:04.345
+De un modelo de Transformer
+preentrenado para una tarea específica.
+
+76
+00:06:04.345 --> 00:06:09.088
+El fine-tuning permite adaptar
+el modelo a tareas de NLP más
+
+77
+00:06:09.088 --> 00:06:14.582
+específicas y así mejorar su
+rendimiento en dominios particulares.
+
+78
+00:06:14.582 --> 00:06:19.305
+Aprovechando ese conocimiento
+que ha adquirido previamente
+
+79
+00:06:19.305 --> 00:06:21.764
+durante el preentrenamiento.
+
+80
+00:06:21.764 --> 00:06:25.103
+Y eso es todo por hoy,
+muchas gracias por su atención.

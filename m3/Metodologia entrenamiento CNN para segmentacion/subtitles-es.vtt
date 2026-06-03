@@ -1,0 +1,405 @@
+WEBVTT
+
+1
+00:00:13.760 --> 00:00:18.120
+Hola, soy Luis Felipe Giraldo y hablaremos sobre
+
+2
+00:00:18.120 --> 00:00:22.180
+la tarea de segmentación con redes neuronales convulsionales.
+
+3
+00:00:22.180 --> 00:00:27.315
+Primero, estudiaremos las operaciones de deconvolución y "unpooling",
+
+4
+00:00:27.315 --> 00:00:29.880
+las cuales son primordiales para que las
+
+5
+00:00:29.880 --> 00:00:33.210
+redes convolucionales puedan segmentar una imagen.
+
+6
+00:00:33.210 --> 00:00:39.195
+Posteriormente, estudiaremos las redes completamente convolucionales o FCNs,
+
+7
+00:00:39.195 --> 00:00:41.010
+por sus siglas en inglés,
+
+8
+00:00:41.010 --> 00:00:44.010
+para realizar la segmentación semántica.
+
+9
+00:00:44.010 --> 00:00:46.965
+Luego, hablaremos de la función de pérdida
+
+10
+00:00:46.965 --> 00:00:49.785
+que se utiliza para entrenar estas arquitecturas.
+
+11
+00:00:49.785 --> 00:00:53.740
+Por último, repasaremos lo aprendido en esta lección.
+
+12
+00:00:57.050 --> 00:01:00.610
+Antes de hablar de la operación de "Unpooling",
+
+13
+00:01:00.610 --> 00:01:02.620
+recordemos la operación de "pooling",
+
+14
+00:01:02.620 --> 00:01:05.150
+en particular, del "Max pooling".
+
+15
+00:01:05.150 --> 00:01:09.790
+El Max Pooling es una operación utilizada comúnmente en las redes
+
+16
+00:01:09.790 --> 00:01:15.190
+neuronales convolucionales para reducir el tamaño espacial de una imagen,
+
+17
+00:01:15.190 --> 00:01:18.095
+mientras se mantiene su información esencial.
+
+18
+00:01:18.095 --> 00:01:22.570
+Consiste en dividir la imagen en regiones de un tamaño fijo y
+
+19
+00:01:22.570 --> 00:01:27.160
+seleccionar el valor máximo de cada región como el valor de salida.
+
+20
+00:01:27.160 --> 00:01:30.730
+Por ejemplo, si se divide la imagen en regiones de dos
+
+21
+00:01:30.730 --> 00:01:34.210
+por dos y se selecciona el valor máximo de cada una,
+
+22
+00:01:34.210 --> 00:01:36.685
+obtenemos una imagen más pequeña,
+
+23
+00:01:36.685 --> 00:01:38.585
+como se observa en la figura.
+
+24
+00:01:38.585 --> 00:01:42.495
+Ahora bien, hablemos de la operación de unpooling.
+
+25
+00:01:42.495 --> 00:01:45.660
+La operación de unpooling tiene el efecto contrario,
+
+26
+00:01:45.660 --> 00:01:49.125
+es decir, aumenta el tamaño espacial de una imagen.
+
+27
+00:01:49.125 --> 00:01:52.050
+Para hacerlo, se utiliza una máscara que indica
+
+28
+00:01:52.050 --> 00:01:55.410
+la posición del valor máximo de la región seleccionada
+
+29
+00:01:55.410 --> 00:01:57.090
+durante la operación de pooling.
+
+30
+00:01:57.090 --> 00:02:01.770
+La operación de unpooling asigna el valor máximo a la
+
+31
+00:02:01.770 --> 00:02:08.200
+posición indicada por la máscara y establece los demás valores en cero.
+
+32
+00:02:09.560 --> 00:02:14.315
+Hablemos ahora de la operación de deconvolución.
+
+33
+00:02:14.315 --> 00:02:18.785
+Después de aplicar operaciones de convolución y de pooling,
+
+34
+00:02:18.785 --> 00:02:23.700
+los mapas de características sufren de pérdida de resolución espacial.
+
+35
+00:02:23.700 --> 00:02:27.475
+Sin embargo, para tareas como la segmentación de imágenes,
+
+36
+00:02:27.475 --> 00:02:32.635
+es necesario que la salida de la red tenga la misma dimensión que la imagen de entrada.
+
+37
+00:02:32.635 --> 00:02:37.140
+Con ese propósito, utilizamos la operación de deconvolución.
+
+38
+00:02:37.140 --> 00:02:39.955
+Esta operación consiste, primero,
+
+39
+00:02:39.955 --> 00:02:43.030
+aplicar una operación de unpooling para aumentar
+
+40
+00:02:43.030 --> 00:02:45.940
+la resolución de los mapas de características y,
+
+41
+00:02:45.940 --> 00:02:49.825
+posteriormente, hacer una operación de convolución con un kernel.
+
+42
+00:02:49.825 --> 00:02:54.760
+De esta manera, se recupera la resolución espacial y se procesa
+
+43
+00:02:54.760 --> 00:02:56.530
+la activación en los mapas de menos
+
+44
+00:02:56.530 --> 00:03:01.160
+resolución para crear una salida con mayor resolución.
+
+45
+00:03:02.540 --> 00:03:08.705
+Hablemos ahora en las redes completamente convolucionales para segmentación semántica.
+
+46
+00:03:08.705 --> 00:03:11.695
+Tradicionalmente, en clasificación,
+
+47
+00:03:11.695 --> 00:03:13.660
+una imagen de entrada es reducida
+
+48
+00:03:13.660 --> 00:03:17.170
+a unos mapas de características con menos resolución espacial,
+
+49
+00:03:17.170 --> 00:03:19.625
+utilizando capas convolucionales.
+
+50
+00:03:19.625 --> 00:03:24.100
+Posteriormente, linealizamos esos mapas de características
+
+51
+00:03:24.100 --> 00:03:28.840
+y los procesamos a través de capas lineales completamente conectadas para,
+
+52
+00:03:28.840 --> 00:03:32.375
+al final, obtener una única etiqueta para la imagen de entrada.
+
+53
+00:03:32.375 --> 00:03:36.575
+Ahora, en el caso de las redes completamente convolucionales,
+
+54
+00:03:36.575 --> 00:03:40.505
+únicamente vamos a utilizar capas convolucionales.
+
+55
+00:03:40.505 --> 00:03:44.910
+Por ejemplo, vamos a reducir las dimensiones de la imagen 32 veces.
+
+56
+00:03:44.910 --> 00:03:50.585
+Al final, obtenemos un mapa de características que aún tiene información espacial.
+
+57
+00:03:50.585 --> 00:03:53.605
+Podemos utilizar convoluciones de uno por uno,
+
+58
+00:03:53.605 --> 00:03:55.345
+las cuales únicamente
+
+59
+00:03:55.345 --> 00:04:00.670
+ajustan los canales de los mapas de características sin reducir más W y H,
+
+60
+00:04:00.670 --> 00:04:05.380
+para que la tercera dimensión sea igual al número de clases que quiero segmentar.
+
+61
+00:04:05.380 --> 00:04:10.930
+Note que en este punto tenemos una distribución de probabilidad de pertenecer
+
+62
+00:04:10.930 --> 00:04:13.255
+a cada clase a nivel de píxel.
+
+63
+00:04:13.255 --> 00:04:16.150
+Por último, podemos aumentar las dimensiones
+
+64
+00:04:16.150 --> 00:04:18.580
+de ese mapa de características para igualar las
+
+65
+00:04:18.580 --> 00:04:21.565
+dimensiones de la imagen de entrada y así,
+
+66
+00:04:21.565 --> 00:04:25.790
+obtener una salida con las mismas dimensiones.
+
+67
+00:04:28.000 --> 00:04:33.620
+Hablemos sobre la función de pérdida para optimizar este tipo de redes.
+
+68
+00:04:33.620 --> 00:04:39.965
+Para entrenar una red neuronal convolucional para la tarea de segmentación semántica,
+
+69
+00:04:39.965 --> 00:04:45.680
+se debe utilizar una función de pérdida que mida la diferencia entre las etiquetas de los
+
+70
+00:04:45.680 --> 00:04:50.355
+píxeles predichas por la red y las etiquetas de la anotación.
+
+71
+00:04:50.355 --> 00:04:54.875
+A grandes rasgos, la segmentación se puede entender como un problema de clasificación,
+
+72
+00:04:54.875 --> 00:04:57.860
+pero a nivel de píxel, pues lo que se puede optimizar de manera
+
+73
+00:04:57.860 --> 00:05:02.010
+similar a cómo se optimizaría una red de clasificación o regresión.
+
+74
+00:05:02.010 --> 00:05:06.685
+En este caso, podemos hacer uso de la función de entropía cruzada,
+
+75
+00:05:06.685 --> 00:05:09.420
+o "Cross-entropy loss", en inglés.
+
+76
+00:05:09.420 --> 00:05:12.460
+La entropía cruzada mide la discrepancia
+
+77
+00:05:12.460 --> 00:05:18.235
+entre la distribución de probabilidad predicha por la red y la anotación.
+
+78
+00:05:18.235 --> 00:05:22.705
+Este concepto lo podemos extrapolar a nivel de píxel.
+
+79
+00:05:22.705 --> 00:05:25.150
+Podemos calcular dicha discrepancia entre
+
+80
+00:05:25.150 --> 00:05:28.540
+la distribución de cada píxel y su respectiva anotación,
+
+81
+00:05:28.540 --> 00:05:30.970
+y promediarlo sobre el número
+
+82
+00:05:30.970 --> 00:05:35.980
+de píxeles de toda la imagen para obtener el valor de la función de pérdida
+
+83
+00:05:35.980 --> 00:05:39.440
+y poder entrenar el modelo.
+
+84
+00:05:41.150 --> 00:05:44.570
+En conclusión. Por un lado,
+
+85
+00:05:44.570 --> 00:05:50.650
+tenemos que el pooling es una operación que reduce la resolución espacial de una imagen.
+
+86
+00:05:50.650 --> 00:05:55.100
+Por otro lado, el unpooling es una técnica que se utiliza para
+
+87
+00:05:55.100 --> 00:05:59.725
+aumentar la resolución espacial de una imagen después de haber aplicado pooling.
+
+88
+00:05:59.725 --> 00:06:03.390
+En el unpooling se almacenan los máximos valores de cada región
+
+89
+00:06:03.390 --> 00:06:05.450
+en la imagen junto con su posición,
+
+90
+00:06:05.450 --> 00:06:08.600
+y luego se usan estos valores para reconstruir
+
+91
+00:06:08.600 --> 00:06:12.865
+la imagen original con una resolución espacial más alta.
+
+92
+00:06:12.865 --> 00:06:16.860
+Ahora bien, en una operación de deconvolución se
+
+93
+00:06:16.860 --> 00:06:21.435
+pueden componer de una operación de unpooling seguida de una convolución.
+
+94
+00:06:21.435 --> 00:06:24.300
+En la segmentación semántica se utiliza
+
+95
+00:06:24.300 --> 00:06:27.600
+en redes completamente convolucionales que utilicen operaciones
+
+96
+00:06:27.600 --> 00:06:33.570
+de convolución y convoluciones uno por uno para crear mapas de segmentación semántica.
+
+97
+00:06:33.570 --> 00:06:35.340
+Por último, se pueden optimizar
+
+98
+00:06:35.340 --> 00:06:39.480
+la segmentación semántica como un problema de clasificación, pero a nivel de píxel.
+
+99
+00:06:39.480 --> 00:06:43.410
+Para hacer esto, se utiliza una función de pérdida de entropía cruzada,
+
+100
+00:06:43.410 --> 00:06:46.770
+que mide la discrepancia entre la distribución predicha por
+
+101
+00:06:46.770 --> 00:06:51.760
+la red para cada píxel y las etiquetas reales de la imagen.
