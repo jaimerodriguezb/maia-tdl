@@ -29,11 +29,11 @@ markmap:
   - Non-linear functions applied after each linear transformation, enabling networks to learn complex, non-linear mappings from inputs to outputs. Without them every layer collapses to a single matrix multiplication and the network loses expressive power.
 - ReLU
   - Acronym: _ReLU_ <span id="relu-target"></span> = Rectified Linear Unit
-    - The default activation for hidden layers in modern deep nets. Computationally cheap, reduces the vanishing-gradient problem compared to sigmoid and tanh, and produces sparse activations that improve generalisation.
+    - The default activation for hidden layers in modern deep nets. Computationally cheap, reduces the [vanishing-gradient problem](#vanishing-gradient-target) compared to sigmoid and tanh, and produces sparse activations that improve generalisation.
   - Maths: f(x) = max(0, x) — zero for negatives, identity for positives
 - Sigmoid
   - description
-    - A smooth S-shaped function that maps any real number to the range (0, 1), making it suitable for binary output layers and gating mechanisms. Its saturating tails produce near-zero gradients for very large or small inputs, causing the vanishing-gradient problem in deep networks.
+    - A smooth S-shaped function that maps any real number to the range (0, 1), making it suitable for binary output layers and gating mechanisms. Its saturating tails produce near-zero gradients for very large or small inputs, causing the [vanishing-gradient problem](#vanishing-gradient-target) in deep networks.
   - Maths: σ(x) = 1 / (1 + e⁻ˣ) — squashes input to (0, 1), used in gates and binary output
 - Tanh
   - description
@@ -143,7 +143,7 @@ markmap:
 
 ## Recurrent Neural Networks (RNNs)
 ### Acronym: _RNNs_ <span id="rnns-target"></span> = Recurrent Neural Networks
-- Neural networks designed for sequential data where a hidden state carries information forward across timesteps using shared weights. They can model arbitrary-length sequences in theory, but struggle with long-range dependencies due to vanishing gradients — the problem [LSTM](#lstm-target) and [GRU](#gru-target) were designed to solve.
+- Neural networks designed for sequential data where a hidden state carries information forward across timesteps using shared weights. They can model arbitrary-length sequences in theory, but struggle with long-range dependencies due to [vanishing gradients](#vanishing-gradient-target) — the problem [LSTM](#lstm-target) and [GRU](#gru-target) were designed to solve.
 ### Architectures
 - description
   - The main RNN variants trade off between simplicity, parameter count, and ability to retain information over long sequences. Vanilla [RNNs](#rnns-target) are the conceptual baseline; [LSTM](#lstm-target) and [GRU](#gru-target) add gating mechanisms that give the network explicit control over what to remember.
@@ -151,7 +151,7 @@ markmap:
   - The simplest recurrent architecture: at each timestep the hidden state is computed from the current input and the previous hidden state via a single linear transformation and a tanh activation. Despite its elegance, the shared weight matrix causes gradients to vanish or explode over long sequences, limiting its practical utility.
 - LSTM — input / forget / output gates
   - Acronym: _LSTM_ <span id="lstm-target"></span> = Long Short-Term Memory — gated RNN that selectively retains long-range dependencies
-    - An RNN cell with three learnable gates (input, forget, output) controlling what is written to, erased from, and read from a dedicated cell state. The gating mechanism preserves or discards information over many timesteps, solving the vanishing-gradient problem for most practical sequence lengths.
+    - An RNN cell with three learnable gates (input, forget, output) controlling what is written to, erased from, and read from a dedicated cell state. The gating mechanism preserves or discards information over many timesteps, solving the [vanishing-gradient problem](#vanishing-gradient-target) for most practical sequence lengths.
 - GRU — update / reset gates
   - Acronym: _GRU_ <span id="gru-target"></span> = Gated Recurrent Unit — streamlined [LSTM](#lstm-target) with fewer parameters
     - Merges the [LSTM](#lstm-target) cell state and hidden state into one and uses only two gates (update and reset). Fewer parameters than [LSTM](#lstm-target) with comparable performance on most tasks, making it preferred when compute is constrained.
@@ -159,7 +159,7 @@ markmap:
 ### Challenges
 #### Description — training difficulties
 - Recurrent networks suffer from two fundamental optimisation problems that arise from multiplying the same weight matrix repeatedly across timesteps. Both problems make it hard to learn dependencies spanning more than a few dozen steps in vanilla [RNNs](#rnns-target).
-#### Vanishing Gradient
+#### [Vanishing Gradient](#vanishing-gradient-target)
 - Gradients shrink through time
 - Solutions: [LSTM](#lstm-target)/[GRU](#gru-target) gating, layer norm
 #### Exploding Gradient
@@ -188,7 +188,7 @@ markmap:
 - Scaled dot-product: softmax(QKᵀ/√dₖ)·V
   - description
     - Computes compatibility between each query and all keys via dot products, divides by √dₖ to keep gradients from vanishing in high dimensions, applies softmax to get a probability distribution, then aggregates values by those weights. This single operation replaces the sequential dependency of recurrence.
-  - Maths: A(Q,K,V) = softmax(QKᵀ / √dₖ) · V — relevance scores scaled to prevent vanishing gradients
+  - Maths: A(Q,K,V) = softmax(QKᵀ / √dₖ) · V — relevance scores scaled to prevent [vanishing gradients](#vanishing-gradient-target)
 - Multi-head attention — parallel views
   - description
     - Runs h independent attention operations with different learned projections of Q, K, and V, then concatenates and projects the results. Each head can specialise in a different type of relationship (syntax, coreference, position), giving the model richer representational capacity than a single attention pass.
@@ -303,7 +303,7 @@ markmap:
   - The generator minimises — and the discriminator maximises — the same objective function, creating a zero-sum game. Convergence to the Nash equilibrium means the generator has learned the true data distribution and the discriminator outputs 0.5 everywhere.
 #### Loss Functions
 - description
-  - The choice of loss function has a major impact on GAN training stability and sample quality. The original JS divergence suffers from vanishing gradients when distributions are disjoint; [WGAN](#wgan-target)'s Wasserstein distance and hinge loss are more robust alternatives.
+  - The choice of loss function has a major impact on GAN training stability and sample quality. The original JS divergence suffers from [vanishing gradients](#vanishing-gradient-target) when distributions are disjoint; [WGAN](#wgan-target)'s Wasserstein distance and hinge loss are more robust alternatives.
 - Jensen-Shannon Divergence (original)
   - description
     - Symmetric, bounded divergence measure used as the original [GAN](#gans-target) objective; minimising it is equivalent to the generator matching the real data distribution. In practice, training often collapses or oscillates because JS divergence saturates when the real and generated distributions have little overlap.
@@ -464,128 +464,283 @@ markmap:
 ### Activation Functions
 #### ReLU
 - Acronym: [ReLU](#relu-target) = Rectified Linear Unit
-- f(x) = max(0, x)
 - description
   - Zero for negatives, identity for positives — removes negative activations and adds non-linearity
+- f(x) = max(0, x)
+  - read as
+    - For any input x: return x if x is positive, otherwise return zero.
+  - example
+    - f(3) = max(0, 3) = 3 · f(−2) = max(0, −2) = 0 · f(0) = max(0, 0) = 0
+  - code
+    - import torch; x = torch.tensor([-2., 0.5, 3.]); torch.relu(x)  # → tensor([0., 0.5, 3.])
 
 #### Sigmoid
-- σ(x) = 1 / (1 + e⁻ˣ)
 - description
   - Squashes any real value into (0, 1) — used for binary outputs and [LSTM](#lstm-target)/[GRU](#gru-target) gates
+- σ(x) = 1 / (1 + e⁻ˣ)
+  - read as
+    - One divided by one plus e to the negative x — squashes any real input to (0, 1).
+  - example
+    - σ(0) = 1/(1+e⁰) = 0.50 · σ(2) ≈ 1/(1+0.135) ≈ 0.88 · σ(−2) ≈ 1/(1+7.39) ≈ 0.12
+  - code
+    - import torch; x = torch.tensor([-2., 0., 2.]); torch.sigmoid(x)  # → tensor([0.1192, 0.5000, 0.8808])
 
 #### Tanh
-- tanh(x) = (eˣ − e⁻ˣ) / (eˣ + e⁻ˣ)
 - description
   - Squashes values to (−1, 1) — zero-centred, preferred over sigmoid in hidden layers
+- tanh(x) = (eˣ − e⁻ˣ) / (eˣ + e⁻ˣ)
+  - read as
+    - e-to-x minus e-to-negative-x divided by e-to-x plus e-to-negative-x — zero-centred squashing to (−1, 1).
+  - example
+    - tanh(0) = 0 · tanh(1) ≈ (2.72−0.37)/(2.72+0.37) ≈ 0.76 · tanh(−1) ≈ −0.76
+  - code
+    - import torch; x = torch.tensor([-1., 0., 1.]); torch.tanh(x)  # → tensor([-0.7616, 0.0000, 0.7616])
 
 #### Softmax
-- softmax(zᵢ) = eᶻⁱ / Σⱼ eᶻʲ
 - description
   - Converts a score vector into a probability distribution that sums to 1 — used at classification output
+- softmax(zᵢ) = eᶻⁱ / Σⱼ eᶻʲ
+  - read as
+    - e raised to score z-i divided by the sum of e raised to each score z-j — converts raw logits into a probability distribution summing to 1.
+  - example
+    - z=[1,2,3] → e^z≈[2.72, 7.39, 20.09], sum≈30.19 → softmax≈[0.09, 0.24, 0.67]
+  - code
+    - import torch; z = torch.tensor([1., 2., 3.]); torch.softmax(z, dim=0)  # → tensor([0.0900, 0.2447, 0.6652])
 
 ### Loss Functions
 #### Mean Squared Error (MSE)
 - Acronym: [MSE](#mse-target) = Mean Squared Error
-- L = (1/n) Σᵢ (ŷᵢ − yᵢ)²
 - description
   - Averages squared prediction errors — penalises large deviations more heavily, used in regression
+- L = (1/n) Σᵢ (ŷᵢ − yᵢ)²
+  - read as
+    - One over n times the sum of squared differences between predictions ŷ and targets y — average squared error.
+  - example
+    - ŷ=[3,5], y=[2,4] → errors=[1,1] → squared=[1,1] → L=(1/2)·2=1.0
+  - code
+    - import torch; y_hat=torch.tensor([3.,5.]); y=torch.tensor([2.,4.]); torch.nn.functional.mse_loss(y_hat,y)  # → tensor(1.)
 
 #### Binary Cross-Entropy
-- L = −[y log(ŷ) + (1−y) log(1−ŷ)]
 - description
   - Measures divergence between predicted probability and binary label — used in binary classifiers and [GAN](#gans-target) discriminator
+- L = −[y log(ŷ) + (1−y) log(1−ŷ)]
+  - read as
+    - Negative bracket y times log ŷ plus one-minus-y times log one-minus-ŷ — penalises low probability on the correct binary label.
+  - example
+    - y=1, ŷ=0.9 → L=−log(0.9)≈0.105 · y=1, ŷ=0.1 → L=−log(0.1)≈2.303 — wrong prediction costs 22× more
+  - code
+    - import torch; y_hat=torch.tensor([0.9,0.1]); y=torch.tensor([1.,1.]); torch.nn.functional.binary_cross_entropy(y_hat,y)  # → tensor(1.2040)
 
 #### Categorical Cross-Entropy
-- L = −Σᵢ yᵢ log(ŷᵢ)
 - description
   - Penalises low confidence on the correct class — standard for multi-class softmax output
+- L = −Σᵢ yᵢ log(ŷᵢ)
+  - read as
+    - Negative sum over all classes of the true label times the log predicted probability — selects and negates the log probability assigned to the correct class.
+  - example
+    - y=[0,1,0] (class 2), ŷ=[0.1,0.7,0.2] → L=−log(0.7)≈0.357
+  - code
+    - import torch; y_hat=torch.tensor([[0.1,0.7,0.2]]); y=torch.tensor([1]); torch.nn.functional.cross_entropy(y_hat,y)  # → tensor(0.3567)
 
 #### KL Divergence
 - Acronym: [KL](#kl-target) = Kullback-Leibler divergence
-- D_KL(P ‖ Q) = Σₓ P(x) log(P(x) / Q(x))
 - description
   - How much distribution P diverges from reference Q — used in [VAE](#vae-target) and Diffusion model objectives
+- D_KL(P ‖ Q) = Σₓ P(x) log(P(x) / Q(x))
+  - read as
+    - Sum over x of P-of-x times log of P-of-x over Q-of-x — total extra bits needed to encode P-distributed events using Q's code.
+  - example
+    - P=[0.4,0.6], Q=[0.5,0.5] → KL=0.4·log(0.4/0.5)+0.6·log(0.6/0.5)≈0.4·(−0.223)+0.6·0.182≈0.020
+  - code
+    - import torch; P=torch.tensor([0.4,0.6]); Q=torch.tensor([0.5,0.5]); (P*(P/Q).log()).sum()  # → tensor(0.0202)
 
 ### Backpropagation & Optimisation
 #### Chain Rule (Backprop)
 - Acronym: _Backprop_ <span id="backprop-target"></span> = Backpropagation
-- ∂L/∂w = (∂L/∂a) · (∂a/∂z) · (∂z/∂w)
 - description
   - Recursively decomposes the loss gradient layer by layer from output back to weights
+- ∂L/∂w = (∂L/∂a) · (∂a/∂z) · (∂z/∂w)
+  - read as
+    - Partial L over w equals partial L over a, times partial a over z, times partial z over w — three factors chained from loss back to the weight.
+  - example
+    - ∂L/∂a=2, ∂a/∂z=0.5, ∂z/∂w=3 → ∂L/∂w = 2·0.5·3 = 3.0
+  - code
+    - import torch; w=torch.tensor(2.,requires_grad=True); z=3*w; a=torch.sigmoid(z); L=(a-1)**2; L.backward(); print(w.grad)  # → tensor(-0.0045)
 
+#### Vanishing Gradient Problem <span id="vanishing-gradient-target"></span>
+- description
+  - Each [Backprop](#backprop-target) step multiplies the gradient by σ'(z), which peaks at 0.25 for sigmoid and tanh. After n layers the magnitude is at most (0.25)ⁿ — exponentially small — so early layers receive near-zero gradients and their weights effectively stop updating.
+- ∂L/∂W₁ ∝ ∏ₗ σ'(zₗ) · Wₗ — gradient at early layers is a product of all per-layer Jacobians
+  - read as
+    - The gradient at layer 1 is proportional to the product of all per-layer Jacobians σ'(z-l) times W-l, multiplied across every layer from output back to the first.
+  - example
+    - 4-layer sigmoid net, σ'≤0.25 per layer → ∏σ'≤(0.25)⁴=0.0039 — gradient shrinks ~250× from output to first layer
+    - 6-layer sigmoid network, σ'(z) ≤ 0.25 at every layer → gradient at layer 1 ≤ (0.25)⁶ ≈ 0.00024× the output gradient. Solutions: [ReLU](#relu-target) (σ' = 1 for positive inputs, no decay), [LSTM](#lstm-target)/[GRU](#gru-target) (additive cell-state bypasses repeated multiplication), [ResNet](#resnet-target) skip connections (gradient shortcut around stacked layers).
+  - code
+    - import torch; x=torch.tensor(0.,requires_grad=True); s=torch.sigmoid(torch.sigmoid(torch.sigmoid(torch.sigmoid(torch.sigmoid(torch.sigmoid(x)))))); s.backward(); print(x.grad)  # → ~2e-05 at 6 sigmoid layers
 #### Gradient Descent Update
-- θ ← θ − η · ∇_θ L
 - description
   - Shifts each parameter opposite to its gradient by step size η — the core weight update rule
+- θ ← θ − η · ∇_θ L
+  - read as
+    - Theta becomes theta minus learning rate eta times the gradient of L with respect to theta — move each parameter in the direction that reduces the loss.
+  - example
+    - θ=2.0, η=0.1, ∇L=3.0 → θ ← 2.0 − 0.1·3.0 = 1.7
+  - code
+    - import torch; theta=torch.tensor(2.,requires_grad=True); L=theta**2; L.backward(); with torch.no_grad(): theta-=0.1*theta.grad; print(theta)  # → tensor(1.6)
 
 #### Adam Optimizer
 - Acronym: [Adam](#adam-target) = Adaptive Moment Estimation
-- mₜ = β₁ mₜ₋₁ + (1−β₁) gₜ  ← 1st moment (mean)
-- vₜ = β₂ vₜ₋₁ + (1−β₂) gₜ²  ← 2nd moment (variance)
-- θₜ ← θₜ₋₁ − η · m̂ₜ / (√v̂ₜ + ε)
 - description
   - Adapts learning rate per parameter using bias-corrected gradient mean and variance estimates
+- mₜ = β₁ mₜ₋₁ + (1−β₁) gₜ  ← 1st moment (mean)
+  - read as
+    - The first moment estimate is beta-1 times the previous moment plus one-minus-beta-1 times the current gradient — an exponential moving average tracking the mean gradient direction.
+  - example
+    - β₁=0.9, m₀=0, g₁=0.5 → m₁=0.9·0+0.1·0.5=0.05 · g₂=0.8 → m₂=0.9·0.05+0.1·0.8=0.125
+  - code
+    - beta1=0.9; m=0.; gs=[0.5,0.8,0.3]; ms=[m := beta1*m+(1-beta1)*g for g in gs]; print(ms)  # → [0.05, 0.125, 0.1425]
+- vₜ = β₂ vₜ₋₁ + (1−β₂) gₜ²  ← 2nd moment (variance)
+  - read as
+    - The second moment estimate is beta-2 times the previous second moment plus one-minus-beta-2 times the squared gradient — an exponential moving average tracking uncentred gradient variance.
+  - example
+    - β₂=0.999, v₀=0, g₁=0.5 → v₁=0.999·0+0.001·0.25=0.00025 · g₂=0.8 → v₂≈0.00025+0.00064≈0.00089
+  - code
+    - beta2=0.999; v=0.; gs=[0.5,0.8,0.3]; vs=[v := beta2*v+(1-beta2)*g**2 for g in gs]; print(vs)  # → [2.5e-4, 8.9e-4, 1.7e-3]
+- θₜ ← θₜ₋₁ − η · m̂ₜ / (√v̂ₜ + ε)
+  - read as
+    - Update theta by subtracting the learning rate times the bias-corrected mean divided by the square root of the bias-corrected variance plus epsilon — an adaptive per-parameter step size.
+  - example
+    - η=0.001, m̂=0.5, v̂=0.25 → θ ← θ − 0.001·0.5/√0.25 = θ − 0.001 — step normalised to unit gradient magnitude
+  - code
+    - import torch; p=torch.nn.Parameter(torch.tensor(2.)); opt=torch.optim.Adam([p],lr=0.001); (p**2).backward(); opt.step(); print(p.item())  # → ~1.999 after one Adam step
 
 ### Attention Mechanism
 #### Scaled Dot-Product Attention
-- A(Q, K, V) = softmax(QKᵀ / √dₖ) · V
 - description
-  - Dot products between Q and K give relevance scores; scaling by √dₖ prevents vanishing gradients; V is aggregated by those weights
+  - Dot products between Q and K give relevance scores; scaling by √dₖ prevents [vanishing gradients](#vanishing-gradient-target); V is aggregated by those weights
+- A(Q, K, V) = softmax(QKᵀ / √dₖ) · V
+  - read as
+    - Compute dot products between each query and all keys, divide by root d-k to prevent large magnitudes, apply softmax to get attention weights, then take a weighted sum of values.
+  - example
+    - Q=[[1,0]], K=[[1,0],[0,1]], dₖ=2 → scores=[1/√2,0]≈[0.71,0] → softmax≈[0.67,0.33] → V=[[10,0],[0,10]] → A≈[6.7,3.3]
+  - code
+    - import torch; Q=torch.tensor([[1.,0.]]); K=torch.tensor([[1.,0.],[0.,1.]]); V=torch.tensor([[10.,0.],[0.,10.]]); A=(torch.softmax(Q@K.T/2**0.5,dim=-1)@V); print(A)  # → [[6.70, 3.30]]
 
 #### Multi-Head Attention
-- headᵢ = Attention(Q Wᵢᴼ, K Wᵢᴷ, V Wᵢᵛ)
-- MultiHead(Q,K,V) = Concat(head₁, …, headₕ) Wᴼ
 - description
   - Runs h independent attention operations in parallel — each head learns different relational patterns
+- headᵢ = Attention(Q Wᵢᴼ, K Wᵢᴷ, V Wᵢᵛ)
+  - read as
+    - Project Q, K, V with head-specific weight matrices, then apply scaled dot-product attention — one independent attention view specialised to a different relationship type.
+  - example
+    - d_model=8, h=2 → dₖ=4 per head; each Wᵢ is 8×4; head_i sees a 4-dim projection of every token
+  - code
+    - import torch.nn as nn; import torch; mha=nn.MultiheadAttention(embed_dim=8,num_heads=2,batch_first=True); Q=K=V=torch.randn(1,5,8); out,w=mha(Q,K,V); print(w.shape)  # → [1, 5, 5] attention weights
+- MultiHead(Q,K,V) = Concat(head₁, …, headₕ) Wᴼ
+  - read as
+    - Concatenate all h head outputs along the feature dimension, then project back to d-model with output matrix W-O — combines what each head learned.
+  - example
+    - h=2 heads, each output [5, 4] → Concat is [5, 8] → multiply by Wᴼ (8×8) → [5, d_model=8]
+  - code
+    - import torch.nn as nn; import torch; mha=nn.MultiheadAttention(embed_dim=8,num_heads=2,batch_first=True); x=torch.randn(1,5,8); out,_=mha(x,x,x); print(out.shape)  # → torch.Size([1, 5, 8])
 
 ### Positional Encoding
 #### Even dimensions — Sine
-- PE(pos, 2i) = sin(pos / 10000^(2i/d))
 - description
   - Encodes absolute position using a sine wave whose frequency decreases with dimension index i
+- PE(pos, 2i) = sin(pos / 10000^(2i/d))
+  - read as
+    - For even dimension 2i, assign the sine of position divided by 10000 raised to the power 2i over d — frequency halves geometrically with i, giving each position a unique multi-scale signal.
+  - example
+    - pos=1, i=0, d=512 → PE(1,0)=sin(1/1)≈0.841 · pos=1, i=1 → PE(1,2)=sin(1/10000^(2/512))≈0.835
+  - code
+    - import torch; pos=torch.tensor(1.); d=512.; i=torch.tensor(0.); pe=torch.sin(pos/(10000**(2*i/d))); print(pe)  # → tensor(0.8415)
 
 #### Odd dimensions — Cosine
-- PE(pos, 2i+1) = cos(pos / 10000^(2i/d))
 - description
   - Paired with sine to give each position a unique, continuous signature across all dimensions
+- PE(pos, 2i+1) = cos(pos / 10000^(2i/d))
+  - read as
+    - For odd dimension 2i+1, use the cosine at the same frequency as the paired even dimension 2i — together sine and cosine form a 2D rotation vector encoding each position.
+  - example
+    - pos=1, i=0, d=512 → PE(1,1)=cos(1/1)≈0.540 · pos=0, any i → PE(0,2i+1)=cos(0)=1.0
+  - code
+    - import torch; pos=torch.tensor(1.); d=512.; i=torch.tensor(0.); pe=torch.cos(pos/(10000**(2*i/d))); print(pe)  # → tensor(0.5403)
 
 ### Generative Model Equations
 #### VAE — ELBO Loss
 - Acronym: [VAE](#vae-target) = Variational Autoencoder
 - Acronym: [ELBO](#elbo-target) = Evidence Lower BOund
-- L = E_q[log p_θ(x|z)] − D_KL(q_φ(z|x) ‖ p(z))
 - description
   - Maximises reconstruction quality (1st term) while keeping latent distribution close to a unit Gaussian prior (2nd term)
+- L = E_q[log p_θ(x|z)] − D_KL(q_φ(z|x) ‖ p(z))
+  - read as
+    - The ELBO is the expected log-likelihood of x given z under the decoder, minus the KL divergence of the approximate posterior from the prior — maximise reconstruction while regularising the latent space.
+  - example
+    - recon term ≈ −50 nats, KL ≈ 2 nats → ELBO = −52; minimising −ELBO (loss=52) drives better reconstruction and tighter prior
+  - code
+    - import torch; mu=torch.zeros(4,16); logvar=torch.zeros(4,16); kl=(-0.5*(1+logvar-mu**2-logvar.exp()).sum(1)).mean(); print(kl)  # → 0.0 when posterior = prior
 
 #### Forward Diffusion — DDPM
 - Acronym: [DDPM](#ddpm-target) = Denoising Diffusion Probabilistic Models
-- q(xₜ | xₜ₋₁) = N(xₜ ; √(1−βₜ) xₜ₋₁ , βₜ I)
 - description
   - Adds scheduled Gaussian noise at each timestep t; βₜ controls noise magnitude — after T steps xₜ ≈ N(0,I)
+- q(xₜ | xₜ₋₁) = N(xₜ ; √(1−βₜ) xₜ₋₁ , βₜ I)
+  - read as
+    - At each forward step t, scale the previous sample by root one-minus-beta-t and add Gaussian noise with variance beta-t — gradually corrupting the signal toward pure isotropic noise.
+  - example
+    - β=0.02, x₀=1.0 → x₁=√0.98·1.0+√0.02·ε≈0.990+0.141ε; after T=1000 small steps xₜ≈N(0,1)
+  - code
+    - import torch; x=torch.ones(4,3,8,8); beta=0.02; x_t=(1-beta)**0.5*x+beta**0.5*torch.randn_like(x); print(x_t.mean().item(), x_t.std().item())  # → ~0.99, ~0.17
 
 #### Reverse Diffusion — DDPM
 - Acronym: [DDPM](#ddpm-target) = Denoising Diffusion Probabilistic Models
-- p_θ(xₜ₋₁ | xₜ) = N(xₜ₋₁ ; μ_θ(xₜ, t) , Σ̃(t))
 - description
   - Learned denoising step; neural network predicts the mean of the clean distribution conditioned on noisy input and timestep
+- p_θ(xₜ₋₁ | xₜ) = N(xₜ₋₁ ; μ_θ(xₜ, t) , Σ̃(t))
+  - read as
+    - At denoising step t, the model predicts the mean mu-theta of the previous cleaner state given noisy input x-t and timestep t, then samples from that Gaussian.
+  - example
+    - β=0.02, xₜ given; U-Net predicts ε_θ ≈ added noise → μ_θ=(xₜ−√β·ε_θ)/√(1−β) → sample x_{t-1}~N(μ_θ, Σ̃)
+  - code
+    - import torch; beta=0.02; x_t=torch.randn(1,3,4,4); eps_pred=torch.randn_like(x_t); mu=(x_t-beta**0.5*eps_pred)/(1-beta)**0.5; x_prev=mu+beta**0.5*torch.randn_like(mu); print(x_prev.shape)  # → [1, 3, 4, 4]
 
 #### Diffusion Training Objective (Simplified)
-- L = ‖ μ_θ(xₜ, t) − μ̃(xₜ, x₀) ‖²
 - description
   - L2 distance between predicted and true reverse-process mean — minimised across all timesteps
+- L = ‖ μ_θ(xₜ, t) − μ̃(xₜ, x₀) ‖²
+  - read as
+    - Squared L2 norm between the network's predicted reverse-step mean and the true reverse-step mean — equivalent to predicting the added noise and minimising MSE.
+  - example
+    - μ_θ=(0.8, 0.3), μ̃=(1.0, 0.5) → diff=(−0.2, −0.2) → L=0.04+0.04=0.08
+  - code
+    - import torch; mu_pred=torch.tensor([0.8,0.3]); mu_true=torch.tensor([1.0,0.5]); L=((mu_pred-mu_true)**2).sum(); print(L.item())  # → 0.08
 
 #### GAN — Jensen-Shannon Divergence
 - Acronym: [GAN](#gans-target) = Generative Adversarial Network
-- JSD(P ‖ Q) = ½ D_KL(P ‖ M) + ½ D_KL(Q ‖ M), where M = ½(P+Q)
 - description
   - Symmetric measure of similarity between real and generated distributions — minimised by the generator in original [GAN](#gans-target)
+- JSD(P ‖ Q) = ½ D_KL(P ‖ M) + ½ D_KL(Q ‖ M), where M = ½(P+Q)
+  - read as
+    - Half the KL from P to the mixture M plus half the KL from Q to M — symmetric, bounded in [0, log 2], where 0 means identical distributions.
+  - example
+    - P=[0.8,0.2], Q=[0.2,0.8], M=[0.5,0.5] → KL(P‖M)≈0.278, KL(Q‖M)≈0.278 → JSD≈0.278 (≈0.40 bits)
+  - code
+    - import torch; P=torch.tensor([0.8,0.2]); Q=torch.tensor([0.2,0.8]); M=0.5*(P+Q); jsd=0.5*(P*(P/M).log()).sum()+0.5*(Q*(Q/M).log()).sum(); print(jsd.item())  # → ~0.278
 
 #### GAN — Wasserstein Distance (WGAN)
 - Acronym: [GAN](#gans-target) = Generative Adversarial Network
 - Acronym: [WGAN](#wgan-target) = Wasserstein Generative Adversarial Network
-- W(P, Q) = inf_{γ ∈ Π(P,Q)} 𝔼_(x,y)~γ [‖x − y‖]
 - description
   - Earth-mover distance between distributions — provides stable gradients even when P and Q have disjoint support, reducing mode collapse
+- W(P, Q) = inf_{γ ∈ Π(P,Q)} 𝔼_(x,y)~γ [‖x − y‖]
+  - read as
+    - The infimum expected Euclidean distance between paired samples under the optimal coupling gamma of P and Q — minimum work to transport mass from P to Q.
+  - example
+    - P = point mass at 0, Q = point mass at 3 → only coupling is (0,3) → W(P,Q)=|0−3|=3.0 (vs. JSD=log 2 regardless of distance)
+  - code
+    - import torch; real=torch.ones(16,1); fake=torch.zeros(16,1); w_est=real.mean()-fake.mean(); print(w_est.item())  # → 1.0 — critic estimates W(P,Q) via Kantorovich duality
 
 ## Projects & Labs
 ### Miniproyecto 1 — CNNs
@@ -596,7 +751,7 @@ markmap:
   - End-to-end workflow including data preprocessing, batching, model training with cross-entropy loss and [SGD](#sgd-target)/[Adam](#adam-target), learning rate scheduling, and computing accuracy metrics on a held-out test set.
 
 ### Miniproyecto 2 — RNNs
-- Project applying recurrent architectures to sequence modelling tasks using real-world datasets. Focuses on understanding how hidden states evolve over time and how gating mechanisms address the vanishing-gradient problem in practice.
+- Project applying recurrent architectures to sequence modelling tasks using real-world datasets. Focuses on understanding how hidden states evolve over time and how gating mechanisms address the [vanishing-gradient problem](#vanishing-gradient-target) in practice.
 - Sequential data modeling
   - Represents input sequences as ordered series of vectors fed into an RNN one timestep at a time, with the hidden state carrying context forward. The challenge is capturing dependencies that span many steps.
 - Movie/sentiment analysis
